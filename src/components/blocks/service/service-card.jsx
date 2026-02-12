@@ -43,7 +43,7 @@ export default function ServiceCard({ data, index, locale }) {
           variant="outline"
           className="min-w-[90px] sm:min-w-[100px] xl:min-w-[110px] 2xl:min-w-[120px] 3xl:min-w-[160px] transition-all duration-300 hover:scale-105 hover:shadow-lg"
         >
-          <Link href={"/service"}>
+          <Link href={data?.slug}>
             {locale == "ar" ? "اعرف المزيد" : "Know More"}
           </Link>
         </Button>
