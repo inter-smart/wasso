@@ -1,57 +1,87 @@
 import { NextResponse } from "next/server";
 
+const servicesData = {
+  heroInfo: {
+    media: {
+      media_type: "image",
+      mobile_path: "/images/service-hero.webp",
+      desktop_path: "/images/service-hero.webp",
+      media_alt: "service-hero-1",
+    },
+    title: "Our Services",
+    title_ar: "الخدمات",
+  },
+
+  serviceList: {
+    sub_title: "WHAT WE DO",
+    sub_title_ar: "ماذا نقدم",
+
+    title: "Comprehensive Project Solutions",
+    title_ar: "خدمات <span>احترافية</span>",
+
+    description:
+      "Wasso is a leading project management company committed to delivering excellence in construction and engineering solutions. We specialize in providing end-to-end services that ensure projects are completed on time, within budget, and to the highest quality standards. With expertise in project management, engineering supervision, contracts & tenders management, and quality",
+    description_ar:
+      "نقدم حلولاً متكاملة في إدارة المشاريع، والإشراف الهندسي، وإدارة العقود، وضمان الجودة.",
+
+    items: [
+      {
+        id: 1,
+        title: "Project Management",
+        title_ar: "",
+        description:
+          "At Wasso, we understand that successful projects require more than planning — they demand foresight, coordination, and commitment.",
+        description_ar: "",
+        slug: "/services/project-management",
+        icon: "/images/service-icon-01.png",
+      },
+      {
+        id: 2,
+        title: "Engineering Supervision",
+        title_ar: "",
+        description:
+          "Our engineering supervision services ensure quality, safety, and efficiency at every stage of your project.",
+        description_ar: "",
+        slug: "/services/engineering-supervision",
+        icon: "/images/service-icon-02.png",
+      },
+      {
+        id: 3,
+        title: "Engineering Supervision",
+        title_ar: "",
+        description:
+          "Our engineering supervision services ensure quality, safety, and efficiency at every stage of your project.",
+        description_ar: "",
+        slug: "/services/engineering-supervision",
+        icon: "/images/service-icon-03.png",
+      },
+      {
+        id: 4,
+        title: "Engineering Supervision",
+        title_ar: "",
+        description:
+          "Our engineering supervision services ensure quality, safety, and efficiency at every stage of your project.",
+        description_ar: "",
+        slug: "/services/engineering-supervision",
+        icon: "/images/service-icon-04.png",
+      },
+    ],
+  },
+};
+
 /**
- * GET /api/home
+ * GET /api/services
  */
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const locale = searchParams.get("locale") || "en";
-  const serviceData = {
-    serviceInfo: {
-      heading: "Comprehensive Project Solutions",
-      subHeading: "Our Services",
-      description:
-        "Wasso is a leading project management company committed to delivering excellence in construction and engineering solutions. We specialize in providing end-to-end services that ensure projects are completed on time, within budget, and to the highest quality standards.",
-      services: [
-        {
-          title: "Project Management",
-          excerpt:
-            "We understand that successful projects require more than planning — they demand foresight, coordination, and commitment.",
-          slug: "project-management",
-          icon: "project-management"
-        },
-        {
-          title: "Engineering Supervision",
-          excerpt:
-            "We provide hands-on engineering supervision to maintain quality and compliance throughout the project lifecycle.",
-          slug: "engineering-supervision",
-          icon: "engineering-supervision"
-        },
-        {
-          title: "Contracts & Tenders Management",
-          excerpt:
-            "Navigating contracts and tenders can be complex and time-consuming. We simplify the process with end-to-end management.",
-          slug: "contracts-and-tenders-management",
-          icon: "contracts-tenders"
-        },
-        {
-          title: "Quality & Safety Assurance",
-          excerpt:
-            "Quality and safety are at the heart of everything we do, enforcing rigorous quality control systems.",
-          slug: "quality-and-safety-assurance",
-          icon: "quality-safety"
-        }
-      ]
-    }
-
-  };
 
   return NextResponse.json(
     {
       success: true,
-      message: "Service data fetched successfully",
-      message_ar: "تم جلب بيانات الصفحة الرئيسية بنجاح",
-      data: serviceData,
+      message: "Services data fetched successfully",
+      message_ar: "تم جلب بيانات الخدمات بنجاح",
+      data: servicesData,
     },
     { status: 200 },
   );

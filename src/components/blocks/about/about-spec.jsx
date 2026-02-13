@@ -20,8 +20,8 @@ export default function AboutSpec({ data, locale }) {
           className={cn(
             "",
             locale === "ar"
-              ? "pl-0 mask-[linear-gradient(to_left,black_0%,black_90%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_left,black_0%,black_95%,transparent_100%)]"
-              : "pr-0 mask-[linear-gradient(to_right,black_0%,black_90%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,black_0%,black_95%,transparent_100%)]",
+              ? "pl-0"
+              : "pr-0",
           )}
         >
           <div className="flex flex-wrap">
