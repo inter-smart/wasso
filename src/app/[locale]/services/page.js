@@ -13,6 +13,8 @@ export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
 
+  console.log('STRAPI_URL',STRAPI_URL);
+
   return {
     title: locale === "ar" ? "الخدمات" : "Services",
     description:
@@ -96,7 +98,7 @@ export default async function ServicesPage({ params }) {
           description: item.description,
           description_ar: item.description,
 
-          slug: `/services/${item.slug}`,
+          slug: `/${locale}/services/${item.slug}`,
 
           icon: `${STRAPI_URL}${item.icon?.url}`,
         })) || [],

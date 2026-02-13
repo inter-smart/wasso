@@ -17,10 +17,10 @@ export default function ServiceHearFrom({ data, locale = "en" }) {
               className="text-xl font-normal text-black"
             >
               <span className="font-extralight">
-                {parse(locale === "ar" ? data?.title_lit_ar : data?.title_lit)}
+                {parse((locale === "ar" ? data?.title_lit_ar : data?.title_lit) || "")}
               </span>
               <br className="max-md:hidden" />
-              {parse(locale === "ar" ? data?.title_ar : data?.title)}
+              {parse((locale === "ar" ? data?.title_ar : data?.title) || "")}
             </Heading>
           </div>
           <div className="w-full md:w-7/12 lg:w-[70%] flex flex-wrap items-center pt-[20px] md:pt-0 md:pl-[30px] xl:pl-[50px] 2xl:pl-[60px] 3xl:pl-[80px] relative">
