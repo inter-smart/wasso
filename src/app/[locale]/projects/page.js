@@ -29,7 +29,7 @@ export default async function ProjectsPage({ params, searchParams }) {
   let projectsData = null;
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
     const res = await fetch(`${baseUrl}/api/projects?locale=${locale}`, {
       cache: "no-store",
     });
@@ -54,55 +54,13 @@ export default async function ProjectsPage({ params, searchParams }) {
     project_image,
   } = projectsData;
 
-  // const category = searchParams?.category || null;
-  // const page = searchParams?.page || "1";
-
-  // let projectsData = null;
-
-  // try {
-  //   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-  //   const queryParams = new URLSearchParams({
-  //     locale,
-  //     page,
-  //     limit: "12",
-  //   });
-  //   if (category) queryParams.append("category", category);
-
-  //   const res = await fetch(
-  //     `${baseUrl}/api/projects?${queryParams.toString()}`,
-  //     {
-  //       cache: "no-store",
-  //     },
-  //   );
-
-  //   if (res.ok) {
-  //     const response = await res.json();
-  //     projectsData = response.data;
-  //   }
-  // } catch (error) {
-  //   console.error("Error fetching projects data:", error);
-  // }
-
-  // if (!projectsData) {
-  //   notFound();
-  // }
-
-  // const { projects, pagination } = projectsData;
-
   return (
     <>
-      <InnerHero
-        locale={locale}
-        data={projects_hero}
-        slug={"Our Projects"}
-      />
+      <InnerHero locale={locale} data={projects_hero} slug={"Our Projects"} />
 
       <ProjectsMonth locale={locale} data={project_month} />
 
-      <ProjectsSuccessStories
-        locale={locale}
-        data={success_stories}
-      />
+      <ProjectsSuccessStories locale={locale} data={success_stories} />
 
       <ProjectsMore locale={locale} data={recent_projects} />
 

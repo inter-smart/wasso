@@ -9,75 +9,58 @@ export async function GET(request) {
   const locale = searchParams.get("locale") || "en";
 
   const contactData = {
-    office: {
-      title: "Main Office",
-      title_ar: "المكتب الرئيسي",
-      address: "Office No 133, Business Tower, Meydan Road, Al Qouz, Dubai",
-      address_ar: "مكتب رقم 133، برج الأعمال، طريق ميدان، القوز، دبي",
-      p_o_box: "P.O Box: 294568",
-      p_o_box_ar: "ص.ب: 294568",
-      country: "United Arab Emirates",
-      country_ar: "الإمارات العربية المتحدة",
+    hero: {
+      media: {
+        media_type: "image",
+        mobile_path: "/images/contact-banner.jpg",
+        desktop_path: "/images/contact-banner.jpg",
+        media_alt: "contact-hero-1",
+      },
+      title_ar: "تواصل معنا",
+      title: "Contact Us",
     },
-    phone: {
-      sales: {
-        label: "Sales",
-        label_ar: "المبيعات",
-        number: "+971 56 503 6378",
+
+    contact_info: {
+      title:
+        "“We'd love to hear about your next project — let's build something remarkable together.”",
+      title_ar: "العنوان",
+      address: {
+        icon_path: "/images/icon-address.svg",
+        label: "Address",
+        label_ar: "العنوان",
+        details:
+          "57PH+4PJ - Business Bay - Bay Square Dubai United Arab Emirates",
       },
-      support: {
-        label: "Support",
-        label_ar: "الدعم",
-        number: "+971 56 503 6379",
+      phone: {
+        icon_path: "/images/icon-phone.svg",
+        label: "Phone",
+        label_ar: "الهاتف",
+        details: "+971 4 123 4567",
       },
-      general: {
-        label: "General",
-        label_ar: "عام",
-        number: "+971 4 123 4567",
+      email: {
+        icon_path: "/images/icon-contact-mail.svg",
+        label: "Email Address",
+        label_ar: "البريد الالكتروني",
+        details: "info@wassopm.com",
       },
-    },
-    email: {
-      sales: {
-        label: "Sales",
-        label_ar: "المبيعات",
-        address: "sales@wasso.ae",
+      whatsapp: {
+        icon_path: "/images/icon-contact-whatsapp.svg",
+        label: "Whatsapp",
+        label_ar: "واتساب",
+        details: "+01 4567 2334",
       },
-      support: {
-        label: "Support",
-        label_ar: "الدعم",
-        address: "support@wasso.ae",
+      location: {
+        label: "location",
+        label_ar: "الموقع",
+        details:
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.3686686686686!2d55.26!3d25.186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDExJzA5LjYiTiA1NcKwMTUnMzYuMCJF!5e0!3m2!1sen!2sae!4v1234567890123!5m2!1sen!2sae",
       },
-      info: {
-        label: "General Information",
-        label_ar: "معلومات عامة",
-        address: "info@wasso.ae",
+      social_media: {
+        facebook: "https://www.facebook.com/wasso",
+        instagram: "https://www.instagram.com/wasso",
+        linkedin: "https://www.linkedin.com/company/wasso",
+        twitter: "https://www.twitter.com/wasso",
       },
-      careers: {
-        label: "Careers",
-        label_ar: "الوظائف",
-        address: "careers@wasso.ae",
-      },
-    },
-    business_hours: {
-      title: "Business Hours",
-      title_ar: "ساعات العمل",
-      weekdays: "Sunday - Thursday: 9:00 AM - 6:00 PM",
-      weekdays_ar: "الأحد - الخميس: 9:00 صباحًا - 6:00 مساءً",
-      weekend: "Friday - Saturday: Closed",
-      weekend_ar: "الجمعة - السبت: مغلق",
-      timezone: "GST (Gulf Standard Time)",
-      timezone_ar: "توقيت الخليج القياسي",
-    },
-    social_media: {
-      facebook: "https://www.facebook.com/wasso",
-      instagram: "https://www.instagram.com/wasso",
-      linkedin: "https://www.linkedin.com/company/wasso",
-      twitter: "https://www.twitter.com/wasso",
-    },
-    map: {
-      latitude: 25.2048,
-      longitude: 55.2708,
-      zoom: 15,
     },
   };
 
@@ -88,21 +71,14 @@ export async function GET(request) {
       message_ar: "تم جلب معلومات الاتصال بنجاح",
       data: contactData,
     },
-    { status: 200 }
+    { status: 200 },
   );
 }
 
 export async function POST(request) {
   try {
     const body = await request.json();
-    const {
-      name,
-      email,
-      phone,
-      subject,
-      message,
-      inquiry_type,
-    } = body;
+    const { name, email, phone, subject, message, inquiry_type } = body;
 
     // Validate required fields
     if (!name || !email || !message) {
@@ -112,7 +88,7 @@ export async function POST(request) {
           message: "Missing required fields",
           message_ar: "الحقول المطلوبة مفقودة",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -125,7 +101,7 @@ export async function POST(request) {
           message: "Invalid email format",
           message_ar: "تنسيق البريد الإلكتروني غير صحيح",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -148,7 +124,7 @@ export async function POST(request) {
           estimated_response_time_ar: "24-48 ساعة",
         },
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     return NextResponse.json(
@@ -158,7 +134,7 @@ export async function POST(request) {
         message_ar: "خطأ في إرسال نموذج الاتصال",
         error: error.message,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

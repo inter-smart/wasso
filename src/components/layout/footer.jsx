@@ -19,7 +19,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
   const [openSection, setOpenSection] = useState(null);
 
   return (
-    <footer className="w-full py-[30px_20px] xl:py-[60px_30px] 2xl:py-[60px_40px] overflow-hidden bg-[#fffbf2] relative z-0">
+    <footer className="w-full py-[30px_20px] xl:py-[60px_30px] 2xl:py-[60px_40px] overflow-hidden bg-[#fffbf2] relative z-0 max-sm:pb-12">
       <div className="container">
         <div className="flex flex-wrap -mx-2.5 sm:-mx-3 xl:-mx-5 2xl:-mx-7.5 [&>*]:p-2.5 sm:[&>*]:p-3 xl:[&>*]:p-5 2xl:[&>*]:p-7.5 max-lg:flex-col-reverse">
           <div className="w-full lg:w-[24%] 2xl:w-[23.5%]">

@@ -46,7 +46,7 @@ export default async function HomePage({ params }) {
   let homeData = null;
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
     const res = await fetch(`${baseUrl}/api/home?locale=${locale}`, {
       next: { revalidate: 60 }, // Cache for 60 seconds
     });
@@ -87,4 +87,4 @@ export default async function HomePage({ params }) {
       {partners && <HomePartners data={partners} locale={locale} />}
     </>
   );
-} 
+}

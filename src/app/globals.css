@@ -263,15 +263,15 @@
     p,
     &,
     li {
-      @apply text-[12px] xl:text-[14px] 2xl:text-[14px] 3xl:text-[16px] leading-normal font-light text-(--text-color);
+      @apply text-[14px] lg:text-[14px] 2xl:text-[15px] 3xl:text-[18px] leading-normal font-normal text-(--text-color);
     }
 
     h1 {
-      @apply text-[20px] sm:text-[24px] lg:text-[28px] xl:text-[32px] 2xl:text-[40px] 3xl:text-[50px] leading-tight font-normal text-(--text-color);
+      @apply text-[30px] sm:text-[40px] lg:text-[54px] 2xl:text-[65px] 3xl:text-[80px] leading-tight font-normal text-(--text-color);
     }
 
     h2 {
-      @apply text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[24px] 3xl:text-[30px] leading-tight font-medium text-(--text-color);
+      @apply text-[26px] sm:text-[36px] lg:text-[48px] 2xl:text-[58px] 3xl:text-[70px] leading-tight font-normal text-(--text-color);
     }
 
     h3 {
@@ -287,7 +287,7 @@
     }
 
     h6 {
-      @apply text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[16px] leading-tight font-normal text-(--text-color);
+      @apply text-[13px] 2xl:text-[14px] 3xl:text-[18px] leading-tight font-normal text-(--text-color);
     }
 
     &[dir="ltr"] ul,

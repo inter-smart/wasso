@@ -151,10 +151,18 @@ const aboutData = {
       "<p>Wasso is proud to be associated with Hemin Group UAE, a diversified business group with a strong presence across multiple sectors. Hemin Group has built a reputation for reliability, innovation, and customer-focused solutions, making it a trusted name in the UAE and beyond.</p><p>Through this association, we leverage shared expertise, resources, and values to deliver greater value to our clients. Together, Wasso and Hemin Group continue to strengthen capabilities, expand opportunities, and drive sustainable growth across industries.</p>",
     description_ar:
       "<p>في مجموعة واسو، ندرك أن كل مشروع فريد من نوعه، مع مجموعة خاصة من الفرص والتحديات. وتستند خدمة إدارة المشاريع لدينا على مبدأ تحويل المشاريع المعقدة إلى نجاحات ملموسة. سواء كان مشروعًا جديدًا أو توسعة أو تجديدًا، فإننا نقدم نهجًا شاملاً يضمن تحقيق أهدافك بكفاءة وفعالية.</p>",
+    companyLogo: "/images/about-concern-logo.jpg",
+    media: {
+      media_type: "image",
+      media_path: "/images/about-concern-1.jpg",
+      media_alt: "about-concern-1",
+    },
     button: {
-      slug: "Visit Website",
-      label: "/"
-    }
+      label: "Visit Website",
+      label_ar: "زيارة الموقع",
+      slug: "/",
+      slug_ar: "/",
+    },
   },
 
   // recent_projects: {

@@ -64,7 +64,7 @@ export default function InnerHero({ slug, data, locale }) {
             )}
           </ParallaxBannerLayer>
           <div className="container">
-            <div className="w-full sm:max-w-1/2 py-[20px] sm:py-[40px] xl:py-[60px] 2xl:py-[80px]">
+            <div className="w-full sm:max-w-1/2 py-[20px] sm:py-[40px] lg:py-[50px] xl:py-[60px] 2xl:py-[80px] 3xl:py-[100px]">
               <Heading
                 as="h2"
                 size="h2"
@@ -72,7 +72,7 @@ export default function InnerHero({ slug, data, locale }) {
               >
                 {parse(locale == "ar" ? data?.title_ar : data?.title)}
               </Heading>
-              <Breadcrumb className="mb-1 xl:mb-2">
+              <Breadcrumb className="mb-1 lg:mb-1.5 xl:mb-2 2xl:mb-2.5">
                 <BreadcrumbList>
                   <BreadcrumbItem>
                     <BreadcrumbLink href="/">Home</BreadcrumbLink>

@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
   let projectData = null;
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
     const res = await fetch(
       `${baseUrl}/api/projects/${slug}?locale=${locale}`,
       {
@@ -46,9 +46,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function ProjectsDetailPage({
-  params,
-}) {
+export default async function ProjectsDetailPage({ params }) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
   const slug = resolvedParams.slug;
@@ -56,7 +54,7 @@ export default async function ProjectsDetailPage({
   let projectData = null;
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
     const res = await fetch(
       `${baseUrl}/api/projects/${slug}?locale=${locale}`,
       {
@@ -78,7 +76,11 @@ export default async function ProjectsDetailPage({
 
   return (
     <>
-      <InnerHero locale={locale} data={projectData?.hero} slug={"Our Projects"} />
+      <InnerHero
+        locale={locale}
+        data={projectData?.hero}
+        slug={"Our Projects"}
+      />
 
       <ProjectsInfo locale={locale} data={projectData?.project_info} />
 

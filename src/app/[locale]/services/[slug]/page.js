@@ -106,7 +106,9 @@ export default async function ServiceDetailPage({ params }) {
         serviceData = {
           heroInfo_data: {
             media: {
-              media_type: rawData.bannerSection?.enableVideo ? "video" : "image",
+              media_type: rawData.bannerSection?.enableVideo
+                ? "video"
+                : "image",
               mobile_path: rawData.bannerSection?.enableVideo
                 ? `${STRAPI_URL}${rawData.bannerSection?.video?.url}`
                 : `${STRAPI_URL}${rawData.bannerSection?.mobileImage?.url}`,
@@ -183,7 +185,6 @@ export default async function ServiceDetailPage({ params }) {
           },
         };
       }
-
     } else {
       console.error("Strapi fetch failed:", res.status, res.statusText);
     }
@@ -210,4 +211,3 @@ export default async function ServiceDetailPage({ params }) {
     </>
   );
 }
-

@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
 
-  console.log('STRAPI_URL',STRAPI_URL);
+  console.log("STRAPI_URL", STRAPI_URL);
 
   return {
     title: locale === "ar" ? "الخدمات" : "Services",
@@ -126,4 +126,14 @@ export default async function ServicesPage({ params }) {
     console.error("Services page error:", error);
     notFound();
   }
+
+  const { heroInfo, serviceList } = servicesData;
+
+  return (
+    <>
+      <InnerHero locale={locale} data={heroInfo} slug={"Services"} />
+
+      <ServiceList data={serviceList} locale={locale} />
+    </>
+  );
 }
