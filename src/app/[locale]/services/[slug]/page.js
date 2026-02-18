@@ -201,7 +201,7 @@ export default async function ServiceDetailPage({ params }) {
       <InnerHero
         locale={locale}
         data={serviceData.heroInfo_data}
-        slug={"Services"}
+        slug={serviceData.heroInfo_data.title}
       />
       <ServiceOverview data={serviceData.overview_data} locale={locale} />
       <ServiceApproach data={serviceData.approach_data} locale={locale} />

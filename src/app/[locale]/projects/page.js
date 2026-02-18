@@ -4,6 +4,7 @@ import InnerHero from "@/components/common/inner-hero";
 import ProjectsMore from "@/components/blocks/projects/projects-more";
 import ProjectsSuccessStories from "@/components/blocks/projects/projects-success-stories";
 import ProjectsImage from "@/components/blocks/projects/projects-image";
+import { STRAPI_URL } from "@/lib/constants";
 
 // Local data removed
 
@@ -29,17 +30,16 @@ export default async function ProjectsPage({ params, searchParams }) {
   let projectsData = null;
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    const res = await fetch(`${baseUrl}/api/projects?locale=${locale}`, {
+    const res = await fetch(`${STRAPI_URL}/api/our-project?locale=${locale}`, {
       cache: "no-store",
     });
 
-    if (res.ok) {
-      const response = await res.json();
-      projectsData = response.data;
-    }
+    if (!res.ok) throw new Error("Failed to fetch projects");
+
+    // your controller returns object directly
+    projectsData = await res.json();
   } catch (error) {
-    console.error("Error fetching home data:", error);
+    console.error("Error fetching projects data:", error);
   }
 
   if (!projectsData) {
