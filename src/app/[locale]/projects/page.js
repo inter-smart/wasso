@@ -49,8 +49,8 @@ export default async function ProjectsPage({ params, searchParams }) {
   const {
     projects_hero,
     project_month,
-    recent_projects,
     success_stories,
+    recent_projects,
     project_image,
   } = projectsData;
 

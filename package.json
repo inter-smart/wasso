@@ -21,6 +21,8 @@
     "embla-carousel-fade": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "html-react-parser": "^5.2.11",
+    "isomorphic-dompurify": "^2.36.0",
+    "jsdom": "^28.1.0",
     "lenis": "^1.3.17",
     "lucide-react": "^0.562.0",
     "motion": "^12.28.1",

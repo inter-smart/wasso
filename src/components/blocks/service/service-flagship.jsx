@@ -117,8 +117,11 @@ function FlagshipCard({ data, index, locale }) {
               </Heading>
               <Text as="div" size="p1" className="line-clamp-7 text-black">
                 {parse(
-                  locale === "ar" ? data?.description_ar : data?.description,
+                  (locale === "ar"
+                    ? data?.description_ar
+                    : data?.description) || "",
                 )}
+
               </Text>
             </div>
           </motion.div>

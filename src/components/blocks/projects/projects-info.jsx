@@ -114,7 +114,9 @@ export default function ProjectsInfo({ data, locale }) {
                 className="font-normal text-[#1e1e1e] mb-3 xl:mb-8 3xl:mb-11"
               >
                 {parse(
-                  locale == "ar" ? currentSlide?.title_ar : currentSlide?.title,
+                  (locale == "ar"
+                    ? currentSlide?.title_ar
+                    : currentSlide?.title) || "",
                 )}
               </Heading>
               <Text
@@ -123,9 +125,9 @@ export default function ProjectsInfo({ data, locale }) {
                 className="text-[#1e1e1e] mb-3 xl:mb-5 2xl:mb-6 xl:[&>p]:mb-2.5 3xl:[&>p]:mb-3"
               >
                 {parse(
-                  locale === "ar"
+                  (locale === "ar"
                     ? currentSlide?.description_ar
-                    : currentSlide?.description,
+                    : currentSlide?.description) || "",
                 )}
               </Text>
             </div>

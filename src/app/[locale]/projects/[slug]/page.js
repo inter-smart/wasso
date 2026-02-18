@@ -4,7 +4,7 @@ import InnerHero from "@/components/common/inner-hero";
 import ProjectsInfo from "@/components/blocks/projects/projects-info";
 import ProjectsRecent from "@/components/blocks/projects/projects-recent";
 import ProjectsExplore from "@/components/blocks/projects/projects-explore";
-
+import { STRAPI_URL } from "@/lib/constants";
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }) {
@@ -15,9 +15,8 @@ export async function generateMetadata({ params }) {
   let projectData = null;
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
     const res = await fetch(
-      `${baseUrl}/api/projects/${slug}?locale=${locale}`,
+      `${STRAPI_URL}/api/projects/${slug}?locale=${locale}`,
       {
         cache: "no-store",
       },
@@ -54,9 +53,8 @@ export default async function ProjectsDetailPage({ params }) {
   let projectData = null;
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
     const res = await fetch(
-      `${baseUrl}/api/projects/${slug}?locale=${locale}`,
+      `${STRAPI_URL}/api/projects/${slug}?locale=${locale}`,
       {
         cache: "no-store",
       },

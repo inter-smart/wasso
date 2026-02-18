@@ -70,7 +70,7 @@ export default function InnerHero({ slug, data, locale }) {
                 size="h2"
                 className="leading-snug text-white mb-1 [&>span]:text-[128%] [&>span]:font-medium [&>span]:block"
               >
-                {parse(locale == "ar" ? data?.title_ar : data?.title)}
+                {parse((locale == "ar" ? data?.title_ar : data?.title) || "")}
               </Heading>
               <Breadcrumb className="mb-1 lg:mb-1.5 xl:mb-2 2xl:mb-2.5">
                 <BreadcrumbList>
