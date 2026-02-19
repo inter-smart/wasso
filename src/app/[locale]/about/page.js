@@ -4,6 +4,7 @@ import AboutLetter from "@/components/blocks/about/about-letter";
 import AboutSpec from "@/components/blocks/about/about-spec";
 import AboutStatistics from "@/components/blocks/about/about-statistics";
 import InnerHero from "@/components/common/inner-hero";
+import { STRAPI_URL } from "@/lib/constants";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -12,12 +13,31 @@ export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
 
+  let aboutData = null;
+
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+    const res = await fetch(`${STRAPI_URL}/api/about-page?locale=${locale}`, {
+      cache: "no-store",
+    });
+
+    if (res.ok) {
+      const response = await res.json();
+      aboutData = response;
+    }
+  } catch (error) {
+    console.error("Error fetching about data:", error);
+  }
+
   return {
-    title: locale === "ar" ? "عن واسو" : "About WASSO",
+    title:
+      locale === "ar"
+        ? aboutData?.seoTitle_ar || "عن واسو"
+        : aboutData?.seoTitle || "About WASSO",
     description:
       locale === "ar"
-        ? "تعرف على واسو لإدارة المشاريع - شركة رائدة في إدارة المشاريع والهندسة وتطوير العقارات"
-        : "Learn about WASSO Project Management - Leading company in project management, engineering, and real estate development",
+        ? aboutData?.seoDescription_ar || aboutData?.seoDescription
+        : aboutData?.seoDescription,
   };
 }
 
@@ -29,13 +49,13 @@ export default async function AboutPage({ params }) {
 
   try {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    const res = await fetch(`${baseUrl}/api/about?locale=${locale}`, {
+    const res = await fetch(`${STRAPI_URL}/api/about-page?locale=${locale}`, {
       cache: "no-store",
     });
 
     if (res.ok) {
       const response = await res.json();
-      aboutData = response.data;
+      aboutData = response;
     }
   } catch (error) {
     console.error("Error fetching about data:", error);
@@ -58,11 +78,7 @@ export default async function AboutPage({ params }) {
   return (
     <>
       {hero && (
-        <InnerHero
-          locale={locale}
-          data={aboutData?.hero}
-          slug={"Our Projects"}
-        />
+        <InnerHero locale={locale} data={aboutData?.hero} slug={"About Us"} />
       )}
 
       <AboutInfo locale={locale} data={aboutData?.about_info} />
