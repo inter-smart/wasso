@@ -1,16 +1,27 @@
 import InnerHero from "@/components/common/inner-hero";
 import ContactInfo from "@/components/blocks/contact/contact-info";
 import { notFound } from "next/navigation";
+import { STRAPI_URL } from "@/lib/constants";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }) {
-  const resolvedParams = await params;
-  const locale = resolvedParams.locale;
+  const { locale } = await params; // ✅ MUST await
+
+  const res = await fetch(`${STRAPI_URL}/api/contact-page?locale=${locale}`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) return {};
+
+  const data = await res.json();
 
   return {
-    title: locale === "ar" ? "اتصل بنا" : "Contact Us",
-    description: locale === "ar" ? "" : "",
+    title: locale === "ar" ? data.seoTitle_ar || data.seoTitle : data.seoTitle,
+    description:
+      locale === "ar"
+        ? data.seoDescription_ar || data.seoDescription
+        : data.seoDescription,
   };
 }
 
@@ -22,13 +33,13 @@ export default async function ContactPage({ params }) {
 
   try {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    const res = await fetch(`${baseUrl}/api/contact?locale=${locale}`, {
+    const res = await fetch(`${STRAPI_URL}/api/contact-page?locale=${locale}`, {
       cache: "no-store",
     });
 
     if (res.ok) {
       const response = await res.json();
-      contactData = response.data;
+      contactData = response;
     }
   } catch (error) {
     console.error("Error fetching about data:", error);
