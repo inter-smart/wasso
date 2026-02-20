@@ -4,6 +4,39 @@ import CareerHero from "@/components/blocks/career/career-hero";
 import CareerJoin from "@/components/blocks/career/career-join";
 import CareerCulture from "@/components/blocks/career/career-culture";
 import CareerOpening from "@/components/blocks/career/career-opening";
+import { STRAPI_URL } from "@/lib/constants";
+
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const locale = resolvedParams.locale;
+
+  let careerData = null;
+
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+    const res = await fetch(`${STRAPI_URL}/api/career-page?locale=${locale}`, {
+      cache: "no-store",
+    });
+
+    if (res.ok) {
+      const response = await res.json();
+      careerData = response;
+    }
+  } catch (error) {
+    console.error("Error fetching career data:", error);
+  }
+
+  return {
+    title:
+      locale === "ar"
+        ? careerData?.seoTitle_ar || "عن واسو"
+        : careerData?.seoTitle || "Career WASSO",
+    description:
+      locale === "ar"
+        ? careerData?.seoDescription_ar || careerData?.seoDescription
+        : careerData?.seoDescription,
+  };
+}
 
 export default async function CareerPage({ params }) {
   const resolvedParams = await params;
@@ -13,13 +46,13 @@ export default async function CareerPage({ params }) {
 
   try {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    const res = await fetch(`${baseUrl}/api/career?locale=${locale}`, {
+    const res = await fetch(`${STRAPI_URL}/api/career-page?locale=${locale}`, {
       cache: "no-store",
     });
 
     if (res.ok) {
       const response = await res.json();
-      careerData = response.data;
+      careerData = response;
     }
   } catch (error) {
     console.error("Error fetching career data:", error);
