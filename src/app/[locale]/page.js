@@ -5,6 +5,7 @@ import HomeServices from "@/components/blocks/home/home-services";
 import { notFound } from "next/navigation";
 
 import dynamic from "next/dynamic";
+import { STRAPI_URL } from "@/lib/constants";
 
 // Lazy load below-the-fold components for better performance
 const HomePortfolio = dynamic(
@@ -47,13 +48,13 @@ export default async function HomePage({ params }) {
 
   try {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    const res = await fetch(`${baseUrl}/api/home?locale=${locale}`, {
+    const res = await fetch(`${STRAPI_URL}/api/home-page?locale=${locale}`, {
       next: { revalidate: 60 }, // Cache for 60 seconds
     });
 
     if (res.ok) {
       const response = await res.json();
-      homeData = response.data;
+      homeData = response;
     }
   } catch (error) {
     console.error("Error fetching home data:", error);
