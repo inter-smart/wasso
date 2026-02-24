@@ -108,17 +108,20 @@ export default function Header({ headerData, navigationData, locale }) {
                 ? "bg-black/90"
                 : "bg-black/90"
               : showDarkHeader
-                // ? "bg-linear-to-b from-white/20 to-transparent"
-                ? "bg-transparent"
+                ? // ? "bg-linear-to-b from-white/20 to-transparent"
+                  "bg-transparent"
                 : "bg-transparent",
         )}
       >
         <div className="container">
           <div className="flex justify-between sm:justify-end items-center gap-x-3 lg:gap-x-8 relative z-0">
             {/* Brand Logo */}
-            <div className={cn("sm:absolute left-1/2 sm:-translate-x-1/2",
-              // locale === "ar" ? "right-4 sm:right-1/2" : "left-4 sm:left-1/2"
-            )}>
+            <div
+              className={cn(
+                "sm:absolute left-1/2 sm:-translate-x-1/2",
+                // locale === "ar" ? "right-4 sm:right-1/2" : "left-4 sm:left-1/2"
+              )}
+            >
               <div
                 className={cn(
                   "w-[60px] sm:w-[75px] 2xl:w-[90px] 3xl:w-[110px]",
@@ -179,7 +182,9 @@ export default function Header({ headerData, navigationData, locale }) {
                 )}
                 asChild
               >
-                <Link href={`/${locale}/contact`}>CONTACT US</Link>
+                <Link href={`/${locale}/${headerData?.button?.link}`}>
+                  {headerData?.button?.label}
+                </Link>
               </Button>
               <HeaderNavigation
                 locale={locale}

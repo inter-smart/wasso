@@ -140,7 +140,10 @@ export default async function RootLayout({ children, params }) {
 
           <Header
             locale={locale}
-            headerData={data.header_data}
+            headerData={{
+              ...data.header_data,
+              button: data.button,
+            }}
             navigationData={data.navigation_data}
           />
 
