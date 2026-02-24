@@ -2,25 +2,31 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 
-const local_data = [
-  {
-    id: 1,
-    icon: "/images/float-icon-call.svg",
-    link: "tel:+966501234567",
-  },
-  {
-    id: 2,
-    icon: "/images/float-icon-mail.svg",
-    link: "mailto:[EMAIL_ADDRESS]",
-  },
-  {
-    id: 3,
-    icon: "/images/float-icon-whatsapp.svg",
-    link: "https://wa.me/966501234567",
-  },
-];
+export default function FloatNavigation({ data = [], locale }) {
+  if (!Array.isArray(data) || data.length === 0) return null;
 
-export default function FloatNavigation({ data = local_data, locale }) {
+  // 🔥 Auto detect link type
+  const generateHref = (value) => {
+    if (!value) return "#";
+
+    const trimmed = value.trim();
+
+    // Already full URL
+    if (trimmed.startsWith("http")) return trimmed;
+
+    // Email detection
+    if (/\S+@\S+\.\S+/.test(trimmed)) {
+      return `mailto:${trimmed}`;
+    }
+
+    // Phone detection (+ or numbers only)
+    if (/^\+?\d+$/.test(trimmed)) {
+      return `tel:${trimmed}`;
+    }
+
+    return trimmed;
+  };
+
   return (
     <div
       className={cn(
@@ -30,25 +36,31 @@ export default function FloatNavigation({ data = local_data, locale }) {
           : "right-0 sm:right-4 xl:right-5.5 2xl:right-8",
       )}
     >
-      {data.map((item) => (
-        <a
-          key={item.id}
-          href={item.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cn(
-            "w-1/3 sm:w-8 xl:w-9 2xl:w-11 3xl:w-11.5 max-sm:h-11 sm:aspect-square bg-[#1e1e1e] flex items-center justify-center transition-all duration-300 ease-in-out hover:bg-[#c09c86] translate-y-0 hover:translate-y-[1px] shadow-lg shadow-black/20",
-          )}
-        >
-          <Image
-            src={item.icon}
-            alt={item.icon}
-            width={50}
-            height={50}
-            className="w-4.5 sm:w-4 xl:w-5 2xl:w-5.5 3xl:w-6"
-          />
-        </a>
-      ))}
+      {data.map((item, index) => {
+        const href = generateHref(item.link);
+
+        return (
+          <a
+            key={item.id ?? index}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              "w-1/3 sm:w-8 xl:w-9 2xl:w-11 3xl:w-11.5 max-sm:h-11 sm:aspect-square bg-[#1e1e1e] flex items-center justify-center transition-all duration-300 ease-in-out hover:bg-[#c09c86] translate-y-0 hover:translate-y-[1px] shadow-lg shadow-black/20",
+            )}
+          >
+            {item.icon?.media_path && (
+              <Image
+                src={item.icon.media_path}
+                alt={item.icon.media_alt || "contact icon"}
+                width={50}
+                height={50}
+                className="w-4.5 sm:w-4 xl:w-5 2xl:w-5.5 3xl:w-6"
+              />
+            )}
+          </a>
+        );
+      })}
     </div>
   );
 }

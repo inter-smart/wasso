@@ -136,7 +136,7 @@ export default async function RootLayout({ children, params }) {
         <SmoothScrolling>
           <PageLoader />
           <CursorFollower />
-          <FloatNavigation locale={locale} />
+          <FloatNavigation locale={locale} data={data.stickyWidget} />
 
           <Header
             locale={locale}
