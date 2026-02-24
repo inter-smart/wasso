@@ -8,6 +8,7 @@ import CursorFollower from "@/components/animations/cursor-follower";
 import PageLoader from "@/components/animations/page-loader";
 import SmoothScrolling from "@/components/utils/smooth-scrolling";
 import FloatNavigation from "@/components/common/float-navigation";
+import { STRAPI_URL } from "@/lib/constants";
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -73,7 +74,7 @@ export default async function RootLayout({ children, params }) {
   try {
     // During build, use relative URL or skip fetch
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    const url = `${baseUrl}/api/global?locale=${locale}`;
+    const url = `${STRAPI_URL}/api/global?locale=${locale}`;
 
     const res = await fetch(url, {
       cache: "no-store",
@@ -82,7 +83,7 @@ export default async function RootLayout({ children, params }) {
 
     if (res.ok) {
       const response = await res.json();
-      globalData = response.data;
+      globalData = response;
     }
   } catch (error) {
     // Silently fail during build - will use fallback data
@@ -92,21 +93,21 @@ export default async function RootLayout({ children, params }) {
   }
 
   // Fallback data if API fails
-  const fallbackData = {
-    header_data: {
-      name: "WASSO Project Management LLC",
-      name_ar: "واسو لإدارة المشاريع",
-      logoUrl: "/images/brand-logo-primary.svg",
-      logoWhiteUrl: "/images/brand-logo.svg",
-    },
-    navigation_data: [],
-    footer_data: {
-      name: "WASSO Project Management LLC",
-      name_ar: "واسو لإدارة المشاريع",
-      logoUrl: "/images/brand-logo-primary.svg",
-    },
-    social_link_data: [],
-  };
+  // const fallbackData = {
+  //   header_data: {
+  //     name: "WASSO Project Management LLC",
+  //     name_ar: "واسو لإدارة المشاريع",
+  //     logoUrl: "/images/brand-logo-primary.svg",
+  //     logoWhiteUrl: "/images/brand-logo.svg",
+  //   },
+  //   navigation_data: [],
+  //   footer_data: {
+  //     name: "WASSO Project Management LLC",
+  //     name_ar: "واسو لإدارة المشاريع",
+  //     logoUrl: "/images/brand-logo-primary.svg",
+  //   },
+  //   social_link_data: [],
+  // };
 
   const data = globalData || fallbackData;
 
