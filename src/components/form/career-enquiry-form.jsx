@@ -29,8 +29,8 @@ const formSchema = z.object({
     .max(50, "Full name cannot exceed 50 characters"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(8, "Phone number is required"),
-  city: z.string().optional(),
-  message: z.string().optional(),
+  // city: z.string().optional(),
+  // message: z.string().optional(),
 
   attachment: z.any().optional(),
 });
@@ -62,8 +62,8 @@ export default function CareerEnquiryForm() {
       fullName: "",
       email: "",
       phone: "",
-      city: "",
-      message: "",
+      // city: "",
+      // message: "",
       attachment: null,
     },
   });
@@ -74,24 +74,69 @@ export default function CareerEnquiryForm() {
   // File upload
   const [uploadedFile, setUploadedFile] = useState(null);
 
+  // const onSubmit = async (values) => {
+  //   setLoading(true);
+  //   setSuccess("");
+
+  //   try {
+  //     const res = await fetch("http://localhost:1337/api/career-enquiries", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ data: values }),
+  //     });
+
+  //     if (!res.ok) throw new Error("Failed to send enquiry");
+
+  //     form.reset();
+  //     setUploadedFile(null);
+  //     setSuccess("Message sent successfully!");
+  //   } catch {
+  //     setSuccess("Something went wrong. Please try again.");
+  //   }
+
+  //   setLoading(false);
+  // };
+
   const onSubmit = async (values) => {
     setLoading(true);
     setSuccess("");
 
     try {
-      const res = await fetch("http://localhost:1337/api/enquiry", {
+      const formData = new FormData();
+
+      const data = {
+        fullName: values.fullName,
+        email: values.email,
+        phone: values.phone,
+        // city: values.city,
+        // message: values.message,
+      };
+
+      formData.append("data", JSON.stringify(data));
+
+      if (uploadedFile) {
+        formData.append("files.attachment", uploadedFile);
+      }
+
+      for (let pair of formData.entries()) {
+        console.log(pair[0], pair[1]);
+      }
+      const res = await fetch("http://localhost:1337/api/career-enquiries", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data: values }),
+        body: formData,
       });
 
-      if (!res.ok) throw new Error("Failed to send enquiry");
+      const result = await res.json();
+      console.log(result);
+
+      if (!res.ok) throw new Error("Upload failed");
 
       form.reset();
       setUploadedFile(null);
       setSuccess("Message sent successfully!");
-    } catch {
-      setSuccess("Something went wrong. Please try again.");
+    } catch (error) {
+      console.error(error);
+      setSuccess("Something went wrong.");
     }
 
     setLoading(false);

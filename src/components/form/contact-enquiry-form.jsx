@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { STRAPI_URL } from "@/lib/constants";
 
 // ✅ Validation schema
 const formSchema = z.object({
@@ -72,36 +73,36 @@ export default function ContactEnquiryForm() {
   const [success, setSuccess] = useState(null);
 
   // 2. Define a submit handler.
-  // async function onSubmit(values) {
-  //   setLoading(true);
-  //   setSuccess(null);
+  async function onSubmit(values) {
+    setLoading(true);
+    setSuccess(null);
 
-  //   try {
-  //     const res = await fetch(`${STRAPI_URL}/api/contacts`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ data: values }),
-  //     });
+    try {
+      const res = await fetch(`${STRAPI_URL}/api/contact-enquiries`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: values }),
+      });
 
-  //     if (res.ok) {
-  //       setSuccess("Message sent successfully!");
-  //       form.reset(); // ✅ Reset the form properly
-  //     } else {
-  //       setSuccess("Failed to send message.");
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //     setSuccess("Error occurred.");
-  //   }
+      if (res.ok) {
+        setSuccess("Message sent successfully!");
+        form.reset(); // ✅ Reset the form properly
+      } else {
+        setSuccess("Failed to send message.");
+      }
+    } catch (err) {
+      console.log(err);
+      setSuccess("Error occurred.");
+    }
 
-  //   setLoading(false);
-  // }
-
-  function onSubmit(values) {
-    console.log(values);
+    setLoading(false);
   }
+
+  // function onSubmit(values) {
+  //   console.log(values);
+  // }
 
   return (
     <Form {...form}>

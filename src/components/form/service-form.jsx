@@ -69,7 +69,7 @@ export default function ServiceForm() {
     setSuccess(null);
 
     try {
-      const res = await fetch("http://localhost:1337/api/enquiry", {
+      const res = await fetch("http://localhost:1337/api/service-enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data: values }),
