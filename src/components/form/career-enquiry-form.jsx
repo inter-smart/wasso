@@ -97,13 +97,77 @@ export default function CareerEnquiryForm() {
   //   setLoading(false);
   // };
 
+  // const onSubmit = async (values) => {
+  //   setLoading(true);
+  //   setSuccess("");
+
+  //   try {
+  //     const formData = new FormData();
+
+  //     const data = {
+  //       fullName: values.fullName,
+  //       email: values.email,
+  //       phone: values.phone,
+  //       // city: values.city,
+  //       // message: values.message,
+  //     };
+
+  //     formData.append("data", JSON.stringify(data));
+
+  //     if (uploadedFile) {
+  //       formData.append("files.attachment", uploadedFile);
+  //     }
+
+  //     for (let pair of formData.entries()) {
+  //       console.log(pair[0], pair[1]);
+  //     }
+  //     const res = await fetch("http://localhost:1337/api/career-enquiries", {
+  //       method: "POST",
+  //       body: formData,
+  //     });
+
+  //     const result = await res.json();
+  //     console.log(result);
+
+  //     if (!res.ok) throw new Error("Upload failed");
+
+  //     form.reset();
+  //     setUploadedFile(null);
+  //     setSuccess("Message sent successfully!");
+  //   } catch (error) {
+  //     console.error(error);
+  //     setSuccess("Something went wrong.");
+  //   }
+
+  //   setLoading(false);
+  // };
+
   const onSubmit = async (values) => {
     setLoading(true);
     setSuccess("");
 
     try {
-      const formData = new FormData();
+      let attachmentId = null;
 
+      // Ensure file upload happens FIRST
+      if (uploadedFile) {
+        const uploadFormData = new FormData();
+        uploadFormData.append("files", uploadedFile);
+
+        const uploadRes = await fetch("http://localhost:1337/api/upload", {
+          method: "POST",
+          body: uploadFormData,
+        });
+
+        if (!uploadRes.ok) throw new Error("File upload failed to Strapi");
+
+        const uploadResult = await uploadRes.json();
+        if (uploadResult && uploadResult.length > 0) {
+          attachmentId = uploadResult[0].id;
+        }
+      }
+
+      // Prepare final content API payload
       const data = {
         fullName: values.fullName,
         email: values.email,
@@ -112,35 +176,35 @@ export default function CareerEnquiryForm() {
         // message: values.message,
       };
 
-      formData.append("data", JSON.stringify(data));
-
-      if (uploadedFile) {
-        formData.append("files.attachment", uploadedFile);
+      if (attachmentId) {
+        data.attachment = attachmentId;
       }
 
-      for (let pair of formData.entries()) {
-        console.log(pair[0], pair[1]);
-      }
+      // Submit the text with relationship link to the newly uploaded file!
       const res = await fetch("http://localhost:1337/api/career-enquiries", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data }),
       });
 
       const result = await res.json();
       console.log(result);
 
-      if (!res.ok) throw new Error("Upload failed");
+      if (!res.ok) throw new Error("Form submission to Strapi failed");
 
       form.reset();
       setUploadedFile(null);
       setSuccess("Message sent successfully!");
     } catch (error) {
       console.error(error);
-      setSuccess("Something went wrong.");
+      setSuccess("Something went wrong. Please try again.");
     }
 
     setLoading(false);
   };
+
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
