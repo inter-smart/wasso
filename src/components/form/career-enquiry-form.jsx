@@ -79,7 +79,7 @@ export default function CareerEnquiryForm() {
   //   setSuccess("");
 
   //   try {
-  //     const res = await fetch("http://localhost:1337/api/career-enquiries", {
+  //     const res = await fetch("${STRAPI_URL}/api/career-enquiries", {
   //       method: "POST",
   //       headers: { "Content-Type": "application/json" },
   //       body: JSON.stringify({ data: values }),
@@ -121,7 +121,7 @@ export default function CareerEnquiryForm() {
   //     for (let pair of formData.entries()) {
   //       console.log(pair[0], pair[1]);
   //     }
-  //     const res = await fetch("http://localhost:1337/api/career-enquiries", {
+  //     const res = await fetch("${STRAPI_URL}/api/career-enquiries", {
   //       method: "POST",
   //       body: formData,
   //     });
@@ -154,7 +154,7 @@ export default function CareerEnquiryForm() {
         const uploadFormData = new FormData();
         uploadFormData.append("files", uploadedFile);
 
-        const uploadRes = await fetch("http://localhost:1337/api/upload", {
+        const uploadRes = await fetch(`${STRAPI_URL}/api/upload`, {
           method: "POST",
           body: uploadFormData,
         });
@@ -181,7 +181,7 @@ export default function CareerEnquiryForm() {
       }
 
       // Submit the text with relationship link to the newly uploaded file!
-      const res = await fetch("http://localhost:1337/api/career-enquiries", {
+      const res = await fetch(`${STRAPI_URL}/api/career-enquiries`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -204,7 +204,6 @@ export default function CareerEnquiryForm() {
 
     setLoading(false);
   };
-
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];

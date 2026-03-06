@@ -78,7 +78,7 @@ export default function Header({ headerData, navigationData, locale }) {
     // Use transition for smooth loading state
     startTransition(() => {
       router.push(newPath);
-      setIsOpen(false);
+      setToggle(false);
     });
   };
 
@@ -109,7 +109,7 @@ export default function Header({ headerData, navigationData, locale }) {
                 : "bg-black/90"
               : showDarkHeader
                 ? // ? "bg-linear-to-b from-white/20 to-transparent"
-                  "bg-transparent"
+                "bg-transparent"
                 : "bg-transparent",
         )}
       >
@@ -150,7 +150,7 @@ export default function Header({ headerData, navigationData, locale }) {
               {locale == "ar" ? (
                 <Button
                   variant="none"
-                  onClick={() => switchLocale("ar")}
+                  onClick={() => switchLocale("en")}
                   className={cn(
                     "text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-none font-normal p-0! gap-1",
                     showDarkHeader ? "text-white" : "text-white",
@@ -162,14 +162,13 @@ export default function Header({ headerData, navigationData, locale }) {
               ) : (
                 <Button
                   variant="none"
-                  onClick={() => switchLocale("en")}
+                  onClick={() => switchLocale("ar")}
                   className={cn(
                     "text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-none font-normal font-cairo p-0! gap-1",
                     showDarkHeader ? "text-white" : "text-white",
                   )}
                 >
-                  EN
-                  {/* العر */}
+                  AR
                   <ChevronDown className="text-[10px]" />
                 </Button>
               )}

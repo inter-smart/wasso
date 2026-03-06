@@ -114,7 +114,8 @@ export default async function ServiceDetailPage({ params }) {
         media: {
           desktop_path: rawData.Overview?.image?.url
             ? `${STRAPI_URL}${rawData.Overview.image.url}`
-            : null,
+            : "/images/placeholder.webp",
+
           media_alt:
             rawData.Overview?.image?.alternativeText || "overview",
         },
@@ -142,7 +143,7 @@ export default async function ServiceDetailPage({ params }) {
         media: {
           desktop_path: rawData.benefitSection?.image?.url
             ? `${STRAPI_URL}${rawData.benefitSection.image.url}`
-            : null,
+            : "/images/placeholder.webp",
           media_alt:
             rawData.benefitSection?.image?.alternativeText || "benefit",
         },
@@ -163,6 +164,8 @@ export default async function ServiceDetailPage({ params }) {
                 ? `${STRAPI_URL}${p.featured_image.url}`
                 : null,
               alt:
+                p.featured_image?.alternativeText || p.title || "",
+              alt_ar:
                 p.featured_image?.alternativeText || p.title || "",
             },
           })) || [],

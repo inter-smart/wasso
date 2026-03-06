@@ -35,7 +35,7 @@ export default function ServiceCard({ data, index, locale }) {
             />
           </div>
         )}
-      
+
 
         <Button
           size="lg"
@@ -55,14 +55,14 @@ export default function ServiceCard({ data, index, locale }) {
           size="h4"
           className="text-[16px] sm:text-[18px] lg:text-[22px] xl:text-[26px] 2xl:text-[35px] 3xl:text-[40px] font-normal text-black mb-4"
         >
-          {parse(locale === "ar" ? data?.title_ar : data?.title)}
+          {parse((locale === "ar" ? data?.title_ar : data?.title) || "")}
         </Heading>
         <Text
           as="div"
           size="p1"
           className="font-normal line-clamp-3 text-[#1E1E1E]"
         >
-          {parse(locale == "ar" ? data?.description_ar : data?.description)}
+          {parse((locale == "ar" ? data?.description_ar : data?.description) || "")}
         </Text>
       </div>
     </div>

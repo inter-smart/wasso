@@ -100,7 +100,7 @@ export default async function ServicesPage({ params }) {
 
           slug: `/${locale}/services/${item.slug}`,
 
-          icon: `${STRAPI_URL}${item.icon?.url}`,
+          icon: item.icon?.url ? `${STRAPI_URL}${item.icon.url}` : null,
         })) || [],
     };
 

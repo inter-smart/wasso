@@ -130,9 +130,9 @@ export default function CareerDetailInfo({ data, locale }) {
               <Image
                 src={data?.responsibilitiesMedia?.media_url}
                 alt={
-                  locale == "ar"
+                  (locale == "ar"
                     ? data?.responsibilitiesMedia?.media_alt_ar
-                    : data?.responsibilitiesMedia?.media_alt
+                    : data?.responsibilitiesMedia?.media_alt) || "Career"
                 }
                 width={886}
                 height={550}
@@ -151,9 +151,8 @@ export default function CareerDetailInfo({ data, locale }) {
                 className="leading-tight font-normal text-[#1e1e1e]"
               >
                 {parse(
-                  locale == "ar"
-                    ? data?.benefits?.title_ar
-                    : data?.benefits?.title,
+                  (locale == "ar" ? data?.formTitle_ar : data?.formTitle) ||
+                  "",
                 )}
               </Heading>
             </div>
