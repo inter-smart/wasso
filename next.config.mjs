@@ -18,6 +18,13 @@ const nextConfig = {
         hostname: "picsum.photos",
         pathname: "/**",
       },
+
+      // ✅ Strapi Production Server
+      {
+        protocol: "https",
+        hostname: "strapi.intersmart.in",
+        pathname: "/uploads/**",
+      },
     ],
      // ✅ Allow localhost/private IP images
     dangerouslyAllowLocalIP: true,
