@@ -2,6 +2,12 @@
 const nextConfig = {
   images: {
     remotePatterns: [
+      // ✅ Strapi Production Server
+      {
+        protocol: "https",
+        hostname: "https://strapi.intersmart.in",
+        // pathname: "/uploads/**",
+      },
       {
         protocol: "https",
         hostname: "images.unsplash.com",
@@ -11,23 +17,16 @@ const nextConfig = {
         protocol: "http",
         hostname: "localhost",
         port: "1337", // optional but good
-        pathname: "/uploads/**", // ← THIS WAS MISSING
+        // pathname: "/uploads/**", // ← THIS WAS MISSING
       },
       {
         protocol: "https",
         hostname: "picsum.photos",
         pathname: "/**",
       },
-
-      // ✅ Strapi Production Server
-      {
-        protocol: "https",
-        hostname: "strapi.intersmart.in",
-        pathname: "/uploads/**",
-      },
     ],
-     // ✅ Allow localhost/private IP images
-    dangerouslyAllowLocalIP: true,
+    // ✅ Allow localhost/private IP images
+    // dangerouslyAllowLocalIP: true,
 
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -43,6 +42,22 @@ const nextConfig = {
   // Experimental features for better performance
   experimental: {
     optimizePackageImports: ["lucide-react", "@radix-ui/react-slot"],
+  },
+
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "https://strap.intersmart.in",
+          },
+        ],
+        destination: "https://strapi.intersmart.in/:path*",
+        permanent: true,
+      },
+    ];
   },
 };
 
