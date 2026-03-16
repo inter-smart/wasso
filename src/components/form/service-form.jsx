@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { STRAPI_URL } from "@/lib/constants";
 
 const formSchema = z.object({
   fullName: z
