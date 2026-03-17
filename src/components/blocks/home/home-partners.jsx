@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import ScrollReveal from "@/components/animations/scroll-reveal";
+import CharacterAnimation from "./character-animation";
 
 const listVariants = {
   hidden: {},
@@ -117,7 +118,7 @@ export default function HomePartners({ data, locale }) {
     <section className="w-full h-auto bg-white block pt-[30px] sm:pt-[40px] xl:pt-[70px] 2xl:pt-[90px] overflow-hidden relative z-0">
       <div
         className={cn(
-          "w-full sm:max-w-[calc(var(--container-sm)/2+50%)] md:max-w-[calc(var(--container-md)/2+50%)] lg:max-w-[calc(var(--container-lg)/2+50%)] xl:max-w-[calc(var(--container-xl)/2+50%)] 2xl:max-w-[calc(var(--container-2xl)/2+50%)] 3xl:max-w-[calc(var(--container-3xl)/2+50%)]",
+          "w-full sm:max-w-[calc(var(--container-sm)/2+50%)] md:max-w-[calc(var(--container-md)/2+50%)] lg:max-w-[calc(var(--container-lg)/2+50%)] xl:max-w-[calc(var(--container-xl)/2+50%)] 2xl:max-w-[calc(var(--container-2xl)/2+50%)] 3xl:max-w-[calc(var(--container-3xl)/2+50%)] mb-6 xl:mb-8 2xl:mb-9 3xl:mb-10",
           locale === "ar"
             ? "pr-4 mr-auto [mask-image:linear-gradient(to_left,black_0%,black_90%,transparent_100%)] max-sm:[-webkit-mask-image:linear-gradient(to_left,black_0%,black_95%,transparent_100%)]"
             : "pl-4 ml-auto [mask-image:linear-gradient(to_right,black_0%,black_90%,transparent_100%)] max-sm:[-webkit-mask-image:linear-gradient(to_right,black_0%,black_95%,transparent_100%)]",
@@ -234,21 +235,7 @@ export default function HomePartners({ data, locale }) {
           </div>
         </div>
       </div>
-      <div className="text-[90px] 3xs:text-[100px] sm:text-[240px] xl:text-[300px] 2xl:text-[368px] 3xl:text-[440px] leading-none font-medium text-center text-[#fff3e8]">
-        {["W", "A", "S", "S", "O"].map((letter, index) => (
-          <motion.span
-            key={"letter-" + index}
-            className="inline-block cursor-default origin-bottom"
-            whileHover={{ scaleY: 1.1 }}
-            transition={{
-              duration: 0.3,
-              ease: [0.33, 1, 0.68, 1],
-            }}
-          >
-            {letter}
-          </motion.span>
-        ))}
-      </div>
+      <CharacterAnimation />
     </section>
   );
 }
