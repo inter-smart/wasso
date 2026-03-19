@@ -39,7 +39,7 @@ export default function CharacterAnimation() {
 
   return (
     <div
-      className="text-[90px] 3xs:text-[100px] sm:text-[240px] xl:text-[300px] 2xl:text-[368px] 3xl:text-[440px] leading-none font-medium text-center text-[#c09c86]"
+      className="text-[70px] 3xs:text-[80px] sm:text-[240px] xl:text-[300px] 2xl:text-[368px] 3xl:text-[440px] leading-none font-medium text-center text-[#c09c86] whitespace-nowrap overflow-hidden pt-6 xl:pt-8 2xl:pt-9 3xl:pt-10"
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
     >

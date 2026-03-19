@@ -14,10 +14,7 @@ import parse from "html-react-parser";
 import { cn } from "@/lib/utils";
 import { Heading } from "@/components/utils/typography";
 
-import {
-  Parallax,
-  ParallaxProvider,
-} from "react-scroll-parallax";
+import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 import WebglDisplacementCarousel from "@/components/animations/WebglDisplacementCarousel";
 import HackingText from "@/components/ui/hacking-text";
 
@@ -102,14 +99,20 @@ export default function HomeHero({ data, locale }) {
               className="object-cover"
               style={{
                 opacity: isRevealed ? 0 : 1,
-                transition: 'opacity 0.5s ease-in-out'
+                transition: "opacity 0.5s ease-in-out",
               }}
             />
           )}
 
           <div className="absolute inset-0 w-full h-full bg-linear-to-b from-black/70 via-transparent to-black/60 z-10 pointer-events-none" />
           {/* Single WebGL instance with conditional parallax for desktop */}
-          <MediaQuery minWidth={640}>
+          <div className="w-full h-full">
+            <WebglDisplacementCarousel
+              images={images}
+              activeIndex={selectedIndex}
+            />
+          </div>
+          {/* <MediaQuery minWidth={640}>
             {images.length > 0 && (
               <div className="w-full h-full">
                 <WebglDisplacementCarousel
@@ -128,7 +131,7 @@ export default function HomeHero({ data, locale }) {
                 />
               </div>
             )}
-          </MediaQuery>
+          </MediaQuery> */}
         </motion.div>
 
         {/* Invisible Embla Layer for Swipe Detection */}
