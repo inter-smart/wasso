@@ -1,31 +1,33 @@
-// middleware.ts
 import { NextRequest, NextResponse } from "next/server";
-import { locales, defaultLocale, localeDirection } from "./il8n/config";
+import { locales, defaultLocale } from "./il8n/config";
 
-export function middleware(request) {
+export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Check if pathname already has a locale
-  const pathnameHasLocale = locales.some((locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`);
+  const pathnameHasLocale = locales.some(
+    (locale) =>
+      pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
 
   if (pathnameHasLocale) return NextResponse.next();
 
-  // Detect locale from Accept-Language header or use default
+  // Detect locale
   const locale = getLocale(request) || defaultLocale;
 
-  // Redirect to locale-prefixed URL
+  // Redirect
   const newUrl = new URL(`/${locale}${pathname}`, request.url);
   return NextResponse.redirect(newUrl);
 }
 
-function getLocale(request) {
-  // Check cookie first
+function getLocale(request: NextRequest) {
+  // Cookie
   const cookieLocale = request.cookies.get("NEXT_LOCALE")?.value;
   if (cookieLocale && locales.includes(cookieLocale)) {
     return cookieLocale;
   }
 
-  // Check Accept-Language header
+  // Header
   const acceptLanguage = request.headers.get("accept-language");
   if (acceptLanguage) {
     const preferredLocale = acceptLanguage
@@ -41,7 +43,6 @@ function getLocale(request) {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next, api, static files)
     "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*|manifest.json).*)",
   ],
 };
