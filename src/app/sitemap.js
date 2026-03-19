@@ -4,10 +4,8 @@ export const revalidate = 60;
 
 export default async function sitemap() {
   const baseUrl = BASE_URL;
-
   const locales = ["en", "ar"];
 
-  // Fetch pages from Strapi
   const res = await fetch(`${STRAPI_URL}/api/pages?fields=slug,updatedAt`, {
     cache: "no-store",
   });
@@ -15,9 +13,8 @@ export default async function sitemap() {
   const data = await res.json();
   const pages = data?.data || [];
 
-  let urls = [];
+  const urls = [];
 
-  // Static routes
   const staticRoutes = [
     "",
     "about",
@@ -27,29 +24,32 @@ export default async function sitemap() {
     "services",
   ];
 
-  locales.forEach((locale) => {
-    staticRoutes.forEach((route) => {
+  // Static
+  for (const locale of locales) {
+    for (const route of staticRoutes) {
       urls.push({
-        url: `${baseUrl}/${locale}/${route}`,
-        lastModified: new Date(),
+        url: route ? `${baseUrl}/${locale}/${route}` : `${baseUrl}/${locale}`,
+        lastModified: new Date().toISOString(), // ✅ FIX
       });
-    });
-  });
+    }
+  }
 
-  // Dynamic routes from Strapi
-  pages.forEach((item) => {
+  // Dynamic
+  for (const item of pages) {
     const slug = item?.attributes?.slug;
     const updatedAt = item?.attributes?.updatedAt;
 
-    if (!slug) return;
+    if (!slug) continue;
 
-    locales.forEach((locale) => {
+    for (const locale of locales) {
       urls.push({
         url: `${baseUrl}/${locale}/${slug}`,
-        lastModified: updatedAt || new Date(),
+        lastModified: updatedAt
+          ? new Date(updatedAt).toISOString()
+          : new Date().toISOString(),
       });
-    });
-  });
+    }
+  }
 
   return urls;
 }
