@@ -144,9 +144,9 @@ export default function HeaderNavigation({
                                   setOpen(false);
                                 }}
                                 className={cn(
-                                  "text-[36px] sm:text-[48px] xl:text-[60px] leading-none font-light tracking-tight uppercase block",
+                                  "text-[36px] sm:text-[48px] xl:text-[54px] 2xl:text-[60px] leading-none font-light tracking-tight uppercase block",
                                   "hover:scale-100",
-                                  isActive ? "text-white" : "text-white/90",
+                                  isActive ? "text-white" : "text-white/60",
                                 )}
                                 asChild
                               >

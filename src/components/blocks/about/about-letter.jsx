@@ -1,10 +1,13 @@
-"use client";
-import { motion } from "motion/react";
+import CharacterAnimation from "../home/character-animation";
 
 export default function AboutLetter() {
   return (
-    <section className="w-full block border-t border-[#C09C86]/30">
-      <div className="text-[90px] 3xs:text-[100px] sm:text-[240px] lg:text-[260px] xl:text-[300px] 2xl:text-[368px] 3xl:text-[440px] leading-none font-medium text-center text-[#fff3e8]">
+    <section className="w-full block ">
+      {/* border-t border-[#C09C86]/30 */}
+      {/* <div
+        dir="ltr"
+        className="text-[90px] 3xs:text-[100px] sm:text-[240px] lg:text-[260px] xl:text-[300px] 2xl:text-[368px] 3xl:text-[440px] leading-none font-medium text-center text-[#fff3e8]"
+      >
         {["W", "A", "S", "S", "O"].map((letter, index) => (
           <motion.span
             key={"letter-" + index}
@@ -18,7 +21,9 @@ export default function AboutLetter() {
             {letter}
           </motion.span>
         ))}
-      </div>
+      </div> */}
+
+      <CharacterAnimation />
     </section>
   );
 }

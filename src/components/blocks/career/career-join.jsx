@@ -32,7 +32,6 @@ export default function CareerJoin({ data, locale }) {
           </Text>
         </div>
 
-        {/* Carousel */}
         <div
           ref={emblaRef}
           className="w-full max-w-full py-[18px] sm:py-[20px_25px] xl:py-[50px_52px] 2xl:py-[65px_70px] 3xl:py-[84px] overflow-hidden"
@@ -44,7 +43,7 @@ export default function CareerJoin({ data, locale }) {
                 key={slide.id}
                 className="flex-[0_0_220px] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 select-none"
               >
-                <div className="w-full h-full bg-[#FFFBF2] p-[18px_25px_18px_18px] sm:p-[20px_45px_20px_25px] xl:p-[32px_85px_32px_36px] 2xl:p-[41px_130px_41px_46px] 3xl:p-[52px_140px_52px_58px]">
+                <div className="w-full h-full bg-[#FFFBF2] p-[18px_25px_18px_18px] sm:p-[20px_45px_20px_25px] xl:p-[32px_85px_32px_36px] 2xl:p-[41px_130px_41px_46px] 3xl:p-[52px_140px_52px_58px] hover:bg-[#fff3e8] hover:scale-105 transition-all duration-300">
                   <div className="w-[40px] sm:w-[56px] xl:w-[72px] 2xl:w-[86px] h-[40px] sm:h-[56px] xl:h-[72px] 2xl:h-[86px]  mb-[40px] sm:mb-[56px] xl:mb-[72px] 2xl:mb-[80px] overflow-hidden">
                     <Image
                       src={slide.image}

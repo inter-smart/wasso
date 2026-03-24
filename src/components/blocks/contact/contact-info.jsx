@@ -100,6 +100,7 @@ export default function ContactInfo({ data, locale }) {
 function SubItems({ data, className, info, locale }) {
   return (
     <div
+      dir="ltr"
       className={cn(
         "w-full h-full bg-[#fafafa] p-4 xl:p-6 2xl:p-7 3xl:p-8",
         className,

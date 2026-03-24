@@ -65,6 +65,7 @@ export default function PageLoader() {
               preload="auto"
               fetchPriority="high"
               onPlaying={() => setIsVideoReady(true)}
+              className="max-w-[320px] object-contain"
             ></video>
           </motion.div>
         </motion.div>

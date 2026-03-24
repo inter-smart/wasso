@@ -60,7 +60,7 @@ export default function HomeServices({ data, locale }) {
               className="line-clamp-2 text-[#4b4b4b] mb-3 xl:mb-5 2xl:mb-6"
             >
               {parse(
-                locale === "ar" ? data?.description_ar : data?.description
+                locale === "ar" ? data?.description_ar : data?.description,
               )}
             </Text>
             <Button
@@ -153,19 +153,19 @@ function ServiceCard({ data, index, locale }) {
             animate={
               isMobile
                 ? {
-                  rotateY: 0,
-                  opacity: 1,
-                  filter: "blur(0px)",
-                }
+                    rotateY: 0,
+                    opacity: 1,
+                    filter: "blur(0px)",
+                  }
                 : {
-                  rotateY: hovered === index ? 0 : 180,
-                  opacity: hovered === index ? 1 : 0,
-                  filter: hovered === index ? "blur(0px)" : "blur(2px)",
-                }
+                    rotateY: hovered === index ? 0 : 180,
+                    opacity: hovered === index ? 1 : 0,
+                    filter: hovered === index ? "blur(0px)" : "blur(2px)",
+                  }
             }
             transition={{
               duration: 1,
-              ease: [0.43, 0.13, 0.23, 0.96] // Custom cubic-bezier for smooth professional feel
+              ease: [0.43, 0.13, 0.23, 0.96], // Custom cubic-bezier for smooth professional feel
             }}
             style={{
               perspective: 1200,
@@ -175,7 +175,7 @@ function ServiceCard({ data, index, locale }) {
           >
             <div>
               <Image
-                src={data?.icon_path}
+                src={data?.icon_path || "/images/placeholder.jpg"}
                 alt={locale == "ar" ? data?.title_ar : data?.title}
                 width={50}
                 height={52}
@@ -204,7 +204,7 @@ function ServiceCard({ data, index, locale }) {
                 asChild
               >
                 <Link href={data?.slug}>
-                  {locale == "ar" ? "Know More arabic" : "Know More"}
+                  {locale == "ar" ? "اعرف المزيد" : "Know More"}
                 </Link>
               </Button>
             </div>

@@ -7,6 +7,9 @@ import ProjectsCard from "./projects-card";
 
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import ScrollReveal from "@/components/animations/scroll-reveal";
+import { Heading } from "@/components/utils/typography";
+import parse from "html-react-parser";
 
 export default function ProjectsMore({ data, locale }) {
   const targetRef = useRef(null);
@@ -83,11 +86,22 @@ export default function ProjectsMore({ data, locale }) {
         style={{ height: sectionHeight }}
         className="relative w-full hidden sm:block"
       >
-        <div className="sticky top-0 h-screen w-full overflow-hidden">
+        <div className="sticky top-0 h-auto min-h-screen w-full overflow-hidden flex flex-col justify-center items-center">
+          <div className="container">
+            <ScrollReveal delay={0.1}>
+              <Heading
+                as="h2"
+                size="h2"
+                className="leading-normal font-normal text-[#1e1e1e] truncate"
+              >
+                {parse(locale == "ar" ? "المشاريع" : "Projects")}
+              </Heading>
+            </ScrollReveal>
+          </div>
           <div
             ref={containerRef}
             className={cn(
-              "w-full h-full flex items-center",
+              "w-full h-[calc(100vh-60px)] h-auto flex items-center",
               "sm:max-w-[calc(var(--container-sm)/2+50%)] md:max-w-[calc(var(--container-md)/2+50%)] lg:max-w-[calc(var(--container-lg)/2+50%)] xl:max-w-[calc(var(--container-xl)/2+50%)] 2xl:max-w-[calc(var(--container-2xl)/2+50%)] 3xl:max-w-[calc(var(--container-3xl)/2+50%)]",
               locale === "ar"
                 ? "pr-4 mr-auto [mask-image:linear-gradient(to_left,black_0%,black_99%,transparent_100%)]"
@@ -98,13 +112,16 @@ export default function ProjectsMore({ data, locale }) {
               style={{
                 x: locale === "ar" ? useTransform(x, (value) => -value) : x,
               }}
-              className="flex gap-0 pr-4 -mx-2 lg:-mx-4 2xl:-mx-6"
+              className={cn(
+                "flex gap-0 -mx-2 lg:-mx-4 2xl:-mx-6",
+                locale === "ar" ? "pl-4 " : "pr-4 ",
+              )}
             >
               {items.map((item, i) => (
                 <div
                   key={item.id || i}
                   data-project-item
-                  className="relative h-screen w-[40vw] sm:w-[34vw] lg:w-[30vw] shrink-0 p-2 lg:p-4 2xl:p-6 flex flex-col justify-center"
+                  className="relative h-hull w-[40vw] sm:w-[34vw] lg:w-[30vw] shrink-0 p-2 lg:p-4 2xl:p-6 flex flex-col justify-center"
                 >
                   <ProjectsCard locale={locale} data={item} />
                 </div>
@@ -123,6 +140,15 @@ export default function ProjectsMore({ data, locale }) {
               : "pr-0 mask-[linear-gradient(to_right,black_0%,black_90%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,black_0%,black_95%,transparent_100%)]",
           )}
         >
+          <ScrollReveal delay={0.1}>
+            <Heading
+              as="h2"
+              size="h2"
+              className="leading-normal font-normal text-[#1e1e1e] mb-1"
+            >
+              {parse(locale == "ar" ? "المشاريع" : "Projects")}
+            </Heading>
+          </ScrollReveal>
           <div
             ref={emblaRef}
             className="w-full max-w-full overflow-hidden"

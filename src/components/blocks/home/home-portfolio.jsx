@@ -122,7 +122,10 @@ export default function HomePortfolio({ data, locale }) {
 
           <button
             onClick={goToNext}
-            className="w-[60px] sm:w-[100px] xl:w-[130px] 2xl:w-[160px] absolute z-0 bottom-0 right-2 sm:right-4 cursor-pointer"
+            className={cn(
+              "w-[60px] sm:w-[100px] xl:w-[130px] 2xl:w-[160px] absolute z-0 bottom-0 cursor-pointer",
+              locale === "ar" ? "left-2 sm:left-4" : "right-2 sm:right-4",
+            )}
           >
             <div className="w-full h-full bg-[url('/images/home-portfolio-button-1.svg')] bg-center bg-no-repeat bg-size-[30px] sm:bg-size-[40px] xl:bg-size-[45px] 2xl:bg-size-[50px] relative hover:bg-size-[100px] transition-all duration-300">
               <Image
@@ -146,9 +149,7 @@ function PortfolioCard({ data, slot, locale, activeIndex, images }) {
 
   return (
     <Suspense
-      fallback={
-        <Skeleton className="w-full h-80 sm:h-92 bg-gray-300" />
-      }
+      fallback={<Skeleton className="w-full h-80 sm:h-92 bg-gray-300" />}
     >
       <div
         className={cn(
@@ -177,7 +178,7 @@ function PortfolioCard({ data, slot, locale, activeIndex, images }) {
               exit={{ opacity: 0 }}
               transition={{
                 duration: 0.5,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
               className="absolute inset-0"
             >
@@ -212,7 +213,9 @@ function PortfolioCard({ data, slot, locale, activeIndex, images }) {
                       {parse(locale === "ar" ? data?.title_ar : data?.title)}
                     </Heading>
                     <Text size="p1" className="text-white">
-                      <span className="font-light">Location: </span>
+                      <span className="font-light">
+                        {locale === "ar" ? "الموقع: " : "Location: "}
+                      </span>
                       {parse(
                         locale === "ar" ? data?.location_ar : data?.location,
                       )}
@@ -236,7 +239,7 @@ function PortfolioCard({ data, slot, locale, activeIndex, images }) {
                       asChild
                     >
                       <Link href={data?.slug}>
-                        {locale === "ar" ? "Know More arabic" : "Know More"}
+                        {locale === "ar" ? "اعرف المزيد" : "Know More"}
                       </Link>
                     </Button>
                   </motion.div>

@@ -14,7 +14,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 import dynamic from "next/dynamic";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Languages } from "lucide-react";
 import HeaderNavigation from "./header-navigation";
 
 const MediaQuery = dynamic(() => import("react-responsive"), {
@@ -109,7 +109,7 @@ export default function Header({ headerData, navigationData, locale }) {
                 : "bg-black/90"
               : showDarkHeader
                 ? // ? "bg-linear-to-b from-white/20 to-transparent"
-                "bg-transparent"
+                  "bg-transparent"
                 : "bg-transparent",
         )}
       >
@@ -157,7 +157,7 @@ export default function Header({ headerData, navigationData, locale }) {
                   )}
                 >
                   EN
-                  <ChevronDown className="text-[10px]" />
+                  <Languages className="size-[10px]" />
                 </Button>
               ) : (
                 <Button
@@ -169,7 +169,7 @@ export default function Header({ headerData, navigationData, locale }) {
                   )}
                 >
                   AR
-                  <ChevronDown className="text-[10px]" />
+                  <Languages className="size-[10px]" />
                 </Button>
               )}
               <Button

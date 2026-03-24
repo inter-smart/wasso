@@ -32,7 +32,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                       size="h7"
                       className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
                     >
-                      {locale == "ar" ? "QUICK LINKS ar" : "QUICK LINKS"}
+                      QUICK LINKS
                     </Heading>
                     {footerData?.quick_link_navigation?.map((item, index) => (
                       <div key={"quick_link_navigation" + index}>
@@ -54,7 +54,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     <AccordionItem
                       locale={locale}
                       title="Quick links"
-                      title_ar="QUICK LINKS ar"
+                      title_ar="QUICK LINKS"
                       section="quick"
                       openSection={openSection}
                       setOpenSection={setOpenSection}
@@ -90,7 +90,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                       size="h7"
                       className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
                     >
-                      {locale == "ar" ? "SERVICES ar" : "SERVICES"}
+                      SERVICES
                     </Heading>
                     {footerData?.services_navigation?.map((item, index) => (
                       <div key={"services_navigation" + index}>
@@ -111,7 +111,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                   <AccordionItem
                     locale={locale}
                     title="Services"
-                    title_ar="SERVICES ar"
+                    title_ar="SERVICES"
                     section="services"
                     openSection={openSection}
                     setOpenSection={setOpenSection}
@@ -142,7 +142,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     size="h7"
                     className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
                   >
-                    {locale == "ar" ? "FOLLOW US ar" : "FOLLOW US"}
+                    FOLLOW US
                   </Heading>
                   <div className="flex flex-wrap items-center gap-x-3 xl:gap-x-5">
                     {socialLinkData?.map((item, index) => (
@@ -214,7 +214,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                       size="h7"
                       className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
                     >
-                      {locale == "ar" ? "CONTACT US ar" : "CONTACT US"}
+                      CONTACT US
                     </Heading>
                     <Heading
                       as="div"
@@ -251,7 +251,11 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                       className="font-normal text-[#1e1e1e] flex-1 transition [&>a]:hover:text-[#cda278]"
                     >
                       {footerData?.phone.map((phone, index) => (
-                        <a key={"phone" + index} href={`tel:${phone}`}>
+                        <a
+                          key={"phone" + index}
+                          href={`tel:${phone}`}
+                          dir="ltr"
+                        >
                           {phone}{" "}
                         </a>
                       ))}
@@ -281,7 +285,11 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         className="font-normal text-[#1e1e1e] transition [&>a]:hover:text-[#cda278]"
                       >
                         {footerData?.email.map((email, index) => (
-                          <a key={"email" + index} href={`mailto:${email}`}>
+                          <a
+                            key={"email" + index}
+                            href={`mailto:${email}`}
+                            dir="ltr"
+                          >
                             {email}{" "}
                           </a>
                         ))}
@@ -309,7 +317,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         className="w-3 xl:w-5 block"
                         unoptimized
                       />
-                      {locale == "ar" ? "Locate on Map ar" : "Locate on Map"}
+                      Locate on Map
                     </a>
                   </Button>
                 )}
@@ -322,7 +330,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         size="h7"
                         className="font-medium text-[#c09c86] mb-1"
                       >
-                        {locale == "ar" ? "FOLLOW US ar" : "FOLLOW US"}
+                        FOLLOW US
                       </Heading>
                       <div className="flex flex-wrap items-center gap-x-4">
                         {socialLinkData?.map((item, index) => (
@@ -352,15 +360,17 @@ export default function Footer({ footerData, socialLinkData, locale }) {
 
         <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-x-5 mt-6 xl:mt-8 2xl:mt-10">
           <Text as="div" size="p2" className="tracking-wide text-[#1e1e1e]">
-            {parse(footerData?.copyright)}
+            {parse(
+              locale == "ar" ? footerData?.copyright_ar : footerData?.copyright,
+            )}
           </Text>
           <hr className="border-[#eadcce] flex-1 max-sm:hidden" />
           <Text
             as="div"
             size="p2"
-            className="whitespace-nowrap text-end tracking-wide text-[#1e1e1e] flex"
+            className="whitespace-nowrap text-end tracking-wide text-[#1e1e1e] flex gap-1"
           >
-            {locale == "ar" ? "Designed By: ar" : "Designed By:"}{" "}
+            {locale === "ar" ? "تصميم بواسطة: " : "Designed By: "}
             <a href="https://www.intersmartsolution.com/" target="_blank">
               <Image
                 src="/images/footer-author.svg"
