@@ -235,7 +235,7 @@ export default function HomePartners({ data, locale }) {
           </div>
         </div>
       </div>
-      <CharacterAnimation />
+      <CharacterAnimation locale={locale} />
     </section>
   );
 }

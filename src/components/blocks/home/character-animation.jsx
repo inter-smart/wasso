@@ -1,11 +1,12 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { motion, useSpring } from "motion/react";
 import { useRef, useCallback } from "react";
 
 const LETTERS = ["W", "A", "S", "S", "O"];
 const MAX_SCALE = 1.25;
 
-export default function CharacterAnimation() {
+export default function CharacterAnimation({ locale }) {
   const refs = useRef([]);
 
   const s0 = useSpring(1, { stiffness: 280, damping: 22, mass: 0.6 });
@@ -41,7 +42,10 @@ export default function CharacterAnimation() {
 
   return (
     <div
-      className="text-[70px] 3xs:text-[80px] sm:text-[240px] xl:text-[300px] 2xl:text-[368px] 3xl:text-[440px] leading-none font-medium text-center text-[#c09c86] whitespace-nowrap overflow-hidden pt-6 xl:pt-8 2xl:pt-9 3xl:pt-10"
+      className={cn(
+        "text-[70px] 3xs:text-[80px] sm:text-[240px] xl:text-[300px] 2xl:text-[368px] 3xl:text-[440px] leading-none font-medium text-center text-[#c09c86] whitespace-nowrap overflow-hidden pt-6 xl:pt-8 2xl:pt-9 3xl:pt-10",
+        locale === "ar" && "font-sans!",
+      )}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       dir="ltr"

@@ -33,7 +33,7 @@ export const cairo = Cairo({
  * @returns {string} Font variable class name
  */
 export function getFontVariable(locale) {
-  return locale === "ar" ? cairo.variable : poppins.variable;
+  return `${cairo.variable} ${poppins.variable}`;
 }
 
 /**

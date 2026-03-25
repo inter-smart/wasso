@@ -89,7 +89,7 @@ export default async function AboutPage({ params }) {
 
       <AboutConcern locale={locale} data={aboutData?.sister_concern} />
 
-      <AboutLetter />
+      <AboutLetter locale={locale} />
     </>
   );
 }

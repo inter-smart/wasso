@@ -1,6 +1,6 @@
 import CharacterAnimation from "../home/character-animation";
 
-export default function AboutLetter() {
+export default function AboutLetter({ locale }) {
   return (
     <section className="w-full block ">
       {/* border-t border-[#C09C86]/30 */}
@@ -23,7 +23,7 @@ export default function AboutLetter() {
         ))}
       </div> */}
 
-      <CharacterAnimation />
+      <CharacterAnimation locale={locale} />
     </section>
   );
 }
