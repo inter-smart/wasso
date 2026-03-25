@@ -94,7 +94,7 @@ export default function ProjectsMore({ data, locale }) {
                 size="h2"
                 className="leading-normal font-normal text-[#1e1e1e] truncate"
               >
-                {parse(locale == "ar" ? "المشاريع" : "Projects")}
+                {parse(locale == "ar" ? data?.title_ar : data?.title)}
               </Heading>
             </ScrollReveal>
           </div>
@@ -146,7 +146,7 @@ export default function ProjectsMore({ data, locale }) {
               size="h2"
               className="leading-normal font-normal text-[#1e1e1e] mb-1"
             >
-              {parse(locale == "ar" ? "المشاريع" : "Projects")}
+              {parse(locale == "ar" ? (data?.title_ar || "المشاريع") : (data?.title || "Projects"))}
             </Heading>
           </ScrollReveal>
           <div
