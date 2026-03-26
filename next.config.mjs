@@ -53,7 +53,7 @@ const nextConfig = {
         has: [
           {
             type: "host",
-            value: "wasso.intersmart.in",
+            value: "strapi.intersmart.in",
           },
         ],
         destination: "https://wasso.intersmart.in/:path*",
