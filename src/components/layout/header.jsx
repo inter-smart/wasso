@@ -181,7 +181,10 @@ export default function Header({ headerData, navigationData, locale }) {
                 )}
                 asChild
               >
-                <Link href={`/${locale}/${headerData?.button?.link}`}>
+                <Link
+                  href={`/${locale}/${headerData?.button?.link}`}
+                  target={headerData?.button?.isExternal ? "_blank" : "_self"}
+                  rel={headerData?.button?.isExternal ? "noopener noreferrer" : ""}>
                   {headerData?.button?.label}
                 </Link>
               </Button>
