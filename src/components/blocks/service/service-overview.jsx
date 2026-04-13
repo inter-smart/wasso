@@ -27,15 +27,15 @@ export default function ServiceOverview({
         <div className="-mx-4 xl:-mx-7 2xl:-mx-8 3xl:-mx-11 [&>*]:p-4 xl:[&>*]:p-7 2xl:[&>*]:p-8 3xl:[&>*]:p-11 flex flex-wrap flex-col-reverse md:flex-row sm:items-center">
           {/* ✅ Image */}
           {!isEmpty(image) && (
-            <div className="w-full lg:w-5/12 lg:w-[52%]">
+            <div className="w-full lg:w-5/12 lg:w-[52%] overflow-hidden">
               <Image
                 src={
                   data?.media?.desktop_path || "/images/icon-placeholder.svg"
                 }
-                alt={data?.media?.media_alt}
+                alt={data?.media?.media_alt || "overview"}
                 width={885}
                 height={500}
-                className="h-full w-full object-fill"
+                className="h-full w-full object-fill hover:scale-105 transition-all duration-300 ease-in-out"
               />
             </div>
           )}
