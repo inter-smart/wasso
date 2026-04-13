@@ -1,6 +1,6 @@
+import InnerHero from "@/components/common/inner-hero";
 import ServiceFlagship from "@/components/blocks/service/service-flagship";
 import ServiceHearFrom from "@/components/blocks/service/service-hear";
-import InnerHero from "@/components/common/inner-hero";
 import ServiceApproach from "@/components/blocks/service/service-approach";
 import ServiceOverview from "@/components/blocks/service/service-overview";
 import ServiceBenefits from "@/components/blocks/service/service-benefits";

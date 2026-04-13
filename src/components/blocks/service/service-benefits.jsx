@@ -4,7 +4,7 @@ import { Heading, Text } from "@/components/utils/typography";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-export default function ServiceBenefit({ data, locale = "en" }) {
+export default function ServiceBenefits({ data, locale = "en" }) {
   return (
     <section className="w-full h-auto block pt-[30px] sm:pt-[40px] xl:pt-[90px] 2xl:pt-[100px] 3xl:pt-[120px] pb-[20px] sm:pb-[20px] xl:pb-[35px] 2xl:pb-[40px] bg-white relative z-0">
       <div className="container">
