@@ -107,7 +107,7 @@ function SubItems({ data, className, info, locale }) {
       )}
     >
       <Image
-        src={data?.icon_path}
+        src={data?.icon_path || "/images/placeholder.webp"}
         alt={locale == "ar" ? data?.label_ar : data?.label}
         width={45}
         height={45}

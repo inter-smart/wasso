@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { z } from "zod";
+import { useParams } from "next/navigation";
 
 import {
   Form,
@@ -59,6 +60,8 @@ const textareaStyle = `
 const iconStyle = "w-3 xl:w-3.5 2xl:w-4 3xl:w-5 aspect-square object-contain";
 
 export default function ContactEnquiryForm() {
+  const params = useParams();
+  const locale = params?.locale || "en";
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -78,12 +81,12 @@ export default function ContactEnquiryForm() {
     setSuccess(null);
 
     try {
-      const res = await fetch(`${STRAPI_URL}/api/contact-enquiries`, {
+      const res = await fetch(`${STRAPI_URL}/api/contact-enquiries?locale=${locale}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ data: values }),
+        body: JSON.stringify({ data: { ...values, locale } }),
       });
 
       if (res.ok) {

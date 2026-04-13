@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useParams } from "next/navigation";
 import { z } from "zod";
 
 import {
@@ -57,6 +58,8 @@ const textareaStyle = cn(
 );
 
 export default function CareerEnquiryForm() {
+  const params = useParams();
+  const locale = params?.locale || "en";
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -173,6 +176,7 @@ export default function CareerEnquiryForm() {
         fullName: values.fullName,
         email: values.email,
         phone: values.phone,
+        locale: locale,
         // city: values.city,
         // message: values.message,
       };
@@ -182,7 +186,7 @@ export default function CareerEnquiryForm() {
       }
 
       // Submit the text with relationship link to the newly uploaded file!
-      const res = await fetch(`${STRAPI_URL}/api/career-enquiries`, {
+      const res = await fetch(`${STRAPI_URL}/api/career-enquiries?locale=${locale}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
