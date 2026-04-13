@@ -25,7 +25,14 @@ export default function CareerDetailInfo({ data, locale }) {
 
         <div className="w-full bg-[#fffbf2] p-4 lg:py-4 lg:px-8 xl:py-5 xl:px-12 2xl:py-6 2xl:px-14 3xl:py-7 3xl:px-16 mb-12 lg:mb-18 xl:mb-23 2xl:mb-27 3xl:mb-32">
           <div className="flex flex-wrap justify-between -m-2 lg:-m-3 xl:-m-2 2xl:-m-2.5 3xl:-m-3 [&>*]:p-2 lg:[&>*]:p-3 xl:[&>*]:p-2 2xl:[&>*]:p-2.5 3xl:[&>*]:p-3">
-            {data?.jobSpecs?.map((item) => (
+            {(data?.jobSpecs?.length > 0
+              ? data.jobSpecs
+              : [
+                  { id: "p1", title: "Job Type", title_ar: "نوع الوظيفة" },
+                  { id: "p2", title: "Location", title_ar: "موقع" },
+                  { id: "p3", title: "Experience", title_ar: "الخبرة" },
+                ]
+            ).map((item) => (
               <div
                 key={item?.id}
                 className="w-full 3xs:w-1/2 sm:w-1/3 xl:w-auto"
@@ -33,8 +40,12 @@ export default function CareerDetailInfo({ data, locale }) {
                 <div className="w-full flex flex-wrap items-center gap-2 lg:gap-2.5 xl:gap-3 2xl:gap-3.5 3xl:gap-4">
                   <div className="w-[20px] lg:w-[22px] xl:w-[24px] 2xl:w-[26px] 3xl:w-[30px] aspect-square">
                     <Image
-                      src={item?.iconPath}
-                      alt={locale == "ar" ? item?.title_ar : item?.title}
+                      src={item?.iconPath || "/images/career-benefits-1.svg"}
+                      alt={
+                        locale == "ar"
+                          ? item?.title_ar || "Job Type"
+                          : item?.title || "Job Type"
+                      }
                       width={40}
                       height={40}
                       className="w-full h-full object-contain block"
@@ -46,13 +57,18 @@ export default function CareerDetailInfo({ data, locale }) {
                       size="p2"
                       className="leading-none font-medium text-[#1C2222]"
                     >
-                      {parse(locale == "ar" ? item?.title_ar : item?.title)}:
+                      {parse(
+                        locale == "ar"
+                          ? item?.title_ar || "Job Type"
+                          : item?.title || "Job Type",
+                      )}
+                      :
                     </Text>
                     <Text as="div" size="p2" className="text-[#1C2222]">
                       {parse(
                         locale == "ar"
-                          ? item?.description_ar
-                          : item?.description,
+                          ? item?.description_ar || "-"
+                          : item?.description || "-",
                       )}
                     </Text>
                   </div>
@@ -136,7 +152,7 @@ export default function CareerDetailInfo({ data, locale }) {
                 }
                 width={886}
                 height={550}
-                className="w-full h-full object-contain block hover:scale-105 transition-all duration-300 ease-in-out"
+                className="w-full h-full object-cover block hover:scale-105 transition-all duration-300 ease-in-out"
               />
             </div>
           </div>
@@ -151,8 +167,7 @@ export default function CareerDetailInfo({ data, locale }) {
                 className="leading-tight font-normal text-[#1e1e1e]"
               >
                 {parse(
-                  (locale == "ar" ? data?.formTitle_ar : data?.formTitle) ||
-                  "",
+                  (locale == "ar" ? data?.formTitle_ar : data?.formTitle) || "",
                 )}
               </Heading>
             </div>

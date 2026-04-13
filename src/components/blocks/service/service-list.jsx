@@ -4,8 +4,6 @@ import { Heading, Text } from "@/components/utils/typography";
 import ServiceCard from "./service-card";
 
 export default function ServiceList({ data, locale = "en" }) {
-  const isArabic = locale === "ar";
-
   return (
     <section className="w-full h-auto block relative z-0 py-[30px] sm:py-[40px] xl:py-[70px_90px] 2xl:py-[80px_100px] 3xl:py-[100px_130px] bg-white">
       <div className="container">

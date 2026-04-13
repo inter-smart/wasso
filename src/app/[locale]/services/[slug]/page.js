@@ -1,12 +1,11 @@
+import InnerHero from "@/components/common/inner-hero";
 import ServiceFlagship from "@/components/blocks/service/service-flagship";
 import ServiceHearFrom from "@/components/blocks/service/service-hear";
-import InnerHero from "@/components/common/inner-hero";
 import ServiceApproach from "@/components/blocks/service/service-approach";
 import ServiceOverview from "@/components/blocks/service/service-overview";
-import ServiceBenefit from "@/components/blocks/service/service-benefits";
+import ServiceBenefits from "@/components/blocks/service/service-benefits";
 import { STRAPI_URL } from "@/lib/constants";
 import { notFound } from "next/navigation";
-import { convertRichTextToHtml } from "@/lib/sanitizer";
 
 export const dynamic = "force-dynamic";
 
@@ -136,7 +135,7 @@ export default async function ServiceDetailPage({ params }) {
       benefit_data: {
         title: rawData.benefitSection?.title || "",
         title_ar: rawData.benefitSection?.title || "",
-        description: convertRichTextToHtml(rawData.benefitSection?.description),
+        description: rawData.benefitSection?.description || "",
         media: {
           desktop_path: rawData.benefitSection?.image?.url
             ? `${STRAPI_URL}${rawData.benefitSection.image.url}`
@@ -190,7 +189,7 @@ export default async function ServiceDetailPage({ params }) {
 
       <ServiceApproach data={serviceData.approach_data} locale={locale} />
 
-      <ServiceBenefit data={serviceData.benefit_data} locale={locale} />
+      <ServiceBenefits data={serviceData.benefit_data} locale={locale} />
 
       <ServiceFlagship data={serviceData.flagship_data} locale={locale} />
 

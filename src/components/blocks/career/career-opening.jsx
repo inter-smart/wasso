@@ -45,24 +45,31 @@ export default function CareerOpening({ data, locale }) {
               </div>
               <div className="w-full sm:w-[70%] xl:w-[50%]">
                 <div className="flex flex-wrap justify-between gap-y-6">
-                  {item?.opening_specs?.map((spec) => (
+                  {(item?.opening_specs?.length > 0
+                    ? item.opening_specs
+                    : [
+                      {
+                        id: "p1",
+                        title: "Job Type",
+                        title_ar: "نوع الوظيفة",
+                      },
+                      { id: "p2", title: "Location", title_ar: "موقع" },
+                      { id: "p3", title: "Experience", title_ar: "الخبرة" },
+                    ]
+                  ).map((spec) => (
                     <div
                       key={spec.id}
                       className="w-full sm:w-1/2 md:w-[33.333%]"
                     >
                       <div className="w-full flex flex-wrap items-center px-2 gap-1 lg:gap-2 xl:gap-2.5 2xl:gap-3 3xl:gap-4">
                         <div className="w-[18px] lg:w-[20px] xl:w-[22px] 2xl:w-[24px] 3xl:w-[28px] aspect-square">
-                          {spec?.iconPath ? (
-                            <Image
-                              src={spec.iconPath}
-                              alt={locale == "ar" ? spec?.title_ar : spec?.title}
-                              width={40}
-                              height={40}
-                              className="w-full h-full object-contain block"
-                            />
-                          ) : (
-                            <div className="w-full h-full bg-gray-100 rounded-sm" />
-                          )}
+                          <Image
+                            src={spec?.iconPath}
+                            alt={locale == "ar" ? spec?.title_ar : spec?.title}
+                            width={40}
+                            height={40}
+                            className="w-full h-full object-contain block"
+                          />
                         </div>
                         <div className="flex-1">
                           <Text
@@ -71,7 +78,9 @@ export default function CareerOpening({ data, locale }) {
                             className="xl:text-[10px] 2xl:text-[13px] 3xl:text-[16px] leading-none font-medium text-[#1C2222] mb-1"
                           >
                             {parse(
-                              locale == "ar" ? spec?.title_ar : spec?.title,
+                              locale == "ar"
+                                ? spec?.title_ar || "Job Type"
+                                : spec?.title || "Job Type",
                             )}
                             :
                           </Text>
@@ -82,8 +91,8 @@ export default function CareerOpening({ data, locale }) {
                           >
                             {parse(
                               locale == "ar"
-                                ? spec?.description_ar
-                                : spec?.description,
+                                ? spec?.description_ar || "-"
+                                : spec?.description || "-",
                             )}
                           </Text>
                         </div>
@@ -103,7 +112,9 @@ export default function CareerOpening({ data, locale }) {
                   asChild
                 >
                   <Link href={`/${locale}/careers/${item?.slug}`}>
-                    {locale == "ar" ? item?.ctaLabel_ar : item?.ctaLabel}
+                    {locale == "ar"
+                      ? item?.ctaLabel_ar || "استكشف الفرص"
+                      : item?.ctaLabel || "Explore opportunities"}
                   </Link>
                 </Button>
               </div>

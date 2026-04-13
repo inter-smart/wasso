@@ -14,7 +14,6 @@ import Image from "next/image";
 
 import { motion } from "motion/react";
 import { Skeleton } from "@/components/ui/skeleton";
-import ScrollReveal from "@/components/animations/scroll-reveal";
 
 export default function ServiceFlagship({ data, locale }) {
   const [emblaRef] = useEmblaCarousel(
@@ -22,8 +21,10 @@ export default function ServiceFlagship({ data, locale }) {
     [Autoplay({ delay: 6000, stopOnInteraction: true, pauseOnHover: true })],
   );
 
+  if (!data?.items || data.items.length === 0) return null;
+
   return (
-    <section className="w-full h-auto block py-[40px] sm:py-[40px] xl:py-[70px_80px] 2xl:py-[80px_110px] overflow-hidden">
+    <section className="w-full h-auto block py-[20px_40px] sm:py-[20px_40px] xl:py-[35px_80px] 2xl:py-[40px_110px] overflow-hidden">
       <div className="container">
         <Heading as="h2" size="h3" className="font-normal text-[#1e1e1e] mb-2">
           {parse(locale == "ar" ? data?.title_ar : data?.title)}
@@ -121,7 +122,6 @@ function FlagshipCard({ data, index, locale }) {
                     ? data?.description_ar
                     : data?.description) || "",
                 )}
-
               </Text>
             </div>
           </motion.div>
