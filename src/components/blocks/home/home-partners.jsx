@@ -189,7 +189,7 @@ export default function HomePartners({ data, locale }) {
                             className="w-full h-full"
                           >
                             <Image
-                              src={item?.media?.path}
+                              src={item?.media?.path || "/images/placeholder.webp"}
                               alt={
                                 locale == "ar"
                                   ? item?.media?.alt_ar
@@ -213,7 +213,7 @@ export default function HomePartners({ data, locale }) {
                             className="absolute inset-0 block"
                           >
                             <Image
-                              src={item?.media?.path}
+                              src={item?.media?.path || "/images/placeholder.webp"}
                               alt={
                                 locale == "ar"
                                   ? item?.media?.alt_ar

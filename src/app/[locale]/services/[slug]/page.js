@@ -162,7 +162,7 @@ export default async function ServiceDetailPage({ params }) {
             media: {
               path: p.featured_image?.url
                 ? `${STRAPI_URL}${p.featured_image.url}`
-                : null,
+                : "/images/placeholder.webp",
               alt: p.featured_image?.alternativeText || p.title || "",
               alt_ar: p.featured_image?.alternativeText || p.title || "",
             },
