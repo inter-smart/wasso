@@ -188,7 +188,7 @@ function PortfolioCard({ data, slot, locale, activeIndex, images }) {
                 fill
                 priority={slot === 1}
                 sizes="(max-width: 640px) 25vw, 20vw"
-                className="object-cover"
+                className="object-cover hover:scale-105 transition duration-300"
                 quality={85}
               />
             </motion.div>
