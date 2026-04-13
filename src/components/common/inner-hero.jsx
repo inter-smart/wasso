@@ -42,7 +42,7 @@ export default function InnerHero({ slug, data, locale }) {
                   playsInline
                   className="w-full h-full object-cover absolute -z-2 inset-0 opacity-80 hidden sm:block"
                 >
-                  <source src={data?.media?.desktop_path} type="image/webp" />
+                  <source src={data?.media?.desktop_path} type="video/mp4" />
                 </video>
               </>
             ) : (
@@ -57,8 +57,6 @@ export default function InnerHero({ slug, data, locale }) {
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 80vw"
                   className="-z-2 object-cover"
-                  placeholder="blur"
-                  blurDataURL="/images/placeholder.jpg"
                 />
               </picture>
             )}
