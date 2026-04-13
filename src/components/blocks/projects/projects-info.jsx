@@ -11,6 +11,8 @@ import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
 
 export default function ProjectsInfo({ data, locale }) {
+  if (!data?.items || data.items.length === 0) return null;
+
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: false,

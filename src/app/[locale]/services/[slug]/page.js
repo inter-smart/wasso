@@ -78,27 +78,31 @@ export default async function ServiceDetailPage({ params }) {
       heroInfo_data: {
         media: {
           media_type: rawData.bannerSection?.enableVideo ? "video" : "image",
+
           mobile_path: rawData.bannerSection?.enableVideo
             ? rawData.bannerSection?.video?.url
               ? `${STRAPI_URL}${rawData.bannerSection.video.url}`
-              : null
+              : "/images/placeholder.webp" // ✅ video fallback
             : rawData.bannerSection?.mobileImage?.url
               ? `${STRAPI_URL}${rawData.bannerSection.mobileImage.url}`
-              : null,
+              : "/images/placeholder.webp", // ✅ image fallback
+
           desktop_path: rawData.bannerSection?.enableVideo
             ? rawData.bannerSection?.video?.url
               ? `${STRAPI_URL}${rawData.bannerSection.video.url}`
-              : null
+              : "/images/placeholder.webp"
             : rawData.bannerSection?.desktopImage?.url
               ? `${STRAPI_URL}${rawData.bannerSection.desktopImage.url}`
-              : null,
+              : "/images/placeholder.webp",
+
           media_alt:
             rawData.bannerSection?.mobileImage?.alternativeText ||
             rawData.bannerSection?.title ||
             "hero",
         },
-        title: rawData.bannerSection?.title || rawData.title || "",
-        title_ar: rawData.bannerSection?.title || rawData.title || "",
+
+        title: rawData.bannerSection?.title,
+        title_ar: rawData.bannerSection?.title,
       },
 
       overview_data: {
