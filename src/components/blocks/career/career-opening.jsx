@@ -63,13 +63,19 @@ export default function CareerOpening({ data, locale }) {
                     >
                       <div className="w-full flex flex-wrap items-center px-2 gap-1 lg:gap-2 xl:gap-2.5 2xl:gap-3 3xl:gap-4">
                         <div className="w-[18px] lg:w-[20px] xl:w-[22px] 2xl:w-[24px] 3xl:w-[28px] aspect-square">
-                          <Image
-                            src={spec?.iconPath}
-                            alt={locale == "ar" ? spec?.title_ar : spec?.title}
-                            width={40}
-                            height={40}
-                            className="w-full h-full object-contain block"
-                          />
+                          {spec?.iconPath ? (
+                            <Image
+                              src={spec.iconPath}
+                              alt={locale == "ar" ? spec?.title_ar : spec?.title}
+                              width={40}
+                              height={40}
+                              className="w-full h-full object-contain block"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gray-100/50 rounded-sm flex items-center justify-center">
+                               <span className="text-[8px] opacity-20">Icon</span>
+                            </div>
+                          )}
                         </div>
                         <div className="flex-1">
                           <Text
