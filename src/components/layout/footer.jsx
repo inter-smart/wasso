@@ -150,7 +150,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         <Button variant="link" size="none" asChild>
                           <a href={item?.link || "#"} target="_blank">
                             <Image
-                              src={item?.media?.media_path}
+                              src={item?.media?.media_path || "/images/placeholder.webp"}
                               alt={item?.media?.media_alt}
                               width={12}
                               height={12}
@@ -174,7 +174,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                 className="w-[120px] xl:w-[160px] 2xl:w-[200px] block"
               >
                 <Image
-                  src={footerData?.logoUrl}
+                  src={footerData?.logoUrl || "/images/placeholder.webp"}
                   alt={locale === "ar" ? footerData?.name_ar : footerData?.name}
                   width={290}
                   height={260}
@@ -194,7 +194,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     className="w-[80px] sm:w-[120px] block"
                   >
                     <Image
-                      src={footerData?.logoUrl}
+                      src={footerData?.logoUrl || "/images/placeholder.webp"}
                       alt={
                         locale === "ar" ? footerData?.name_ar : footerData?.name
                       }
@@ -341,7 +341,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                             <Button variant="link" size="none" asChild>
                               <a href={item?.link} target="_blank">
                                 <Image
-                                  src={item?.media?.media_path}
+                                  src={item?.media?.media_path || "/images/placeholder.webp"}
                                   alt={item?.media?.media_alt}
                                   width={12}
                                   height={12}

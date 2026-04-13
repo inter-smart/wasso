@@ -130,8 +130,8 @@ export default function Header({ headerData, navigationData, locale }) {
               >
                 <Link href={`/${locale}${headerData?.slug}`}>
                   <Image
-                    src={headerData?.logoWhiteUrl}
-                    alt={headerData?.name}
+                    src={headerData?.logoWhiteUrl || "/images/placeholder.webp"}
+                    alt={headerData?.name || "Logo"}
                     width={110}
                     height={120}
                     unoptimized
