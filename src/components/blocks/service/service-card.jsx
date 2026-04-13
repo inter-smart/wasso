@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function ServiceCard({ data, index, locale }) {
-  const isArabic = locale === "ar";
   return (
     <div
       className={cn(
@@ -19,23 +18,20 @@ export default function ServiceCard({ data, index, locale }) {
           src="/images/service-card-bg.png"
           alt={data?.title}
           fill
-          className="object-cover"
+          className="object-cover pointer-events-none"
         />
       </div>
 
       <div className="flex items-start justify-between">
-        {data?.icon && (
-          <div className="w-[40px] sm:w-[50px] md:w-[60px] xl:w-[76px] 2xl:w-[100px] 3xl:w-[120px] h-[40px] sm:h-[50px] md:h-[60px] xl:h-[76px] 2xl:h-[100px] 3xl:h-[120px]">
-            <Image
-              src={data?.icon}
-              alt={data?.title}
-              width={120}
-              height={120}
-              className="h-full w-full object-contain"
-            />
-          </div>
-        )}
-
+        <div className="w-[40px] sm:w-[50px] md:w-[60px] xl:w-[76px] 2xl:w-[100px] 3xl:w-[120px] h-[40px] sm:h-[50px] md:h-[60px] xl:h-[76px] 2xl:h-[100px] 3xl:h-[120px]">
+          <Image
+            src={data?.icon || "/images/home-services-icon-.svg"}
+            alt={data?.title || "project icon"}
+            width={120}
+            height={120}
+            className="h-full w-full object-contain"
+          />
+        </div>
 
         <Button
           size="lg"
@@ -62,7 +58,9 @@ export default function ServiceCard({ data, index, locale }) {
           size="p1"
           className="font-normal line-clamp-3 text-[#1E1E1E]"
         >
-          {parse((locale == "ar" ? data?.description_ar : data?.description) || "")}
+          {parse(
+            (locale == "ar" ? data?.description_ar : data?.description) || "",
+          )}
         </Text>
       </div>
     </div>

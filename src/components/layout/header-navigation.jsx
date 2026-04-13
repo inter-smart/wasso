@@ -110,7 +110,7 @@ export default function HeaderNavigation({
                   <DialogDescription />
                 </DialogHeader>
 
-                <div className="h-full overflow-y-auto">
+                <div className="h-full max-h-screen overflow-y-auto">
                   <div className="min-h-full flex items-center justify-center py-20">
                     <motion.ul
                       variants={listVariants}
