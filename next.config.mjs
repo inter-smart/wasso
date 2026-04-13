@@ -10,7 +10,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "strapi.intersmart.in",
+        hostname: "wasso.intersmart.in",
         pathname: "/uploads/**",
       },
 
@@ -58,10 +58,10 @@ const nextConfig = {
         has: [
           {
             type: "host",
-            value: "strap.intersmart.in",
+            value: "strapi.intersmart.in",
           },
         ],
-        destination: "https://strapi.intersmart.in/:path*",
+        destination: "https://wasso.intersmart.in/:path*",
         permanent: true,
       },
     ];

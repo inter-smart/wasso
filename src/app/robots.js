@@ -10,6 +10,6 @@ export default function robots() {
         disallow: "/admin",
       },
     ],
-    sitemap: "https://strapi.intersmart.in/sitemap.xml",
+    sitemap: "https://wasso.intersmart.in/sitemap.xml",
   };
 }
