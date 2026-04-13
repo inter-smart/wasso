@@ -5,7 +5,7 @@ const nextConfig = {
       // Strapi production images
       {
         protocol: "https",
-        hostname: "wasso.intersmart.in",
+        hostname: "strapi.intersmart.in",
         pathname: "/uploads/**",
       },
       {
