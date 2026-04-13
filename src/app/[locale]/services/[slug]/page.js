@@ -82,10 +82,12 @@ export default async function ServiceDetailPage({ params }) {
           mobile_path: rawData.bannerSection?.enableVideo
             ? rawData.bannerSection?.video?.url
               ? `${STRAPI_URL}${rawData.bannerSection.video.url}`
-              : "/images/placeholder.webp" // ✅ video fallback
+              : "/images/placeholder.webp"
             : rawData.bannerSection?.mobileImage?.url
               ? `${STRAPI_URL}${rawData.bannerSection.mobileImage.url}`
-              : "/images/placeholder.webp", // ✅ image fallback
+              : rawData.bannerSection?.desktopImage?.url
+                ? `${STRAPI_URL}${rawData.bannerSection.desktopImage.url}`
+                : "/images/placeholder.webp",
 
           desktop_path: rawData.bannerSection?.enableVideo
             ? rawData.bannerSection?.video?.url
@@ -93,7 +95,9 @@ export default async function ServiceDetailPage({ params }) {
               : "/images/placeholder.webp"
             : rawData.bannerSection?.desktopImage?.url
               ? `${STRAPI_URL}${rawData.bannerSection.desktopImage.url}`
-              : "/images/placeholder.webp",
+              : rawData.bannerSection?.mobileImage?.url
+                ? `${STRAPI_URL}${rawData.bannerSection.mobileImage.url}`
+                : "/images/placeholder.webp",
 
           media_alt:
             rawData.bannerSection?.mobileImage?.alternativeText ||

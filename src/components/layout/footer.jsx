@@ -242,6 +242,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         width={20}
                         height={20}
                         className="w-full h-full block"
+                        style={{ height: "auto" }}
                         unoptimized
                       />
                     </div>
@@ -275,6 +276,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         width={20}
                         height={20}
                         className="w-full h-full block"
+                        style={{ height: "auto" }}
                         unoptimized
                       />
                     </div>
@@ -315,6 +317,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         width={20}
                         height={20}
                         className="w-3 xl:w-5 block"
+                        style={{ height: "auto" }}
                         unoptimized
                       />
                       Locate on Map

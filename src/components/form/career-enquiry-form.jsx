@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 
 import Image from "next/image";
 import { X } from "lucide-react";
+import { STRAPI_URL } from "@/lib/constants";
 
 // ✅ Final Correct Schema
 const formSchema = z.object({

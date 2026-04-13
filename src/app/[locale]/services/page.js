@@ -50,12 +50,24 @@ export default async function ServicesPage({ params }) {
         media_type: banner?.enableVideo ? "video" : "image",
 
         mobile_path: banner?.enableVideo
-          ? `${STRAPI_URL}${banner?.video?.url}`
-          : `${STRAPI_URL}${banner?.mobileImage?.url}`,
+          ? banner?.video?.url
+            ? `${STRAPI_URL}${banner.video.url}`
+            : "/images/placeholder.webp"
+          : banner?.mobileImage?.url
+            ? `${STRAPI_URL}${banner.mobileImage.url}`
+            : banner?.desktopImage?.url
+              ? `${STRAPI_URL}${banner.desktopImage.url}`
+              : "/images/placeholder.webp",
 
         desktop_path: banner?.enableVideo
-          ? `${STRAPI_URL}${banner?.video?.url}`
-          : `${STRAPI_URL}${banner?.desktopImage?.url}`,
+          ? banner?.video?.url
+            ? `${STRAPI_URL}${banner.video.url}`
+            : "/images/placeholder.webp"
+          : banner?.desktopImage?.url
+            ? `${STRAPI_URL}${banner.desktopImage.url}`
+            : banner?.mobileImage?.url
+              ? `${STRAPI_URL}${banner.mobileImage.url}`
+              : "/images/placeholder.webp",
 
         media_alt:
           banner?.mobileImage?.alternativeText ||
