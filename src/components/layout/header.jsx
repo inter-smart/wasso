@@ -128,13 +128,12 @@ export default function Header({ headerData, navigationData, locale }) {
                   bg && "w-[40px] sm:w-[60px] 2xl:w-[70px] 3xl:w-[90px]",
                 )}
               >
-                <Link href={`/${locale}${headerData?.slug}`}>
+                <Link href={`/${locale}${headerData?.slug}`} aria-label={headerData?.name || "Brand Logo"}>
                   <Image
                     src={headerData?.logoWhiteUrl || "/images/placeholder.webp"}
                     alt={headerData?.name || "Logo"}
                     width={110}
                     height={120}
-                    unoptimized
                     className="w-full h-full block object-contain"
                     priority
                   />

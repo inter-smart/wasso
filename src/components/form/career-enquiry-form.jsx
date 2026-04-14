@@ -313,7 +313,6 @@ export default function CareerEnquiryForm() {
                           width={20}
                           height={20}
                           className="w-2 xl:w-2.5"
-                          unoptimized
                         />
                       </span>
 

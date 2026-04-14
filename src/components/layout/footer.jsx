@@ -28,7 +28,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                 <MediaQuery minWidth={1024}>
                   <>
                     <Heading
-                      as="h6"
+                      as="div"
                       size="h7"
                       className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
                     >
@@ -86,7 +86,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                 <MediaQuery minWidth={1024}>
                   <>
                     <Heading
-                      as="h6"
+                      as="div"
                       size="h7"
                       className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
                     >
@@ -138,7 +138,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
               {socialLinkData && (
                 <div className="mt-3 xl:mt-5">
                   <Heading
-                    as="h6"
+                    as="div"
                     size="h7"
                     className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
                   >
@@ -148,14 +148,13 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     {socialLinkData?.map((item, index) => (
                       <div key={"social_link" + index}>
                         <Button variant="link" size="none" asChild>
-                          <a href={item?.link || "#"} target="_blank">
+                          <a href={item?.link || "#"} target="_blank" aria-label={item?.media?.media_alt || "Social Media Link"}>
                             <Image
                               src={item?.media?.media_path || "/images/placeholder.webp"}
-                              alt={item?.media?.media_alt}
+                              alt={item?.media?.media_alt || "Social Media"}
                               width={12}
                               height={12}
                               className="w-2.5 xl:w-3 2xl:w-5 aspect-square block hover:scale-110 transition"
-                              unoptimized
                             />
                           </a>
                         </Button>
@@ -171,15 +170,15 @@ export default function Footer({ footerData, socialLinkData, locale }) {
             <div className="w-full sm:w-3/12 lg:w-[24%] 2xl:w-[23%]">
               <Link
                 href={`/${locale}/${footerData?.slug}`}
+                aria-label={locale === "ar" ? footerData?.name_ar : footerData?.name || "Logo"}
                 className="w-[120px] xl:w-[160px] 2xl:w-[200px] block"
               >
                 <Image
                   src={footerData?.logoUrl || "/images/placeholder.webp"}
-                  alt={locale === "ar" ? footerData?.name_ar : footerData?.name}
+                  alt={locale === "ar" ? footerData?.name_ar : footerData?.name || "Logo"}
                   width={290}
                   height={260}
                   className="w-full h-full block hover:scale-105 transition"
-                  unoptimized
                 />
               </Link>
             </div>
@@ -191,17 +190,17 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                 <div className="w-full 3xs:w-4/12 max-sm:mb-3">
                   <Link
                     href={`/${locale}/${footerData?.slug}`}
+                    aria-label={locale === "ar" ? footerData?.name_ar : footerData?.name || "Logo"}
                     className="w-[80px] sm:w-[120px] block"
                   >
                     <Image
                       src={footerData?.logoUrl || "/images/placeholder.webp"}
                       alt={
-                        locale === "ar" ? footerData?.name_ar : footerData?.name
+                        locale === "ar" ? footerData?.name_ar : footerData?.name || "Logo"
                       }
                       width={290}
                       height={260}
                       className="w-full h-full block hover:scale-105 transition"
-                      unoptimized
                     />
                   </Link>
                 </div>
@@ -210,7 +209,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                 {footerData?.address && (
                   <div>
                     <Heading
-                      as="h6"
+                      as="div"
                       size="h7"
                       className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
                     >
@@ -234,16 +233,11 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     <div className="w-3 xl:w-5">
                       <Image
                         src={"/images/footer-telephone.svg"}
-                        alt={
-                          locale === "ar"
-                            ? footerData?.name_ar
-                            : footerData?.name
-                        }
+                        alt="Telephone"
                         width={20}
                         height={20}
                         className="w-full h-full block"
                         style={{ height: "auto" }}
-                        unoptimized
                       />
                     </div>
                     <Heading
@@ -268,16 +262,11 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     <div className="w-3 xl:w-5">
                       <Image
                         src={"/images/footer-mail.svg"}
-                        alt={
-                          locale === "ar"
-                            ? footerData?.name_ar
-                            : footerData?.name
-                        }
+                        alt="Email"
                         width={20}
                         height={20}
                         className="w-full h-full block"
                         style={{ height: "auto" }}
-                        unoptimized
                       />
                     </div>
                     <div className="flex-1">
@@ -309,16 +298,11 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     <a href={footerData?.location_map_link} target="_blank">
                       <Image
                         src={"/images/footer-map.svg"}
-                        alt={
-                          locale === "ar"
-                            ? footerData?.name_ar
-                            : footerData?.name
-                        }
+                        alt="Map Locator"
                         width={20}
                         height={20}
                         className="w-3 xl:w-5 block"
                         style={{ height: "auto" }}
-                        unoptimized
                       />
                       {locale === "ar" ? "تحديد الموقع على الخريطة" : "Locate on Map"}
                     </a>
@@ -329,7 +313,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                   {socialLinkData && (
                     <div className="mt-3">
                       <Heading
-                        as="h6"
+                        as="div"
                         size="h7"
                         className="font-medium text-[#c09c86] mb-1"
                       >
@@ -339,14 +323,13 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         {socialLinkData?.map((item, index) => (
                           <div key={"social_link" + index}>
                             <Button variant="link" size="none" asChild>
-                              <a href={item?.link} target="_blank">
+                              <a href={item?.link} target="_blank" aria-label={item?.media?.media_alt || "Social Media Link"}>
                                 <Image
                                   src={item?.media?.media_path || "/images/placeholder.webp"}
-                                  alt={item?.media?.media_alt}
+                                  alt={item?.media?.media_alt || "Social Media"}
                                   width={12}
                                   height={12}
                                   className="w-4 aspect-square block hover:scale-110 transition"
-                                  unoptimized
                                 />
                               </a>
                             </Button>
@@ -374,14 +357,13 @@ export default function Footer({ footerData, socialLinkData, locale }) {
             className="whitespace-nowrap text-end tracking-wide text-[#1e1e1e] flex gap-1"
           >
             {locale === "ar" ? "تصميم بواسطة: " : "Designed By: "}
-            <a href="https://www.intersmartsolution.com/" target="_blank">
+            <a href="https://www.intersmartsolution.com/" target="_blank" aria-label="Intersmart Web Design">
               <Image
                 src="/images/footer-author.svg"
                 alt="footer-author"
                 width={100}
                 height={20}
                 className="w-[70px] sm:w-[50px] xl:w-[70px] 2xl:w-[85px] inline ml-1"
-                unoptimized
               />
             </a>
           </Text>
@@ -413,7 +395,7 @@ function AccordionItem({
         onClick={toggleAccordion}
         className="w-full flex items-center justify-between pt-4 text-start"
       >
-        <Heading as="h6" size="h7" className="font-medium text-black">
+        <Heading as="div" size="h7" className="font-medium text-black">
           {locale === "ar" ? title_ar : title}
         </Heading>
 
