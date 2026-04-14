@@ -31,9 +31,18 @@ const getFormSchema = (locale) => z.object({
     .min(10, locale === "ar" ? "رقم الهاتف مطلوب" : "Phone number is required")
     .max(20, locale === "ar" ? "رقم الهاتف طويل جداً" : "Phone number is too long"),
   additionalDetails: z
-    .string()
-    .optional()
-    .refine((val) => !val || val.trim().length >= 2, locale === "ar" ? "الرسالة قصيرة جدا" : "Message is too short"),
+    .string({ required_error: locale === "ar" ? "الرسالة مطلوبة" : "Message is required" })
+    .min(2, locale === "ar" ? "الرسالة قصيرة جدا" : "Message is too short")
+    .max(4999, locale === "ar" ? "الرسالة طويلة جدا" : "Message is too long")
+    .refine((val) => val.trim().length >= 2, locale === "ar" ? "الرسالة قصيرة جدا" : "Message is too short")
+    .refine(
+      (val) => /[\p{L}\p{N}]/u.test(val),
+      locale === "ar" ? "لا يمكن أن تحتوي الرسالة على رموز خاصة فقط" : "Message cannot contain only special characters"
+    )
+    .refine(
+      (val) => !/(<script|<iframe|<img|javascript:)/i.test(val) && !/(DROP\s+TABLE|SELECT\s+.*FROM|INSERT\s+INTO|DELETE\s+FROM)/i.test(val) && !/{{.*}}/.test(val),
+      locale === "ar" ? "محتوى غير صالح" : "Invalid content detected"
+    ),
 });
 
 // ✅ Shared styles
