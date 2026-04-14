@@ -31,7 +31,7 @@ export default function HomeAbout({ data, locale }) {
                 <div className="w-full max-w-[268px] bg-gray-200 mx-auto mask-[url(/images/icon-brand.svg)] mask-center mask-contain mask-no-repeat">
                   <Image
                     src={data?.media_path}
-                    alt={locale == "ar" ? data?.media_alt_ar : data?.media_alt}
+                    alt={(locale == "ar" ? data?.media_alt_ar : data?.media_alt) || "About Section"}
                     width={308}
                     height={517}
                     className="w-full h-full object-fill"
@@ -149,7 +149,7 @@ function SubItems({ data, locale }) {
         {data?.logo_path && (
           <Image
             src={data?.logo_path}
-            alt={locale == "ar" ? data?.logo_alt_ar : data?.logo_alt}
+            alt={(locale == "ar" ? data?.logo_alt_ar : data?.logo_alt) || "About Logo"}
             width={52}
             height={27}
             className="w-[40px] xl:w-[50px] 2xl:w-[60px]"

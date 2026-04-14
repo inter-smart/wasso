@@ -49,7 +49,7 @@ export default function CareerCulture({ data, locale }) {
             <div className="w-full h-full overflow-hidden">
               <Image
                 src={data?.image}
-                alt={locale === "ar" ? data?.image_alt_ar : data?.image_alt}
+                alt={(locale === "ar" ? data?.image_alt_ar : data?.image_alt) || "Culture Image"}
                 width={715}
                 height={444}
                 className="w-full h-full object-cover hover:scale-105 transition-all duration-300 ease-in-out"

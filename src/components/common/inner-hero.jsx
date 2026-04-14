@@ -53,7 +53,7 @@ export default function InnerHero({ slug, data, locale }) {
                 />
                 <Image
                   src={data?.media?.desktop_path}
-                  alt={data?.media?.media_alt}
+                  alt={data?.media?.media_alt || "Hero Media"}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 80vw"
                   className="-z-2 object-cover"

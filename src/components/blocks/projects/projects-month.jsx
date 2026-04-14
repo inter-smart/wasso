@@ -33,7 +33,7 @@ export default function ProjectsMonth({ data, locale }) {
               />
               <Image
                 src={data?.media?.desktop_path}
-                alt={data?.media?.media_alt}
+                alt={data?.media?.media_alt || "Project Image"}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 80vw"
                 className="-z-1 object-cover hover:scale-105 transition-transform duration-500 ease-in-out"

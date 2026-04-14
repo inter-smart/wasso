@@ -21,7 +21,7 @@ export default function AboutInfo({ data, locale }) {
                 <ParallaxBannerLayer speed={-5}>
                   <Image
                     src={data?.media_path}
-                    alt={locale == "ar" ? data?.media_alt_ar : data?.media_alt}
+                    alt={(locale == "ar" ? data?.media_alt_ar : data?.media_alt) || "About Image"}
                     width={308}
                     height={517}
                     className="w-full h-full object-fill select-none"

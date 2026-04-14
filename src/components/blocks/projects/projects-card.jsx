@@ -9,7 +9,7 @@ export default function ProjectsCard({ locale, data }) {
       <div className="w-full aspect-54/60 2xl:aspect-54/70 overflow-hidden mb-2 xl:mb-4 2xl:mb-6 select-none">
         <Image
           src={data?.media?.path}
-          alt={locale === "ar" ? data?.media?.alt_ar : data?.media?.alt}
+          alt={(locale === "ar" ? data?.media?.alt_ar : data?.media?.alt) || "Project Image"}
           width={540}
           height={700}
           className="w-full h-full object-cover hover:scale-105 transition-all duration-300 select-none user-select-none"
