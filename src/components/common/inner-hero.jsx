@@ -77,14 +77,14 @@ export default function InnerHero({ slug, data, locale }) {
                 <BreadcrumbList>
                   <BreadcrumbItem>
                     <BreadcrumbLink className="hover:text-[#c09c86]" href="/">
-                      Home
+                      {locale === "ar" ? "الرئيسية" : "Home"}
                     </BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator>/</BreadcrumbSeparator>
                   {slug && (
                     <BreadcrumbItem>
-                      <BreadcrumbPage className={"capitalize"}>
-                        {slug}
+                      <BreadcrumbPage className="capitalize">
+                        {locale === "ar" ? data?.title_ar : data?.title}
                       </BreadcrumbPage>
                     </BreadcrumbItem>
                   )}

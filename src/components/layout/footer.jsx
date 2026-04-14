@@ -32,7 +32,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                       size="h7"
                       className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
                     >
-                      QUICK LINKS
+                      {locale === "ar" ? "روابط سريعة" : "QUICK LINKS"}
                     </Heading>
                     {footerData?.quick_link_navigation?.map((item, index) => (
                       <div key={"quick_link_navigation" + index}>
@@ -90,7 +90,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                       size="h7"
                       className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
                     >
-                      SERVICES
+                      {locale === "ar" ? "خدمات" : "SERVICES"}
                     </Heading>
                     {footerData?.services_navigation?.map((item, index) => (
                       <div key={"services_navigation" + index}>
@@ -142,7 +142,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     size="h7"
                     className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
                   >
-                    FOLLOW US
+                    {locale === "ar" ? "تابعنا" : "FOLLOW US"}
                   </Heading>
                   <div className="flex flex-wrap items-center gap-x-3 xl:gap-x-5">
                     {socialLinkData?.map((item, index) => (
@@ -214,7 +214,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                       size="h7"
                       className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
                     >
-                      CONTACT US
+                      {locale === "ar" ? "اتصل بنا" : "CONTACT US"}
                     </Heading>
                     <Heading
                       as="div"
@@ -320,7 +320,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         style={{ height: "auto" }}
                         unoptimized
                       />
-                      Locate on Map
+                      {locale === "ar" ? "تحديد الموقع على الخريطة" : "Locate on Map"}
                     </a>
                   </Button>
                 )}

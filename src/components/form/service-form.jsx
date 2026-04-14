@@ -20,20 +20,20 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { STRAPI_URL } from "@/lib/constants";
 
-const formSchema = z.object({
+const getFormSchema = (locale) => z.object({
   fullName: z
     .string()
-    .min(2, "Full name must be at least 2 characters")
-    .max(50, "Full name cannot exceed 50 characters"),
-  email: z.string().email("Invalid email address"),
+    .min(2, locale === "ar" ? "يجب أن يتكون الاسم الكامل من حرفين على الأقل" : "Full name must be at least 2 characters")
+    .max(50, locale === "ar" ? "لا يمكن أن يتجاوز الاسم الكامل 50 حرفًا" : "Full name cannot exceed 50 characters"),
+  email: z.string().email(locale === "ar" ? "عنوان بريد إلكتروني غير صالح" : "Invalid email address"),
   phone: z
     .string()
-    .min(10, "Phone number is required")
-    .max(20, "Phone number is too long"),
+    .min(10, locale === "ar" ? "رقم الهاتف مطلوب" : "Phone number is required")
+    .max(20, locale === "ar" ? "رقم الهاتف طويل جداً" : "Phone number is too long"),
   additionalDetails: z
     .string()
     .optional()
-    .refine((val) => !val || val.trim().length >= 2, "Message is too short"),
+    .refine((val) => !val || val.trim().length >= 2, locale === "ar" ? "الرسالة قصيرة جدا" : "Message is too short"),
 });
 
 // ✅ Shared styles
@@ -56,7 +56,7 @@ export default function ServiceForm() {
   const params = useParams();
   const locale = params?.locale || "en";
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(getFormSchema(locale)),
     defaultValues: {
       fullName: "",
       email: "",
@@ -82,10 +82,10 @@ export default function ServiceForm() {
       if (!res.ok) throw new Error("Failed to send enquiry");
 
       form.reset();
-      setSuccess("Message sent successfully!");
+      setSuccess(locale === "ar" ? "تم إرسال الرسالة بنجاح!" : "Message sent successfully!");
     } catch (err) {
       console.error(err);
-      setSuccess("Something went wrong. Please try again.");
+      setSuccess(locale === "ar" ? "حدث خطأ ما. يرجى المحاولة مرة أخرى." : "Something went wrong. Please try again.");
     }
 
     setLoading(false);
@@ -106,7 +106,7 @@ export default function ServiceForm() {
                 <span className={errorStyle}></span>
               </FormLabel>
               <FormControl>
-                <Input {...field} className={inputStyle} placeholder="NAME" />
+                <Input {...field} className={inputStyle} placeholder={locale === "ar" ? "الاسم" : "NAME"} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -127,7 +127,7 @@ export default function ServiceForm() {
                   {...field}
                   type="tel"
                   className={inputStyle}
-                  placeholder="PHONE"
+                  placeholder={locale === "ar" ? "الهاتف" : "PHONE"}
                 />
               </FormControl>
               <FormMessage />
@@ -149,7 +149,7 @@ export default function ServiceForm() {
                   {...field}
                   type="email"
                   className={inputStyle}
-                  placeholder="EMAIL"
+                  placeholder={locale === "ar" ? "البريد الإلكتروني" : "EMAIL"}
                 />
               </FormControl>
               <FormMessage />
@@ -168,7 +168,7 @@ export default function ServiceForm() {
                 <Textarea
                   {...field}
                   className={textareaStyle}
-                  placeholder="Message"
+                  placeholder={locale === "ar" ? "الرسالة" : "Message"}
                 />
               </FormControl>
               <FormMessage />
@@ -178,7 +178,7 @@ export default function ServiceForm() {
 
         {/* Submit */}
         <div className="w-full sm:w-3/12 2xl:w-2/12 mt-auto flex flex-end">
-          
+
 
           <Button
             size="lg"
@@ -187,7 +187,7 @@ export default function ServiceForm() {
             disabled={loading}
             className="w-full min-w-auto transition-all duration-300 hover:scale-105 hover:shadow-lg"
           >
-            {loading ? "Sending..." : "Send Message"}
+            {loading ? (locale === "ar" ? "جاري الإرسال..." : "Sending...") : locale === "ar" ? "أرسل رسالة" : "Send Message"}
           </Button>
         </div>
 
