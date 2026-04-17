@@ -13,6 +13,7 @@ import {
 } from "react-scroll-parallax";
 import { cn } from "@/lib/utils";
 import ScrollReveal from "@/components/animations/scroll-reveal";
+import { convertRichTextToHtml } from "@/lib/sanitizer";
 
 import dynamic from "next/dynamic";
 
@@ -63,10 +64,10 @@ export default function HomeAbout({ data, locale }) {
                 <Text
                   as="div"
                   size="p1"
-                  className="line-clamp-1 text-black mb-4 xl:mb-8 2xl:mb-10"
+                  className="line-clamp-10 text-black mb-4 xl:mb-8 2xl:mb-10"
                 >
                   {parse(
-                    locale == "ar" ? data?.description_ar : data?.description,
+                    convertRichTextToHtml(locale == "ar" ? data?.description_ar : data?.description)
                   )}
                 </Text>
               </ScrollReveal>

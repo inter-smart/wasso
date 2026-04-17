@@ -60,7 +60,11 @@ export function convertRichTextToHtml(blocks = []) {
         switch (type) {
             case "paragraph":
                 closeList();
-                html += `<p>${content}</p>`;
+                if (content.trim() === "") {
+                    html += `<br />`;
+                } else {
+                    html += `<p>${content}</p>`;
+                }
                 break;
 
             case "heading": {
@@ -135,6 +139,7 @@ export function convertRichTextToHtml(blocks = []) {
             "a",
             "img",
             "hr",
+            "br",
         ],
         ALLOWED_ATTR: [
             "href",

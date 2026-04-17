@@ -60,6 +60,7 @@ export default async function AboutPage({ params }) {
   } catch (error) {
     console.error("Error fetching about data:", error);
   }
+  console.log(aboutData.about_info);
 
   if (!aboutData) {
     notFound();

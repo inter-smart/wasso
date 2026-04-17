@@ -9,6 +9,7 @@ import {
   ParallaxProvider,
 } from "react-scroll-parallax";
 import ScrollReveal from "@/components/animations/scroll-reveal";
+import { convertRichTextToHtml } from "@/lib/sanitizer";
 
 export default function AboutInfo({ data, locale }) {
   return (
@@ -56,22 +57,19 @@ export default function AboutInfo({ data, locale }) {
                   className="text-[#1e1e1e] lg:max-w-[450px] xl:max-w-[520px] 2xl:max-w-[620px] 3xl:max-w-[740px] mb-4 lg:mb-6 xl:mb-8 2xl:mb-10 3xl:mb-12"
                 >
                   {parse(
-                    locale == "ar" ? data?.description_ar : data?.description,
+                    convertRichTextToHtml(locale == "ar" ? data?.description_ar : data?.description)
                   )}
                 </Text>
               </ScrollReveal>
 
               <div className="flex flex-wrap -mx-3 sm:-mx-1 lg:-mx-2.5 xl:-mx-3.5 2xl:-mx-4 [&>*]:p-3 sm:[&>*]:p-1 lg:[&>*]:p-2.5 xl:[&>*]:p-3.5 2xl:[&>*]:p-4 mt-[30px] lg:mt-[50px] xl:mt-[70px] 2xl:mt-[80px] 3xl:mt-[100px]">
-                {data?.mission && (
-                  <div className="w-full sm:w-1/2">
-                    <SubItems data={data?.mission} locale={locale} />
-                  </div>
-                )}
-                {data?.vision && (
-                  <div className="w-full sm:w-1/2">
-                    <SubItems data={data?.vision} locale={locale} />
-                  </div>
-                )}
+                {data?.missionVision
+                  ?.sort((a, b) => a.title.localeCompare(b.title))
+                  .map((item, index) => (
+                    <div key={index} className="w-full sm:w-1/2">
+                      <SubItems data={item} locale={locale} />
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
@@ -101,7 +99,7 @@ function SubItems({ data, locale }) {
       <Text
         as="div"
         size="p1"
-        className="lg:text-[11px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[16px] line-clamp-3 text-[#1e1e1e]"
+        className="lg:text-[11px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[16px] line-clamp-20 text-[#1e1e1e]"
       >
         {parse(locale == "ar" ? data?.description_ar : data?.description)}
       </Text>
