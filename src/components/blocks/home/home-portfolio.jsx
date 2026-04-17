@@ -183,7 +183,7 @@ function PortfolioCard({ data, slot, locale, activeIndex, images }) {
               className="absolute inset-0"
             >
               <Image
-                src={currentImage}
+                src={currentImage || "/images/placeholder.webp"}
                 alt={data?.title || "Portfolio"}
                 fill
                 priority={slot === 1}

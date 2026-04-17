@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useParams } from "next/navigation";
 import { z } from "zod";
 
 import {
@@ -20,18 +21,23 @@ import { cn } from "@/lib/utils";
 
 import Image from "next/image";
 import { X } from "lucide-react";
+import { STRAPI_URL } from "@/lib/constants";
 
 // ✅ Final Correct Schema
-const formSchema = z.object({
+const getFormSchema = (locale) => z.object({
   fullName: z
     .string()
-    .min(2, "Full name must be at least 2 characters")
-    .max(50, "Full name cannot exceed 50 characters"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(8, "Phone number is required"),
-  // city: z.string().optional(),
-  // message: z.string().optional(),
-
+    .min(1, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
+    .max(50, locale === "ar" ? "لا يمكن أن يتجاوز الاسم الكامل 50 حرفًا" : "Full name cannot exceed 50 characters")
+    .refine((val) => val === "" || val.length >= 2, locale === "ar" ? "يجب أن يتكون الاسم الكامل من حرفين على الأقل" : "Full name must be at least 2 characters"),
+  email: z
+    .string()
+    .min(1, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
+    .refine((val) => val === "" || z.string().email().safeParse(val).success, locale === "ar" ? "عنوان بريد إلكتروني غير صالح" : "Invalid email address"),
+  phone: z
+    .string()
+    .min(1, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
+    .refine((val) => val === "" || val.length >= 8, locale === "ar" ? "رقم الهاتف غير صالح" : "Phone number is too short"),
   attachment: z.any().optional(),
 });
 
@@ -56,8 +62,10 @@ const textareaStyle = cn(
 );
 
 export default function CareerEnquiryForm() {
+  const params = useParams();
+  const locale = params?.locale || "en";
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(getFormSchema(locale)),
     defaultValues: {
       fullName: "",
       email: "",
@@ -172,6 +180,7 @@ export default function CareerEnquiryForm() {
         fullName: values.fullName,
         email: values.email,
         phone: values.phone,
+        locale: locale,
         // city: values.city,
         // message: values.message,
       };
@@ -181,7 +190,7 @@ export default function CareerEnquiryForm() {
       }
 
       // Submit the text with relationship link to the newly uploaded file!
-      const res = await fetch(`${STRAPI_URL}/api/career-enquiries`, {
+      const res = await fetch(`${STRAPI_URL}/api/career-enquiries?locale=${locale}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -196,10 +205,10 @@ export default function CareerEnquiryForm() {
 
       form.reset();
       setUploadedFile(null);
-      setSuccess("Message sent successfully!");
+      setSuccess(locale === "ar" ? "تم إرسال الرسالة بنجاح!" : "Message sent successfully!");
     } catch (error) {
       console.error(error);
-      setSuccess("Something went wrong. Please try again.");
+      setSuccess(locale === "ar" ? "حدث خطأ ما. يرجى المحاولة مرة أخرى." : "Something went wrong. Please try again.");
     }
 
     setLoading(false);
@@ -233,7 +242,7 @@ export default function CareerEnquiryForm() {
             <FormItem className="w-full md:w-1/3">
               <FormLabel className={"sr-only"}>Name</FormLabel>
               <FormControl>
-                <Input {...field} className={inputStyle} placeholder="NAME" />
+                <Input {...field} className={inputStyle} placeholder={locale === "ar" ? "الاسم" : "NAME"} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -248,7 +257,7 @@ export default function CareerEnquiryForm() {
             <FormItem className="w-full md:w-1/3">
               <FormLabel className={"sr-only"}>Contact Number</FormLabel>
               <FormControl>
-                <Input {...field} className={inputStyle} placeholder="PHONE" />
+                <Input {...field} className={inputStyle} placeholder={locale === "ar" ? "الهاتف" : "PHONE"} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -267,7 +276,7 @@ export default function CareerEnquiryForm() {
                   {...field}
                   type="email"
                   className={inputStyle}
-                  placeholder="EMAIL"
+                  placeholder={locale === "ar" ? "البريد الإلكتروني" : "EMAIL"}
                 />
               </FormControl>
               <FormMessage />
@@ -293,18 +302,17 @@ export default function CareerEnquiryForm() {
                       )}
                     >
                       <span className={cn(labelStyle, "text-[#1e1e1e] m-0")}>
-                        RESUME/CV
+                        {locale === "ar" ? "السيرة الذاتية" : "RESUME/CV"}
                       </span>
 
                       <span className="text-[9px] leading-0 font-normal text-[#1e1e1e] flex items-center gap-x-1 xl:gap-x-2 border border-[#CDA278] rounded-[4px] px-2 py-1 hover:scale-105 transition-all duration-300">
-                        Choose File
+                        {locale === "ar" ? "اختر ملف" : "Choose File"}
                         <Image
                           src="/images/career-upload.svg"
                           alt="career-upload"
                           width={20}
                           height={20}
                           className="w-2 xl:w-2.5"
-                          unoptimized
                         />
                       </span>
 
@@ -339,7 +347,7 @@ export default function CareerEnquiryForm() {
               </FormControl>
 
               <FormMessage className="text-[10px] font-light text-[#939393]">
-                PDF, DOC, or DOCX (Max 5MB)
+                {locale === "ar" ? "PDF أو DOC أو DOCX (بحد أقصى 5 ميجابايت)" : "PDF, DOC, or DOCX (Max 5MB)"}
               </FormMessage>
             </FormItem>
           )}
@@ -352,7 +360,7 @@ export default function CareerEnquiryForm() {
             disabled={loading}
             className="min-w-full font-normal mt-2 xl:mt-3.5 2xl:mt-5 3xl:mt-6"
           >
-            {loading ? "Sending..." : "Send Message"}
+            {loading ? (locale === "ar" ? "جاري الإرسال..." : "Sending...") : locale === "ar" ? "أرسل رسالة" : "Send Message"}
           </Button>
         </div>
 

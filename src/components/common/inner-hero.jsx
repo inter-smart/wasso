@@ -42,7 +42,7 @@ export default function InnerHero({ slug, data, locale }) {
                   playsInline
                   className="w-full h-full object-cover absolute -z-2 inset-0 opacity-80 hidden sm:block"
                 >
-                  <source src={data?.media?.desktop_path} type="image/webp" />
+                  <source src={data?.media?.desktop_path} type="video/mp4" />
                 </video>
               </>
             ) : (
@@ -53,12 +53,13 @@ export default function InnerHero({ slug, data, locale }) {
                 />
                 <Image
                   src={data?.media?.desktop_path}
-                  alt={data?.media?.media_alt}
+                  alt={data?.media?.media_alt || "Hero Media"}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 80vw"
                   className="-z-2 object-cover"
+                  priority
                   placeholder="blur"
-                  blurDataURL="/images/placeholder.jpg"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
                 />
               </picture>
             )}
@@ -76,14 +77,14 @@ export default function InnerHero({ slug, data, locale }) {
                 <BreadcrumbList>
                   <BreadcrumbItem>
                     <BreadcrumbLink className="hover:text-[#c09c86]" href="/">
-                      Home
+                      {locale === "ar" ? "الرئيسية" : "Home"}
                     </BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator>/</BreadcrumbSeparator>
                   {slug && (
                     <BreadcrumbItem>
-                      <BreadcrumbPage className={"capitalize"}>
-                        {slug}
+                      <BreadcrumbPage className="capitalize">
+                        {locale === "ar" ? data?.title_ar : data?.title}
                       </BreadcrumbPage>
                     </BreadcrumbItem>
                   )}

@@ -31,7 +31,7 @@ export default function HomeAbout({ data, locale }) {
                 <div className="w-full max-w-[268px] bg-gray-200 mx-auto mask-[url(/images/icon-brand.svg)] mask-center mask-contain mask-no-repeat">
                   <Image
                     src={data?.media_path}
-                    alt={locale == "ar" ? data?.media_alt_ar : data?.media_alt}
+                    alt={(locale == "ar" ? data?.media_alt_ar : data?.media_alt) || "About Section"}
                     width={308}
                     height={517}
                     className="w-full h-full object-fill"
@@ -77,7 +77,11 @@ export default function HomeAbout({ data, locale }) {
                   className="min-w-[100px] xl:min-w-[105px] 2xl:min-w-[130px] transition-all duration-300 hover:scale-105 hover:shadow-lg"
                   asChild
                 >
-                  <Link href={data?.button?.link}>
+                  <Link
+                    href={data?.button?.link}
+                    target={data?.button?.isExternal ? "_blank" : "_self"}
+                    rel={data?.button?.isExternal ? "noopener noreferrer" : ""}
+                  >
                     {locale == "ar"
                       ? data?.button?.label_ar
                       : data?.button?.label}
@@ -145,7 +149,7 @@ function SubItems({ data, locale }) {
         {data?.logo_path && (
           <Image
             src={data?.logo_path}
-            alt={locale == "ar" ? data?.logo_alt_ar : data?.logo_alt}
+            alt={(locale == "ar" ? data?.logo_alt_ar : data?.logo_alt) || "About Logo"}
             width={52}
             height={27}
             className="w-[40px] xl:w-[50px] 2xl:w-[60px]"

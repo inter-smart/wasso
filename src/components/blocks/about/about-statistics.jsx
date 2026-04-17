@@ -133,9 +133,9 @@ export default function AboutStatistics({ data, locale }) {
                         className="line-clamp-2 font-normal text-black mb-3 xl:mb-2 2xl:mb-2.5"
                       >
                         {parse(
-                          locale === "ar"
+                          (locale === "ar"
                             ? item?.description_ar
-                            : item?.description,
+                            : item?.description) || "",
                         )}
                       </Text>
                     </ScrollReveal>

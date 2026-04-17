@@ -42,12 +42,46 @@ export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
 
+  let homeData = null;
+
+  try {
+    const res = await fetch(`${STRAPI_URL}/api/home-page?locale=${locale}`, {
+      next: { revalidate: 60 },
+    });
+
+    if (res.ok) {
+      const response = await res.json();
+      homeData = response;
+    }
+  } catch (error) {
+    console.error("Error fetching home data for metadata:", error);
+  }
+
   return {
-    title: locale === "ar" ? "واسو - الصفحة الرئيسية" : "WASSO - Home",
+    title:
+      locale === "ar"
+        ? homeData?.seoTitle_ar || "واسو - الصفحة الرئيسية"
+        : homeData?.seoTitle || "WASSO - Home",
     description:
       locale === "ar"
-        ? "واسو لإدارة المشاريع - حلول رائدة في إدارة المشاريع والهندسة وتطوير العقارات"
-        : "WASSO Project Management - Leading solutions in project management, engineering, and real estate development",
+        ? homeData?.seoDescription_ar || homeData?.seoDescription || "واسو لإدارة المشاريع - حلول رائدة في إدارة المشاريع والهندسة وتطوير العقارات"
+        : homeData?.seoDescription || "WASSO Project Management - Leading solutions in project management, engineering, and real estate development",
+    ...(homeData?.metaImage && {
+      openGraph: {
+        images: [
+          {
+            url: homeData.metaImage,
+            width: 1200,
+            height: 630,
+            alt: homeData?.seoTitle || "WASSO",
+          },
+        ],
+      },
+      twitter: {
+        card: "summary_large_image",
+        images: [homeData.metaImage],
+      },
+    }),
   };
 }
 

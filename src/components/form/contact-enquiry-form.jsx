@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { z } from "zod";
+import { useParams } from "next/navigation";
 
 import {
   Form,
@@ -21,20 +22,34 @@ import { cn } from "@/lib/utils";
 import { STRAPI_URL } from "@/lib/constants";
 
 // ✅ Validation schema
-const formSchema = z.object({
+const getFormSchema = (locale) => z.object({
   fullName: z
     .string()
-    .min(2, "Full name must be at least 2 characters")
-    .max(50, "Full name cannot exceed 50 characters"),
-  email: z.string().email("Invalid email address"),
+    .min(1, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
+    .max(50, locale === "ar" ? "لا يمكن أن يتجاوز الاسم الكامل 50 حرفًا" : "Full name cannot exceed 50 characters")
+    .refine((val) => val === "" || val.length >= 2, locale === "ar" ? "يجب أن يتكون الاسم الكامل من حرفين على الأقل" : "Full name must be at least 2 characters"),
+  email: z
+    .string()
+    .min(1, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
+    .refine((val) => val === "" || z.string().email().safeParse(val).success, locale === "ar" ? "عنوان بريد إلكتروني غير صالح" : "Invalid email address"),
   phone: z
     .string()
-    .min(10, "Phone number is required")
-    .max(20, "Phone number is too long"),
+    .min(1, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
+    .max(20, locale === "ar" ? "رقم الهاتف طويل جداً" : "Phone number is too long")
+    .refine((val) => val === "" || val.length >= 10, locale === "ar" ? "رقم الهاتف غير صالح" : "Phone number is too short"),
   additionalDetails: z
     .string()
-    .optional()
-    .refine((val) => !val || val.trim().length >= 2, "Message too short"),
+    .min(1, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
+    .max(4999, locale === "ar" ? "الرسالة طويلة جدا" : "Message is too long")
+    .refine((val) => val === "" || val.trim().length >= 2, locale === "ar" ? "الرسالة قصيرة جدا" : "Message is too short")
+    .refine(
+      (val) => val === "" || /[\p{L}\p{N}]/u.test(val),
+      locale === "ar" ? "لا يمكن أن تحتوي الرسالة على رموز خاصة فقط" : "Message cannot contain only special characters"
+    )
+    .refine(
+      (val) => val === "" || (!/(<script|<iframe|<img|javascript:)/i.test(val) && !/(DROP\s+TABLE|SELECT\s+.*FROM|INSERT\s+INTO|DELETE\s+FROM)/i.test(val) && !/{{.*}}/.test(val)),
+      locale === "ar" ? "محتوى غير صالح" : "Invalid content detected"
+    ),
 });
 
 // ✅ Shared styles
@@ -59,8 +74,10 @@ const textareaStyle = `
 const iconStyle = "w-3 xl:w-3.5 2xl:w-4 3xl:w-5 aspect-square object-contain";
 
 export default function ContactEnquiryForm() {
+  const params = useParams();
+  const locale = params?.locale || "en";
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(getFormSchema(locale)),
     defaultValues: {
       fullName: "",
       email: "",
@@ -78,23 +95,23 @@ export default function ContactEnquiryForm() {
     setSuccess(null);
 
     try {
-      const res = await fetch(`${STRAPI_URL}/api/contact-enquiries`, {
+      const res = await fetch(`${STRAPI_URL}/api/contact-enquiries?locale=${locale}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ data: values }),
+        body: JSON.stringify({ data: { ...values, locale } }),
       });
 
       if (res.ok) {
-        setSuccess("Message sent successfully!");
+        setSuccess(locale === "ar" ? "تم إرسال الرسالة بنجاح!" : "Message sent successfully!");
         form.reset(); // ✅ Reset the form properly
       } else {
-        setSuccess("Failed to send message.");
+        setSuccess(locale === "ar" ? "فشل إرسال الرسالة." : "Failed to send message.");
       }
     } catch (err) {
       console.log(err);
-      setSuccess("Error occurred.");
+      setSuccess(locale === "ar" ? "حدث خطأ." : "Error occurred.");
     }
 
     setLoading(false);
@@ -124,7 +141,7 @@ export default function ContactEnquiryForm() {
                   height={14}
                   className={iconStyle}
                 />
-                NAME
+                {locale === "ar" ? "الاسم" : "NAME"}
               </FormLabel>
               <FormControl>
                 <Input className={inputStyle} placeholder="" {...field} />
@@ -148,7 +165,7 @@ export default function ContactEnquiryForm() {
                   height={14}
                   className={iconStyle}
                 />
-                PHONE
+                {locale === "ar" ? "الهاتف" : "PHONE"}
               </FormLabel>
               <FormControl>
                 <Input
@@ -177,7 +194,7 @@ export default function ContactEnquiryForm() {
                   height={14}
                   className={iconStyle}
                 />
-                EMAIL
+                {locale === "ar" ? "البريد الإلكتروني" : "EMAIL"}
               </FormLabel>
               <FormControl>
                 <Input
@@ -206,7 +223,7 @@ export default function ContactEnquiryForm() {
                   height={14}
                   className={iconStyle}
                 />
-                MESSAGE
+                {locale === "ar" ? "الرسالة" : "MESSAGE"}
               </FormLabel>
               <FormControl>
                 <Textarea className={textareaStyle} placeholder="" {...field} />
@@ -226,7 +243,7 @@ export default function ContactEnquiryForm() {
               "min-w-[120px] lg:min-w-[160px] xl:min-w-[196px] 2xl:min-w-[260px] 3xl:min-w-[320px] lg:h-9 xl:h-10 2xl:h-12 3xl:h-14"
             }
           >
-            {loading ? "Sending..." : "Send Message"}
+            {loading ? (locale === "ar" ? "جاري الإرسال..." : "Sending...") : locale === "ar" ? "أرسل رسالة" : "Send Message"}
           </Button>
         </div>
         {success && (

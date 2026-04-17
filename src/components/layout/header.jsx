@@ -128,13 +128,12 @@ export default function Header({ headerData, navigationData, locale }) {
                   bg && "w-[40px] sm:w-[60px] 2xl:w-[70px] 3xl:w-[90px]",
                 )}
               >
-                <Link href={`/${locale}${headerData?.slug}`}>
+                <Link href={`/${locale}${headerData?.slug}`} aria-label={headerData?.name || "Brand Logo"}>
                   <Image
-                    src={headerData?.logoWhiteUrl}
-                    alt={headerData?.name}
+                    src={headerData?.logoWhiteUrl || "/images/placeholder.webp"}
+                    alt={headerData?.name || "Logo"}
                     width={110}
                     height={120}
-                    unoptimized
                     className="w-full h-full block object-contain"
                     priority
                   />
@@ -181,7 +180,10 @@ export default function Header({ headerData, navigationData, locale }) {
                 )}
                 asChild
               >
-                <Link href={`/${locale}/${headerData?.button?.link}`}>
+                <Link
+                  href={`/${locale}/${headerData?.button?.link}`}
+                  target={headerData?.button?.isExternal ? "_blank" : "_self"}
+                  rel={headerData?.button?.isExternal ? "noopener noreferrer" : ""}>
                   {headerData?.button?.label}
                 </Link>
               </Button>

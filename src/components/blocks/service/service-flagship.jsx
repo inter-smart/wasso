@@ -83,8 +83,8 @@ function FlagshipCard({ data, index, locale }) {
               )}
             />
             <Image
-              src={data?.media?.path}
-              alt={locale == "ar" ? data?.media?.alt_ar : data?.media?.alt}
+              src={data?.media?.path || "/images/placeholder.webp"}
+              alt={(locale == "ar" ? data?.media?.alt_ar : data?.media?.alt) || "Service Flagship"}
               width={432}
               height={668}
               className="w-full h-full object-cover"

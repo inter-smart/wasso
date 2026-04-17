@@ -50,6 +50,8 @@ export default function AboutConcern({ data, locale }) {
                   href={
                     locale == "ar" ? data?.button?.slug_ar : data?.button?.slug
                   }
+                  target={data?.button?.isExternal ? "_blank" : "_self"}
+                  rel={data?.button?.isExternal ? "noopener noreferrer" : ""}
                 >
                   {locale == "ar"
                     ? data?.button?.label_ar

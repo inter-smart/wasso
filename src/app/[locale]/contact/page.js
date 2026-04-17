@@ -53,7 +53,13 @@ export default async function ContactPage({ params }) {
 
   return (
     <>
-      {hero && <InnerHero locale={locale} data={hero} slug={"Contact Us"} />}
+      {hero && (
+        <InnerHero
+          locale={locale}
+          data={hero}
+          slug={locale === "ar" ? hero?.title_ar : hero?.title}
+        />
+      )}
 
       {contact_info && <ContactInfo data={contact_info} locale={locale} />}
     </>

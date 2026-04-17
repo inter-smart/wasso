@@ -194,14 +194,13 @@ export default function HeaderNavigation({
                 <div className="w-full h-(--header-y) flex items-center absolute top-0 left-0 right-0">
                   <div className="container flex justify-between items-center">
                     <div className="w-[60px] 2xl:w-[80px] 3xl:w-[100px]">
-                      <Link href={`/${locale}${headerData?.slug}`}>
+                      <Link href={`/${locale}${headerData?.slug}`} aria-label={headerData?.name || "Brand Logo"}>
                         <Image
                           src={headerData?.logoWhiteUrl}
-                          alt={headerData?.name}
+                          alt={headerData?.name || "Logo"}
                           width={110}
                           height={120}
                           className="w-full h-full block object-contain"
-                          unoptimized
                         />
                       </Link>
                     </div>
@@ -226,11 +225,10 @@ export default function HeaderNavigation({
                 >
                   <Image
                     src={headerData?.logoWhiteUrl}
-                    alt={headerData?.name}
+                    alt={headerData?.name || "Logo"}
                     width={110}
                     height={120}
                     className="w-full h-full block object-cover"
-                    unoptimized
                   />
                 </motion.div>
               </motion.div>
@@ -249,6 +247,7 @@ function HumbergerButton({ open, onClick, showDarkHeader }) {
       size="none"
       onClick={onClick}
       className="flex flex-col items-end gap-1 2xl:gap-1"
+      aria-label="Toggle Menu"
     >
       {[1, 2, 3].map((item) => (
         <span
