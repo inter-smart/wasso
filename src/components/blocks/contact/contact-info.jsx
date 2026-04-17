@@ -52,7 +52,7 @@ export default function ContactInfo({ data, locale }) {
                   <SubItems
                     data={data?.phone}
                     info={
-                      <a href={`tel:${data?.phone?.details}`}>
+                      <a href={`tel:${data?.phone?.details}`} target="_blank">
                         {data?.phone?.details}
                       </a>
                     }
@@ -65,7 +65,10 @@ export default function ContactInfo({ data, locale }) {
                   <SubItems
                     data={data?.email}
                     info={
-                      <a href={`mailto:${data?.email?.details}`}>
+                      <a
+                        href={`mailto:${data?.email?.details}`}
+                        target="_blank"
+                      >
                         {data?.email?.details}
                       </a>
                     }
@@ -79,7 +82,10 @@ export default function ContactInfo({ data, locale }) {
                     data={data?.whatsapp}
                     className="bg-[#fffbf2]"
                     info={
-                      <a href={`https://wa.me/${data?.whatsapp?.details}`}>
+                      <a
+                        href={`https://wa.me/${data?.whatsapp?.details}`}
+                        target="_blank"
+                      >
                         {data?.whatsapp?.details}
                       </a>
                     }
