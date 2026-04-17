@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function ProjectsCard({ locale, data }) {
   return (
     <div className="w-full h-auto block bg-white">
-      <div className="w-full aspect-54/60 2xl:aspect-54/70 overflow-hidden mb-2 xl:mb-4 2xl:mb-6 select-none">
+      <div className="w-full aspect-54/60 2xl:aspect-54/65 overflow-hidden mb-2 xl:mb-4 2xl:mb-6 select-none">
         <Image
           src={data?.media?.path}
           alt={(locale === "ar" ? data?.media?.alt_ar : data?.media?.alt) || "Project Image"}

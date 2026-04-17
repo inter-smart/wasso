@@ -15,7 +15,10 @@ import { cn } from "@/lib/utils";
 import { Heading } from "@/components/utils/typography";
 
 import { Parallax, ParallaxProvider } from "react-scroll-parallax";
-import WebglDisplacementCarousel from "@/components/animations/WebglDisplacementCarousel";
+const WebglDisplacementCarousel = dynamic(
+  () => import("@/components/animations/WebglDisplacementCarousel"),
+  { ssr: false }
+);
 import HackingText from "@/components/ui/hacking-text";
 
 import Image from "next/image";

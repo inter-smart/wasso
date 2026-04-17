@@ -328,7 +328,7 @@ export default function CareerEnquiryForm() {
                     <div
                       className={cn(
                         inputStyle,
-                        "flex items-center justify-between gap-x-1 border",
+                        "flex items-center justify-between gap-x-1 ",
                       )}
                     >
                       <span className="line-clamp-1 flex-1 pr-2">
