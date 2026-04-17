@@ -61,8 +61,6 @@ export const metadata = {
   },
 };
 
-export const dynamic = "force-dynamic";
-
 export default async function RootLayout({ children, params }) {
   const resolvedParams = await params;
 
@@ -77,8 +75,7 @@ export default async function RootLayout({ children, params }) {
     const url = `${STRAPI_URL}/api/global?locale=${locale}`;
 
     const res = await fetch(url, {
-      cache: "no-store",
-      next: { revalidate: 0 },
+      next: { revalidate: 60 },
     });
 
     if (res.ok) {

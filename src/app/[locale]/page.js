@@ -1,13 +1,24 @@
-import HomeAbout from "@/components/blocks/home/home-about";
 import HomeHero from "@/components/blocks/home/home-hero";
-import HomeStatistics from "@/components/blocks/home/home-statistics";
-import HomeServices from "@/components/blocks/home/home-services";
 import { notFound } from "next/navigation";
 
 import dynamic from "next/dynamic";
 import { STRAPI_URL } from "@/lib/constants";
 
 // Lazy load below-the-fold components for better performance
+const HomeAbout = dynamic(() => import("@/components/blocks/home/home-about"), {
+  ssr: true,
+});
+
+const HomeStatistics = dynamic(
+  () => import("@/components/blocks/home/home-statistics"),
+  { ssr: true },
+);
+
+const HomeServices = dynamic(
+  () => import("@/components/blocks/home/home-services"),
+  { ssr: true },
+);
+
 const HomePortfolio = dynamic(
   () => import("@/components/blocks/home/home-portfolio"),
   {
