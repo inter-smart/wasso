@@ -112,8 +112,8 @@ export default async function ServiceDetailPage({ params }) {
       overview_data: {
         title: rawData.Overview?.title || "",
         title_ar: rawData.Overview?.title || "",
-        description: rawData.Overview?.description,
-        description_ar: rawData.Overview?.description,
+        description: rawData.Overview?.overviewDesc,
+        description_ar: rawData.Overview?.overviewDesc,
         media: {
           desktop_path: rawData.Overview?.image?.url
             ? `${STRAPI_URL}${rawData.Overview.image.url}`

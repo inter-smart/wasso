@@ -2,6 +2,7 @@
 import parse from "html-react-parser";
 import { Heading, Text } from "@/components/utils/typography";
 import Image from "next/image";
+import { convertRichTextToHtml } from "@/lib/sanitizer";
 
 export default function ServiceOverview({
   data = {},
@@ -46,15 +47,15 @@ export default function ServiceOverview({
               size="h3"
               className="text-xl font-normal text-black w-full mb-4"
             >
-              {parse(locale === "ar" ? data?.title_ar : data?.title)}
+              {parse(locale === "ar" ? data?.title_ar || "" : data?.title || "")}
             </Heading>
             <Text
               as="div"
               size="p1"
               className="font-light text-black :max-w-[100%] 3xl:max-w-[80%]"
             >
-              {data?.description &&
-                parse(isArabic ? data?.description_ar : data?.description)}
+              {description &&
+                parse(convertRichTextToHtml(isArabic ? data?.description_ar || "" : data?.description || ""))}
             </Text>
           </div>
         </div>
