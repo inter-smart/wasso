@@ -222,8 +222,8 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     >
                       {parse(
                         locale == "ar"
-                          ? footerData?.address_ar
-                          : footerData?.address,
+                          ? footerData?.address_ar || ""
+                          : footerData?.address || "",
                       )}
                     </Heading>
                   </div>
@@ -347,7 +347,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
         <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-x-5 mt-6 xl:mt-8 2xl:mt-10">
           <Text as="div" size="p2" className="tracking-wide text-[#1e1e1e]">
             {parse(
-              locale == "ar" ? footerData?.copyright_ar : footerData?.copyright,
+              locale == "ar" ? footerData?.copyright_ar || "" : footerData?.copyright || "",
             )}
           </Text>
           <hr className="border-[#eadcce] flex-1 max-sm:hidden" />
