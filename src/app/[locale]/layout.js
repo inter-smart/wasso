@@ -106,7 +106,14 @@ export default async function RootLayout({ children, params }) {
   //   social_link_data: [],
   // };
 
-  const data = globalData || fallbackData;
+  const data = globalData || {
+    header_data: {},
+    navigation_data: [],
+    footer_data: {},
+    social_link_data: [],
+    stickyWidget: null,
+    button: null,
+  };
 
   const fontVariable = getFontVariable(locale);
   const fontClassName = getFontClassName(locale);

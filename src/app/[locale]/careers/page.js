@@ -6,6 +6,8 @@ import CareerCulture from "@/components/blocks/career/career-culture";
 import CareerOpening from "@/components/blocks/career/career-opening";
 import { STRAPI_URL } from "@/lib/constants";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
@@ -13,7 +15,6 @@ export async function generateMetadata({ params }) {
   let careerData = null;
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
     const res = await fetch(`${STRAPI_URL}/api/career-page?locale=${locale}`, {
       cache: "no-store",
     });
@@ -45,7 +46,6 @@ export default async function CareerPage({ params }) {
   let careerData = null;
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
     const res = await fetch(`${STRAPI_URL}/api/career-page?locale=${locale}`, {
       cache: "no-store",
     });
