@@ -31,7 +31,7 @@ export default function ContactInfo({ data, locale }) {
             size="h3"
             className="leading-tight font-normal sm:text-center text-[#1e1e1e] mb-4 lg:mb-6 xl:mb-10 2xl:mb-12 3xl:mb-13 xl:max-w-11/12 mx-auto"
           >
-            {parse(locale == "ar" ? data?.title_ar : data?.title)}
+            {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
           </Heading>
         </motion.div>
         <div className="flex flex-wrap -mx-1 sm:-mx-2 lg:-mx-3 xl:-mx-4 2xl:-mx-5 [&>*]:p-1 sm:[&>*]:p-2 lg:[&>*]:p-3 xl:[&>*]:p-4 2xl:[&>*]:p-5">
@@ -143,7 +143,7 @@ function SubItems({ data, className, info, locale }) {
         size="h5"
         className="font-medium line-clamp-1 text-[#1e1e1e] mb-0.5 xl:mb-1"
       >
-        {parse(locale == "ar" ? data?.label_ar : data?.label)}
+        {parse(locale == "ar" ? data?.label_ar || "" : data?.label || "")}
       </Heading>
       <Text
         as="div"

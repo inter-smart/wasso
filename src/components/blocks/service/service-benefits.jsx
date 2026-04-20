@@ -26,7 +26,7 @@ export default function ServiceBenefits({ data, locale = "en" }) {
               size="h3"
               className="text-xl font-normal text-black w-full mb-4"
             >
-              {parse(locale === "ar" ? data?.title_ar : data?.title)}
+              {parse(locale === "ar" ? data?.title_ar || "" : data?.title || "")}
             </Heading>
             <div
               dir={locale === "ar" ? "rtl" : "ltr"}

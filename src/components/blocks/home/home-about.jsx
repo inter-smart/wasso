@@ -48,7 +48,7 @@ export default function HomeAbout({ data, locale }) {
                   className="tracking-widest font-normal text-[#1e1e1e] flex items-center gap-x-4 mb-1 xl:mb-2.5 2xl:mb-4"
                 >
                   <span className="size-2 rounded-full bg-[#c09c86] inline-block" />
-                  {parse(locale == "ar" ? data?.sub_title_ar : data?.sub_title)}
+                  {parse(locale == "ar" ? data?.sub_title_ar || "" : data?.sub_title || "")}
                 </Heading>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
@@ -57,7 +57,7 @@ export default function HomeAbout({ data, locale }) {
                   size="h3"
                   className="font-normal text-[#1e1e1e] mb-2 xl:mb-4 2xl:mb-6"
                 >
-                  {parse(locale == "ar" ? data?.title_ar : data?.title)}
+                  {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
                 </Heading>
               </ScrollReveal>
               <ScrollReveal delay={0.3}>
@@ -67,7 +67,7 @@ export default function HomeAbout({ data, locale }) {
                   className="line-clamp-10 text-black mb-4 xl:mb-8 2xl:mb-10"
                 >
                   {parse(
-                    convertRichTextToHtml(locale == "ar" ? data?.description_ar : data?.description)
+                    convertRichTextToHtml(locale == "ar" ? data?.description_ar || "" : data?.description || "")
                   )}
                 </Text>
               </ScrollReveal>
@@ -146,7 +146,7 @@ function SubItems({ data, locale }) {
         size="h7"
         className="font-medium text-[#1e1e1e] flex items-center gap-x-4 mb-3 sm:mb-1 xl:mb-2"
       >
-        {parse(locale == "ar" ? data?.title_ar : data?.title)}
+        {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
         {data?.logo_path && (
           <Image
             src={data?.logo_path}
@@ -158,7 +158,7 @@ function SubItems({ data, locale }) {
         )}
       </Heading>
       <Text as="div" size="p1" className="line-clamp-3 text-black">
-        {parse(locale == "ar" ? data?.description_ar : data?.description)}
+        {parse(locale == "ar" ? data?.description_ar || "" : data?.description || "")}
       </Text>
     </div>
   );

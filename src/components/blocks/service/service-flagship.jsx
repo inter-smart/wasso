@@ -27,7 +27,7 @@ export default function ServiceFlagship({ data, locale }) {
     <section className="w-full h-auto block py-[20px_40px] sm:py-[20px_40px] xl:py-[35px_80px] 2xl:py-[40px_110px] overflow-hidden">
       <div className="container">
         <Heading as="h2" size="h3" className="font-normal text-[#1e1e1e] mb-2">
-          {parse(locale == "ar" ? data?.title_ar : data?.title)}
+          {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
         </Heading>
         <div
           className={cn(
@@ -94,7 +94,7 @@ function FlagshipCard({ data, index, locale }) {
               size="h4"
               className="font-semibold text-white absolute z-1 inset-0 top-auto p-3 xl:p-5 2xl:p-8 group-hover:opacity-0"
             >
-              {parse(locale == "ar" ? data?.title_ar : data?.title)}
+              {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
             </Heading>
           </div>
 
@@ -114,7 +114,7 @@ function FlagshipCard({ data, index, locale }) {
                 size="h4"
                 className="font-semibold text-black mb-1 xl:mb-2.5 2xl:mb-3"
               >
-                {parse(locale == "ar" ? data?.title_ar : data?.title)}
+                {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
               </Heading>
               <Text as="div" size="p1" className="line-clamp-7 text-black">
                 {parse(

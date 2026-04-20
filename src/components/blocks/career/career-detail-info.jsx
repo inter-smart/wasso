@@ -13,14 +13,14 @@ export default function CareerDetailInfo({ data, locale }) {
           size="h3"
           className="leading-tight font-normal sm:text-center text-[#1e1e1e] mb-2 lg:mb-2 xl:mb-2.5 2xl:mb-3 3xl:mb-4 mx-auto"
         >
-          {parse(locale == "ar" ? data?.title_ar : data?.title)}
+          {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
         </Heading>
         <Text
           as="div"
           size="p1"
           className="sm:text-center text-[#1e1e1e] max-w-[900px] mx-auto mb-6 lg:mb-9 xl:mb-12 2xl:mb-14 3xl:mb-16"
         >
-          {parse(locale == "ar" ? data?.description_ar : data?.description)}
+          {parse(locale == "ar" ? data?.description_ar || "" : data?.description || "")}
         </Text>
 
         <div className="w-full bg-[#fffbf2] p-4 lg:py-4 lg:px-8 xl:py-5 xl:px-12 2xl:py-6 2xl:px-14 3xl:py-7 3xl:px-16 mb-12 lg:mb-18 xl:mb-23 2xl:mb-27 3xl:mb-32">
@@ -88,8 +88,8 @@ export default function CareerDetailInfo({ data, locale }) {
               >
                 {parse(
                   locale == "ar"
-                    ? data?.responsibilities_title_ar
-                    : data?.responsibilities_title,
+                    ? data?.responsibilities_title_ar || ""
+                    : data?.responsibilities_title || "",
                 )}
               </Heading>
               <div
@@ -100,8 +100,8 @@ export default function CareerDetailInfo({ data, locale }) {
               >
                 {parse(
                   locale == "ar"
-                    ? data?.responsibilities_description_ar
-                    : data?.responsibilities_description,
+                    ? data?.responsibilities_description_ar || ""
+                    : data?.responsibilities_description || "",
                 )}
               </div>
               <div className="w-full">
@@ -112,8 +112,8 @@ export default function CareerDetailInfo({ data, locale }) {
                 >
                   {parse(
                     locale == "ar"
-                      ? data?.benefits?.title_ar
-                      : data?.benefits?.title,
+                      ? data?.benefits?.title_ar || ""
+                      : data?.benefits?.title || "",
                   )}
                 </Heading>
                 <div className="flex flex-wrap justify-start xl:justify-between gap-10 lg:gap-5 xl:gap-6 2xl:gap-7 3xl:gap-8">
@@ -132,7 +132,7 @@ export default function CareerDetailInfo({ data, locale }) {
                           size="p1"
                           className="leading-tight font-medium text-center text-[#1e1e1e] max-sm:text-[12px]"
                         >
-                          {parse(locale == "ar" ? item?.title_ar : item?.title)}
+                          {parse(locale == "ar" ? item?.title_ar || "" : item?.title || "")}
                         </Text>
                       </div>
                     </div>

@@ -133,11 +133,11 @@ export default function HomePartners({ data, locale }) {
                 className="tracking-widest font-normal text-[#1e1e1e] flex items-center gap-x-4 mb-1 xl:mb-1.5 2xl:mb-1.5"
               >
                 <span className="size-2 rounded-full bg-[#c09c86] inline-block" />
-                {parse(locale == "ar" ? data?.sub_title_ar : data?.sub_title)}
+                {parse(locale == "ar" ? data?.sub_title_ar || "" : data?.sub_title || "")}
               </Heading>
             </ScrollReveal>
             <Heading as="h2" size="h3" className="font-normal text-[#1e1e1e]">
-              {parse(locale == "ar" ? data?.title_ar : data?.title)}
+              {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
             </Heading>
           </div>
 

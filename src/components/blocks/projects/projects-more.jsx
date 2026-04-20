@@ -94,7 +94,7 @@ export default function ProjectsMore({ data, locale }) {
                 size="h2"
                 className="leading-normal font-normal text-[#1e1e1e] truncate"
               >
-                {parse(locale == "ar" ? data?.title_ar : data?.title)}
+                {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
               </Heading>
             </ScrollReveal>
           </div>

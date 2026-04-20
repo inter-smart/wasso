@@ -32,7 +32,7 @@ export default function ProjectsExplore({ data, locale }) {
             size="h2"
             className="font-normal text-center text-[#1e1e1e] mb-1 xl:mb-2"
           >
-            {parse(locale == "ar" ? data?.title_ar : data?.title)}
+            {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
           </Heading>
           <div className="flex justify-center">
             <Button

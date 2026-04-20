@@ -21,7 +21,7 @@ export default function ServiceApproach({ data, locale }) {
             size="h3"
             className="mb-5 font-normal text-[#1E1E1E]"
           >
-            {parse(locale == "ar" ? data?.main_title_ar : data?.main_title)}
+            {parse(locale == "ar" ? data?.main_title_ar || "" : data?.main_title || "")}
           </Heading>
         </div>
         <div className="" ref={emblaRef}>

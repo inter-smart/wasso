@@ -78,14 +78,14 @@ function SubItems({ data, i, locale }) {
           size="h5"
           className="font-medium text-center text-[#1e1e1e] mb-2 lg:mb-2 xl:mb-3 2xl:mb-4 3xl:mb-5"
         >
-          {parse(locale == "ar" ? data?.title_ar : data?.title)}
+          {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
         </Heading>
         <Text
           as="div"
           size="p1"
           className="line-clamp-3 text-center text-black"
         >
-          {parse(locale == "ar" ? data?.description_ar : data?.description)}
+          {parse(locale == "ar" ? data?.description_ar || "" : data?.description || "")}
         </Text>
       </div>
     </div>

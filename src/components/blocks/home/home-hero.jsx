@@ -183,8 +183,8 @@ export default function HomeHero({ data, locale }) {
                       >
                         {parse(
                           locale === "ar"
-                            ? currentSlide?.title_ar
-                            : currentSlide?.title,
+                            ? currentSlide?.title_ar || ""
+                            : currentSlide?.title || "",
                         )}
                       </Heading>
                     </motion.div>

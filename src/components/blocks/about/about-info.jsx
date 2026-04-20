@@ -38,7 +38,7 @@ export default function AboutInfo({ data, locale }) {
                   className="tracking-widest font-normal text-[#1e1e1e] flex items-center gap-x-4 mb-0.5 lg:mb-1 xl:mb-1.5 2xl:mb-2 3xl:mb-2.5"
                 >
                   <span className="size-2 rounded-full bg-[#c09c86] inline-block" />
-                  {parse(locale == "ar" ? data?.sub_title_ar : data?.sub_title)}
+                  {parse(locale == "ar" ? data?.sub_title_ar || "" : data?.sub_title || "")}
                 </Heading>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
@@ -47,7 +47,7 @@ export default function AboutInfo({ data, locale }) {
                   size="h3"
                   className="font-normal leading-tight text-[#1e1e1e] lg:max-w-[350px] xl:max-w-[400px] 2xl:max-w-[480px] 3xl:max-w-[560px] mb-1 lg:mb-1.5 xl:mb-2 2xl:mb-3 3xl:mb-4"
                 >
-                  {parse(locale == "ar" ? data?.title_ar : data?.title)}
+                  {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
                 </Heading>
               </ScrollReveal>
               <ScrollReveal delay={0.3}>
@@ -57,7 +57,7 @@ export default function AboutInfo({ data, locale }) {
                   className="text-[#1e1e1e] lg:max-w-[450px] xl:max-w-[520px] 2xl:max-w-[620px] 3xl:max-w-[740px] mb-4 lg:mb-6 xl:mb-8 2xl:mb-10 3xl:mb-12"
                 >
                   {parse(
-                    convertRichTextToHtml(locale == "ar" ? data?.description_ar : data?.description)
+                    convertRichTextToHtml(locale == "ar" ? data?.description_ar || "" : data?.description || "")
                   )}
                 </Text>
               </ScrollReveal>
@@ -94,14 +94,14 @@ function SubItems({ data, locale }) {
         size="h7"
         className="font-medium text-[#1e1e1e] mb-2 lg:mb-2 xl:mb-3 2xl:mb-4 3xl:mb-5"
       >
-        {parse(locale == "ar" ? data?.title_ar : data?.title)}
+        {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
       </Heading>
       <Text
         as="div"
         size="p1"
         className="lg:text-[11px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[16px] line-clamp-20 text-[#1e1e1e]"
       >
-        {parse(locale == "ar" ? data?.description_ar : data?.description)}
+        {parse(locale == "ar" ? data?.description_ar || "" : data?.description || "")}
       </Text>
     </div>
   );

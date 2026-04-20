@@ -16,7 +16,7 @@ export default function ServiceList({ data, locale = "en" }) {
               className="flex items-center gap-x-4 text-[#1e1e1e]"
             >
               <span className="inline-block size-2 rounded-full bg-[#c09c86]" />
-              {parse(locale == "ar" ? data?.sub_title_ar : data?.sub_title)}
+              {parse(locale == "ar" ? data?.sub_title_ar || "" : data?.sub_title || "")}
             </Heading>
 
             <Heading
@@ -24,7 +24,7 @@ export default function ServiceList({ data, locale = "en" }) {
               size="h3"
               className="mb-2 font-normal text-[#1E1E1E]"
             >
-              {parse(locale == "ar" ? data?.title_ar : data?.title)}
+              {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
             </Heading>
           </ScrollRevealItem>
 
@@ -33,7 +33,7 @@ export default function ServiceList({ data, locale = "en" }) {
             {data?.description && (
               <Text as="div" size="p1" className="font-light text-black">
                 {parse(
-                  locale == "ar" ? data?.description_ar : data?.description,
+                  locale == "ar" ? data?.description_ar || "" : data?.description || "",
                 )}
               </Text>
             )}

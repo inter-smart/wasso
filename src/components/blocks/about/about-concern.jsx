@@ -27,7 +27,7 @@ export default function AboutConcern({ data, locale }) {
                   size="h3"
                   className="font-normal text-[#1e1e1e] mb-2 lg:mb-2.5 xl:mb-3 2xl:mb-6 3xl:mb-8"
                 >
-                  {parse(locale == "ar" ? data?.title_ar : data?.title)}
+                  {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
                 </Heading>
               </ScrollReveal>
               <ScrollReveal delay={0.3}>
@@ -36,7 +36,7 @@ export default function AboutConcern({ data, locale }) {
                   className={cn("typography", "[--text-color:#1e1e1e]")}
                 >
                   {parse(
-                    locale == "ar" ? data?.description_ar : data?.description,
+                    locale == "ar" ? data?.description_ar || "" : data?.description || "",
                   )}
                 </div>
               </ScrollReveal>

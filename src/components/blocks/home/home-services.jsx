@@ -42,7 +42,7 @@ export default function HomeServices({ data, locale }) {
                 className="tracking-widest font-normal text-[#1e1e1e] flex items-center gap-x-4 mb-1 xl:mb-1.5 2xl:mb-1.5"
               >
                 <span className="size-2 rounded-full bg-[#c09c86] inline-block" />
-                {parse(locale == "ar" ? data?.sub_title_ar : data?.sub_title)}
+                {parse(locale == "ar" ? data?.sub_title_ar || "" : data?.sub_title || "")}
               </Heading>
             </ScrollReveal>
             <Heading
@@ -50,7 +50,7 @@ export default function HomeServices({ data, locale }) {
               size="h3"
               className="font-normal text-[#1e1e1e] mb-2"
             >
-              {parse(locale == "ar" ? data?.title_ar : data?.title)}
+              {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
             </Heading>
           </div>
           <div className="w-full sm:w-5/12">
@@ -60,7 +60,7 @@ export default function HomeServices({ data, locale }) {
               className="line-clamp-2 text-[#4b4b4b] mb-3 xl:mb-5 2xl:mb-6"
             >
               {parse(
-                locale === "ar" ? data?.description_ar : data?.description,
+                locale === "ar" ? data?.description_ar || "" : data?.description || "",
               )}
             </Text>
             <Button
@@ -145,7 +145,7 @@ function ServiceCard({ data, index, locale }) {
               size="h4"
               className="font-semibold text-white absolute z-1 inset-0 top-auto p-3 xl:p-5 2xl:p-8 max-lg:hidden"
             >
-              {parse(locale == "ar" ? data?.title_ar : data?.title)}
+              {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
             </Heading>
           </div>
 
@@ -186,7 +186,7 @@ function ServiceCard({ data, index, locale }) {
                 size="h4"
                 className="font-semibold text-white lg:text-black mb-2 sm:mb-1 xl:mb-2.5 2xl:mb-3"
               >
-                {parse(locale == "ar" ? data?.title_ar : data?.title)}
+                {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
               </Heading>
               <Text
                 as="div"
@@ -194,7 +194,7 @@ function ServiceCard({ data, index, locale }) {
                 className="line-clamp-2 lg:line-clamp-7 text-white lg:text-black mb-4 xl:mb-8 2xl:mb-11 max-sm:text-[12px]"
               >
                 {parse(
-                  locale === "ar" ? data?.description_ar : data?.description,
+                  locale === "ar" ? data?.description_ar || "" : data?.description || "",
                 )}
               </Text>
               <Button

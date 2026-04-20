@@ -53,7 +53,7 @@ export default function HomePortfolio({ data, locale }) {
                 className="tracking-widest font-normal text-[#1e1e1e] flex items-center gap-x-4 mb-1"
               >
                 <span className="size-2 rounded-full bg-[#c09c86]" />
-                {parse(locale === "ar" ? data?.sub_title_ar : data?.sub_title)}
+                {parse(locale === "ar" ? data?.sub_title_ar || "" : data?.sub_title || "")}
               </Heading>
             </ScrollReveal>
             <Heading
@@ -61,7 +61,7 @@ export default function HomePortfolio({ data, locale }) {
               size="h3"
               className="font-normal text-[#1e1e1e] mb-2"
             >
-              {parse(locale === "ar" ? data?.title_ar : data?.title)}
+              {parse(locale === "ar" ? data?.title_ar || "" : data?.title || "")}
             </Heading>
           </div>
 
@@ -72,7 +72,7 @@ export default function HomePortfolio({ data, locale }) {
               className="line-clamp-2 text-[#1e1e1e] mb-5"
             >
               {parse(
-                locale === "ar" ? data?.description_ar : data?.description,
+                locale === "ar" ? data?.description_ar || "" : data?.description || "",
               )}
             </Text>
             <Button
@@ -210,14 +210,14 @@ function PortfolioCard({ data, slot, locale, activeIndex, images }) {
                     transition={{ duration: 0.5 }}
                   >
                     <Heading size="h4" className="text-white mb-1">
-                      {parse(locale === "ar" ? data?.title_ar : data?.title)}
+                      {parse(locale === "ar" ? data?.title_ar || "" : data?.title || "")}
                     </Heading>
                     <Text size="p1" className="text-white">
                       <span className="font-light">
                         {locale === "ar" ? "الموقع: " : "Location: "}
                       </span>
                       {parse(
-                        locale === "ar" ? data?.location_ar : data?.location,
+                        locale === "ar" ? data?.location_ar || "" : data?.location || "",
                       )}
                     </Text>
                   </motion.div>

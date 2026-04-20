@@ -111,7 +111,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                   <AccordionItem
                     locale={locale}
                     title="Services"
-                    title_ar="SERVICES"
+                    title_ar="خدمات"
                     section="services"
                     openSection={openSection}
                     setOpenSection={setOpenSection}
@@ -317,7 +317,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         size="h7"
                         className="font-medium text-[#c09c86] mb-1"
                       >
-                        FOLLOW US
+                        {locale === "ar" ? "تابعنا" : "FOLLOW US"}
                       </Heading>
                       <div className="flex flex-wrap items-center gap-x-4">
                         {socialLinkData?.map((item, index) => (

@@ -28,12 +28,12 @@ export default function ProjectsMonth({ data, locale }) {
               size="h2"
               className="font-normal text-center text-[#1e1e1e] mb-1"
             >
-              {parse(locale == "ar" ? data?.title_ar : data?.title)}
+              {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
             </Heading>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
             <Text as="div" size="p1" className="text-center text-[#1e1e1e]">
-              {parse(locale == "ar" ? data?.description_ar : data?.description)}
+              {parse(locale == "ar" ? data?.description_ar || "" : data?.description || "")}
             </Text>
           </ScrollReveal>
         </div>

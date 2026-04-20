@@ -64,8 +64,8 @@ export default function HomeStatistics({ data, locale }) {
                   >
                     {parse(
                       locale === "ar"
-                        ? item?.description_ar
-                        : item?.description,
+                        ? item?.description_ar || ""
+                        : item?.description || "",
                     )}
                   </Text>
                 </ScrollReveal>
