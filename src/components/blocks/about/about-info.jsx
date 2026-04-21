@@ -10,27 +10,16 @@ import {
 } from "react-scroll-parallax";
 import ScrollReveal from "@/components/animations/scroll-reveal";
 import { convertRichTextToHtml } from "@/lib/sanitizer";
+import { cn } from "@/lib/utils";
 
 export default function AboutInfo({ data, locale }) {
   return (
     <ParallaxProvider>
       <section className="w-full h-auto block py-[30px] sm:py-[40px] lg:py-[80px] xl:py-[110px] 2xl:py-[120px] 3xl:py-[140px]">
         <div className="container">
-          <div className="flex flex-wrap sm:items-center -mx-3 sm:-mx-1 [&>*]:p-3 sm:[&>*]:p-1">
-            <div className="w-full lg:w-6/12">
-              <ParallaxBanner className="w-full max-w-[320px] lg:max-w-[400px] xl:max-w-[490px] 2xl:max-w-[590px] 3xl:max-w-[740px] aspect-74/64 mask-[url(/images/icon-brand.svg)] mask-center mask-contain mask-no-repeat max-md:mb-2">
-                <ParallaxBannerLayer speed={-5}>
-                  <Image
-                    src={data?.media_path}
-                    alt={(locale == "ar" ? data?.media_alt_ar : data?.media_alt) || "About Image"}
-                    width={308}
-                    height={517}
-                    className="w-full h-full object-fill select-none"
-                  />
-                </ParallaxBannerLayer>
-              </ParallaxBanner>
-            </div>
-            <div className="w-full lg:w-6/12">
+          <div className="flex flex-wrap -mx-3 sm:-mx-1 [&>*]:p-3 sm:[&>*]:p-1">
+            {/* <div className="w-full block"> */}
+            <div className="w-full">
               <ScrollReveal delay={0.1}>
                 <Heading
                   as="div"
@@ -38,31 +27,68 @@ export default function AboutInfo({ data, locale }) {
                   className="tracking-widest font-normal text-[#1e1e1e] flex items-center gap-x-4 mb-0.5 lg:mb-1 xl:mb-1.5 2xl:mb-2 3xl:mb-2.5"
                 >
                   <span className="size-2 rounded-full bg-[#c09c86] inline-block" />
-                  {parse(locale == "ar" ? data?.sub_title_ar || "" : data?.sub_title || "")}
+                  {parse(
+                    locale == "ar"
+                      ? data?.sub_title_ar || ""
+                      : data?.sub_title || "",
+                  )}
                 </Heading>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
                 <Heading
                   as="h2"
                   size="h3"
-                  className="font-normal leading-tight text-[#1e1e1e] lg:max-w-[350px] xl:max-w-[400px] 2xl:max-w-[480px] 3xl:max-w-[560px] mb-1 lg:mb-1.5 xl:mb-2 2xl:mb-3 3xl:mb-4"
-                >
-                  {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
-                </Heading>
-              </ScrollReveal>
-              <ScrollReveal delay={0.3}>
-                <Text
-                  as="div"
-                  size="p1"
-                  className="text-[#1e1e1e] lg:max-w-[450px] xl:max-w-[520px] 2xl:max-w-[620px] 3xl:max-w-[740px] mb-4 lg:mb-6 xl:mb-8 2xl:mb-10 3xl:mb-12"
+                  className="font-normal leading-tight text-[#1e1e1e] lg:max-w-[376px] xl:max-w-[400px] 2xl:max-w-[480px] 3xl:max-w-[560px] mb-1 lg:mb-1.5 xl:mb-2 2xl:mb-3 3xl:mb-4"
                 >
                   {parse(
-                    convertRichTextToHtml(locale == "ar" ? data?.description_ar || "" : data?.description || "")
+                    locale == "ar" ? data?.title_ar || "" : data?.title || "",
                   )}
-                </Text>
+                </Heading>
               </ScrollReveal>
-
-              <div className="flex flex-wrap -mx-3 sm:-mx-1 lg:-mx-2.5 xl:-mx-3.5 2xl:-mx-4 [&>*]:p-3 sm:[&>*]:p-1 lg:[&>*]:p-2.5 xl:[&>*]:p-3.5 2xl:[&>*]:p-4 mt-[30px] lg:mt-[50px] xl:mt-[70px] 2xl:mt-[80px] 3xl:mt-[100px]">
+            </div>
+            <div className="w-full lg:w-5/12 lg:sticky top-20">
+              <ParallaxBanner className="w-full max-w-[320px] lg:max-w-[320px] xl:max-w-[400px] 2xl:max-w-[520px] 3xl:max-w-[620px] aspect-74/64 mask-[url(/images/icon-brand.svg)] mask-center mask-contain mask-no-repeat max-md:mb-2 mt-4">
+                <ParallaxBannerLayer speed={-5}>
+                  <Image
+                    src={data?.media_path}
+                    alt={
+                      (locale == "ar" ? data?.media_alt_ar : data?.media_alt) ||
+                      "About Image"
+                    }
+                    width={308}
+                    height={517}
+                    className="w-full h-full object-fill select-none"
+                  />
+                </ParallaxBannerLayer>
+              </ParallaxBanner>
+            </div>
+            <div className="w-full lg:w-7/12">
+              <ScrollReveal delay={0.3}>
+                {/* <Text
+                  as="div"
+                  size="p1"
+                  className="text-[#1e1e1e] mb-4 lg:mb-6 xl:mb-8 2xl:mb-10 3xl:mb-12"
+                > */}
+                <div
+                  dir={locale === "ar" ? "rtl" : "ltr"}
+                  className={cn(
+                    "typography [&_h3]:font-medium",
+                    "[--text-color:#1e1e1e]",
+                  )}
+                >
+                  {parse(
+                    convertRichTextToHtml(
+                      locale == "ar"
+                        ? data?.description_ar || ""
+                        : data?.description || "",
+                    ),
+                  )}
+                </div>
+                {/* </Text> */}
+              </ScrollReveal>
+            </div>
+            <div className="w-full">
+              <div className="flex flex-wrap -mx-2 sm:-mx-2 lg:-mx-4 xl:-mx-6 2xl:-mx-8 [&>*]:p-2 sm:[&>*]:p-2 lg:[&>*]:p-4 xl:[&>*]:p-6 2xl:[&>*]:p-8 mt-[30px] lg:mt-[50px] xl:mt-[70px] 2xl:mt-[80px] 3xl:mt-[100px]">
                 {data?.missionVision
                   ?.sort((a, b) => a.title.localeCompare(b.title))
                   .map((item, index) => (
@@ -101,7 +127,9 @@ function SubItems({ data, locale }) {
         size="p1"
         className="lg:text-[11px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[16px] line-clamp-20 text-[#1e1e1e]"
       >
-        {parse(locale == "ar" ? data?.description_ar || "" : data?.description || "")}
+        {parse(
+          locale == "ar" ? data?.description_ar || "" : data?.description || "",
+        )}
       </Text>
     </div>
   );
