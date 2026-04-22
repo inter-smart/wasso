@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogClose,
@@ -9,6 +9,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+
+import { useLenis } from "lenis/react";
 
 import { motion, AnimatePresence } from "motion/react";
 
@@ -76,6 +78,17 @@ export default function HeaderNavigation({
   headerData,
 }) {
   const [open, setOpen] = useState(false);
+  const lenis = useLenis();
+
+  useEffect(() => {
+    if (!lenis) return;
+
+    if (open) {
+      lenis.stop();
+    } else {
+      lenis.start();
+    }
+  }, [open, lenis]);
 
   return (
     <>
@@ -110,15 +123,18 @@ export default function HeaderNavigation({
                   <DialogDescription />
                 </DialogHeader>
 
-                <div className="h-full max-h-screen xl:max-h-screen overflow-y-auto py-16">
-                  {/* <div className="flex items-center justify-center py-20 min-h-full"> */}
-                  <div className="grid place-items-center ">
+                <div
+                  className="h-full max-h-screen xl:max-h-screen overflow-y-auto flex py-16"
+                  data-lenis-prevent
+                >
+                  <div className="flex flex-col items-center min-h-0 m-auto">
+                    {/* <div className="flex flex-col items-center gap-6 xl:gap-6 2xl:gap-10 py-16"> */}
                     <motion.ul
                       variants={listVariants}
                       initial="hidden"
                       animate="show"
                       exit="exit"
-                      className="flex flex-col items-center gap-6 xl:gap-6 2xl:gap-10"
+                      className="flex flex-col items-center gap-6 xl:gap-6 2xl:gap-10 py-16"
                     >
                       {menuItems?.map((item) => {
                         const isActive = pathname === `/${locale}${item?.slug}`;
@@ -145,7 +161,7 @@ export default function HeaderNavigation({
                                   setOpen(false);
                                 }}
                                 className={cn(
-                                  "text-[36px] sm:text-[48px] xl:text-[54px] 2xl:text-[60px] leading-none font-light tracking-tight uppercase block",
+                                  "text-[34px] sm:text-[42px] xl:text-[44px] 2xl:text-[52px] 3xl:text-[60px] leading-none font-light tracking-tight uppercase block",
                                   "hover:scale-100",
                                   isActive ? "text-white" : "text-white/60",
                                 )}
@@ -189,6 +205,7 @@ export default function HeaderNavigation({
                         );
                       })}
                     </motion.ul>
+                    {/* </div> */}
                   </div>
                 </div>
 

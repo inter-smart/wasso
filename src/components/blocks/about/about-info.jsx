@@ -72,11 +72,18 @@ export default function AboutInfo({ data, locale }) {
                   size="p1"
                   className="text-[#1e1e1e] mb-4 lg:mb-6 xl:mb-8 2xl:mb-10 3xl:mb-12"
                 > */}
-                <div
+                {/* <div
                   dir={locale === "ar" ? "rtl" : "ltr"}
                   className={cn(
                     "typography [&_h3]:font-medium",
                     "[--text-color:#1e1e1e]",
+                  )}
+                > */}
+
+                <div
+                  dir={locale === "ar" ? "rtl" : "ltr"}
+                  className={cn(
+                    "typography [&_h3]:font-medium [--text-color:#1e1e1e] [&_li]:font-normal [&_li]:my-2 lg:[&_li]:my-2.5 xl:[&_li]:my-3 2xl:[&_li]:my-3.5 3xl:[&_li]:my-4 marker:text-[#EFD8AF]",
                   )}
                 >
                   {parse(
