@@ -46,21 +46,24 @@ export default function AboutInfo({ data, locale }) {
                 </Heading>
               </ScrollReveal>
             </div>
-            <div className="w-full lg:w-5/12 lg:sticky top-20">
-              <ParallaxBanner className="w-full max-w-[320px] lg:max-w-[320px] xl:max-w-[400px] 2xl:max-w-[520px] 3xl:max-w-[620px] aspect-74/64 mask-[url(/images/icon-brand.svg)] mask-center mask-contain mask-no-repeat max-md:mb-2 mt-4">
-                <ParallaxBannerLayer speed={-5}>
-                  <Image
-                    src={data?.media_path}
-                    alt={
-                      (locale == "ar" ? data?.media_alt_ar : data?.media_alt) ||
-                      "About Image"
-                    }
-                    width={308}
-                    height={517}
-                    className="w-full h-full object-fill select-none"
-                  />
-                </ParallaxBannerLayer>
-              </ParallaxBanner>
+            <div className="w-full lg:w-5/12">
+              <div className="lg:sticky lg:top-20 xl:top-26">
+                <ParallaxBanner className="w-full max-w-[320px] lg:max-w-[320px] xl:max-w-[400px] 2xl:max-w-[520px] 3xl:max-w-[620px] aspect-74/64 mask-[url(/images/icon-brand.svg)] mask-center mask-contain mask-no-repeat max-md:mb-2 mt-4">
+                  <ParallaxBannerLayer speed={-5}>
+                    <Image
+                      src={data?.media_path}
+                      alt={
+                        (locale == "ar"
+                          ? data?.media_alt_ar
+                          : data?.media_alt) || "About Image"
+                      }
+                      width={308}
+                      height={517}
+                      className="w-full h-full object-fill select-none"
+                    />
+                  </ParallaxBannerLayer>
+                </ParallaxBanner>
+              </div>
             </div>
             <div className="w-full lg:w-7/12">
               <ScrollReveal delay={0.3}>

@@ -110,8 +110,9 @@ export default function HeaderNavigation({
                   <DialogDescription />
                 </DialogHeader>
 
-                <div className="h-full max-h-screen overflow-y-auto">
-                  <div className="min-h-full flex items-center justify-center py-20">
+                <div className="h-full max-h-screen xl:max-h-screen overflow-y-auto py-16">
+                  {/* <div className="flex items-center justify-center py-20 min-h-full"> */}
+                  <div className="grid place-items-center ">
                     <motion.ul
                       variants={listVariants}
                       initial="hidden"
@@ -194,7 +195,10 @@ export default function HeaderNavigation({
                 <div className="w-full h-(--header-y) flex items-center absolute top-0 left-0 right-0">
                   <div className="container flex justify-between items-center">
                     <div className="w-[60px] 2xl:w-[80px] 3xl:w-[100px]">
-                      <Link href={`/${locale}${headerData?.slug}`} aria-label={headerData?.name || "Brand Logo"}>
+                      <Link
+                        href={`/${locale}${headerData?.slug}`}
+                        aria-label={headerData?.name || "Brand Logo"}
+                      >
                         <Image
                           src={headerData?.logoWhiteUrl}
                           alt={headerData?.name || "Logo"}

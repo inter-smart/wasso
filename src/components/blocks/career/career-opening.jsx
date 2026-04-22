@@ -45,18 +45,26 @@ export default function CareerOpening({ data, locale }) {
               </div>
               <div className="w-full sm:w-[70%] xl:w-[50%]">
                 <div className="flex flex-wrap justify-between gap-y-6">
-                  {(item?.opening_specs?.length > 0
-                    ? item.opening_specs
-                    : [
+                  {[
+                    ...(item?.opening_specs || []),
+                    ...[
                       {
                         id: "p1",
                         title: "Job Type",
                         title_ar: "نوع الوظيفة",
                       },
-                      { id: "p2", title: "Location", title_ar: "موقع" },
-                      { id: "p3", title: "Experience", title_ar: "الخبرة" },
-                    ]
-                  ).map((spec) => (
+                      {
+                        id: "p2",
+                        title: "Requirements",
+                        title_ar: "المتطلبات",
+                      },
+                      {
+                        id: "p3",
+                        title: "Deadline to Apply",
+                        title_ar: "الموعد النهائي للتقديم",
+                      },
+                    ].slice(item?.opening_specs?.length || 0),
+                  ].map((spec) => (
                     <div
                       key={spec.id}
                       className="w-full sm:w-1/2 md:w-[33.333%]"
@@ -66,14 +74,18 @@ export default function CareerOpening({ data, locale }) {
                           {spec?.iconPath ? (
                             <Image
                               src={spec.iconPath}
-                              alt={locale == "ar" ? spec?.title_ar : spec?.title}
+                              alt={
+                                locale == "ar" ? spec?.title_ar : spec?.title
+                              }
                               width={40}
                               height={40}
                               className="w-full h-full object-contain block"
                             />
                           ) : (
                             <div className="w-full h-full bg-gray-100/50 rounded-sm flex items-center justify-center">
-                               <span className="text-[8px] opacity-20">Icon</span>
+                              <span className="text-[8px] opacity-20">
+                                Icon
+                              </span>
                             </div>
                           )}
                         </div>

@@ -20,24 +20,40 @@ export default function CareerDetailInfo({ data, locale }) {
           size="p1"
           className="sm:text-center text-[#1e1e1e] max-w-[900px] mx-auto mb-6 lg:mb-9 xl:mb-12 2xl:mb-14 3xl:mb-16"
         >
-          {parse(locale == "ar" ? data?.description_ar || "" : data?.description || "")}
+          {parse(
+            locale == "ar"
+              ? data?.description_ar || ""
+              : data?.description || "",
+          )}
         </Text>
 
-        <div className="w-full bg-[#fffbf2] p-4 lg:py-4 lg:px-8 xl:py-5 xl:px-12 2xl:py-6 2xl:px-14 3xl:py-7 3xl:px-16 mb-12 lg:mb-18 xl:mb-23 2xl:mb-27 3xl:mb-32">
-          <div className="flex flex-wrap justify-between -m-2 lg:-m-3 xl:-m-2 2xl:-m-2.5 3xl:-m-3 [&>*]:p-2 lg:[&>*]:p-3 xl:[&>*]:p-2 2xl:[&>*]:p-2.5 3xl:[&>*]:p-3">
-            {(data?.jobSpecs?.length > 0
-              ? data.jobSpecs
-              : [
-                  { id: "p1", title: "Job Type", title_ar: "نوع الوظيفة" },
-                  { id: "p2", title: "Location", title_ar: "موقع" },
-                  { id: "p3", title: "Experience", title_ar: "الخبرة" },
-                ]
-            ).map((item) => (
+        <div className="w-full bg-[#fffbf2] p-4 lg:py-4 lg:px-8 xl:py-5 xl:px-6 2xl:py-6 2xl:px-8 3xl:py-7 3xl:px-10 mb-12 lg:mb-18 xl:mb-23 2xl:mb-27 3xl:mb-32">
+          <div className="flex flex-wrap justify-center -m-2 lg:-m-3 xl:-m-2 2xl:-m-2.5 3xl:-m-3 [&>*]:p-2 lg:[&>*]:p-3 xl:[&>*]:p-2 2xl:[&>*]:p-2.5 3xl:[&>*]:p-3">
+            {[
+              ...(data?.jobSpecs || []),
+              ...[
+                {
+                  id: "p1",
+                  title: "Job Type",
+                  title_ar: "نوع الوظيفة",
+                },
+                {
+                  id: "p2",
+                  title: "Requirements",
+                  title_ar: "المتطلبات",
+                },
+                {
+                  id: "p3",
+                  title: "Deadline to Apply",
+                  title_ar: "الموعد النهائي للتقديم",
+                },
+              ].slice(data?.jobSpecs?.length || 0),
+            ].map((item) => (
               <div
                 key={item?.id}
-                className="w-full 3xs:w-1/2 sm:w-1/3 xl:w-auto"
+                className="w-full 3xs:w-1/2 sm:w-1/3 xl:w-[176px] 2xl:w-[220px] 3xl:w-[280px]"
               >
-                <div className="w-full flex flex-wrap items-center gap-2 lg:gap-2.5 xl:gap-3 2xl:gap-3.5 3xl:gap-4">
+                <div className="w-full flex flex-wrap items-center ">
                   <div className="w-[20px] lg:w-[22px] xl:w-[24px] 2xl:w-[26px] 3xl:w-[30px] aspect-square">
                     <Image
                       src={item?.iconPath || "/images/career-benefits-1.svg"}
@@ -51,7 +67,7 @@ export default function CareerDetailInfo({ data, locale }) {
                       className="w-full h-full object-contain block"
                     />
                   </div>
-                  <div className="flex-1">
+                  <div className="w-[calc(100%-20px)] lg:w-[calc(100%-22px)] xl:w-[calc(100%-24px)] 2xl:w-[calc(100%-26px)] 3xl:w-[calc(100%-30px)] px-2 lg:px-2.5 xl:px-3 2xl:px-3.5 3xl:px-4">
                     <Text
                       as="div"
                       size="p2"
@@ -64,7 +80,11 @@ export default function CareerDetailInfo({ data, locale }) {
                       )}
                       :
                     </Text>
-                    <Text as="div" size="p2" className="text-[#1C2222]">
+                    <Text
+                      as="div"
+                      size="p2"
+                      className="text-[#1C2222] text-ellipsis"
+                    >
                       {parse(
                         locale == "ar"
                           ? item?.description_ar || "-"
@@ -116,7 +136,7 @@ export default function CareerDetailInfo({ data, locale }) {
                       : data?.benefits?.title || "",
                   )}
                 </Heading>
-                <div className="flex flex-wrap justify-start xl:justify-between gap-10 lg:gap-5 xl:gap-6 2xl:gap-7 3xl:gap-8">
+                <div className="flex flex-wrap justify-start gap-y-3 lg:gap-y-5 xl:gap-y-6 2xl:gap-y-7 3xl:gap-y-8 gap-x-6 lg:gap-x-8 xl:gap-x-12 2xl:gap-x-14 3xl:gap-x-16">
                   {data?.benefits?.items?.map((item) => (
                     <div key={"benefits" + item?.id}>
                       <div className="w-full max-w-[60px] sm:max-w-[70px] lg:max-w-[75px] xl:max-w-[80px] 2xl:max-w-[90px] 3xl:max-w-[100px]">
@@ -132,7 +152,11 @@ export default function CareerDetailInfo({ data, locale }) {
                           size="p1"
                           className="leading-tight font-medium text-center text-[#1e1e1e] max-sm:text-[12px]"
                         >
-                          {parse(locale == "ar" ? item?.title_ar || "" : item?.title || "")}
+                          {parse(
+                            locale == "ar"
+                              ? item?.title_ar || ""
+                              : item?.title || "",
+                          )}
                         </Text>
                       </div>
                     </div>
