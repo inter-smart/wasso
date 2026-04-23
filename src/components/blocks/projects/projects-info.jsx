@@ -9,6 +9,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
+import { convertRichTextToHtml } from "@/lib/sanitizer";
 
 export default function ProjectsInfo({ data, locale }) {
   if (!data?.items || data.items.length === 0) return null;
@@ -104,10 +105,10 @@ export default function ProjectsInfo({ data, locale }) {
             </div>
           )}
 
-          {currentSlide?.title ||
+          {(currentSlide?.title ||
             currentSlide?.title_ar ||
-            currentSlide?.description ||
-            (currentSlide?.description_ar && (
+            (Array.isArray(currentSlide?.description) ? currentSlide.description.length > 0 : currentSlide?.description) ||
+            (Array.isArray(currentSlide?.description_ar) ? currentSlide.description_ar.length > 0 : currentSlide?.description_ar)) && (
               <div className="w-full sm:w-5/12">
                 <div className="w-full h-full bg-[#fffbf2] p-6 xl:p-9 2xl:p-10 3xl:p-12 relative z-0">
                   <Image
@@ -134,15 +135,15 @@ export default function ProjectsInfo({ data, locale }) {
                     size="p1"
                     className="text-[#1e1e1e] mb-3 xl:mb-5 2xl:mb-6 xl:[&>p]:mb-2.5 3xl:[&>p]:mb-3"
                   >
-                    {parse(
-                      (locale === "ar"
-                        ? currentSlide?.description_ar
-                        : currentSlide?.description) || "",
-                    )}
+                    {typeof (locale === "ar" ? currentSlide?.description_ar : currentSlide?.description) === "string"
+                      ? parse((locale === "ar" ? currentSlide?.description_ar : currentSlide?.description) || "")
+                      : Array.isArray(locale === "ar" ? currentSlide?.description_ar : currentSlide?.description)
+                        ? parse(convertRichTextToHtml(locale === "ar" ? currentSlide?.description_ar : currentSlide?.description))
+                        : ""}
                   </Text>
                 </div>
               </div>
-            ))}
+            )}
         </div>
       </div>
     </section>
