@@ -27,76 +27,59 @@ export default function CareerDetailInfo({ data, locale }) {
           )}
         </Text>
 
-        <div className="w-full bg-[#fffbf2] p-4 lg:py-4 lg:px-8 xl:py-5 xl:px-6 2xl:py-6 2xl:px-8 3xl:py-7 3xl:px-10 mb-12 lg:mb-18 xl:mb-23 2xl:mb-27 3xl:mb-32">
-          <div className="flex flex-wrap justify-center -m-2 lg:-m-3 xl:-m-2 2xl:-m-2.5 3xl:-m-3 [&>*]:p-2 lg:[&>*]:p-3 xl:[&>*]:p-2 2xl:[&>*]:p-2.5 3xl:[&>*]:p-3">
-            {[
-              ...(data?.jobSpecs || []),
-              ...[
-                {
-                  id: "p1",
-                  title: "Job Type",
-                  title_ar: "نوع الوظيفة",
-                },
-                {
-                  id: "p2",
-                  title: "Requirements",
-                  title_ar: "المتطلبات",
-                },
-                {
-                  id: "p3",
-                  title: "Deadline to Apply",
-                  title_ar: "الموعد النهائي للتقديم",
-                },
-              ].slice(data?.jobSpecs?.length || 0),
-            ].map((item) => (
-              <div
-                key={item?.id}
-                className="w-full 3xs:w-1/2 sm:w-1/3 xl:w-[176px] 2xl:w-[220px] 3xl:w-[280px]"
-              >
-                <div className="w-full flex flex-wrap items-center ">
-                  <div className="w-[20px] lg:w-[22px] xl:w-[24px] 2xl:w-[26px] 3xl:w-[30px] aspect-square">
-                    <Image
-                      src={item?.iconPath || "/images/career-benefits-1.svg"}
-                      alt={
-                        locale == "ar"
-                          ? item?.title_ar || "Job Type"
-                          : item?.title || "Job Type"
-                      }
-                      width={40}
-                      height={40}
-                      className="w-full h-full object-contain block"
-                    />
-                  </div>
-                  <div className="w-[calc(100%-20px)] lg:w-[calc(100%-22px)] xl:w-[calc(100%-24px)] 2xl:w-[calc(100%-26px)] 3xl:w-[calc(100%-30px)] px-2 lg:px-2.5 xl:px-3 2xl:px-3.5 3xl:px-4">
-                    <Text
-                      as="div"
-                      size="p2"
-                      className="leading-none font-medium text-[#1C2222]"
-                    >
-                      {parse(
-                        locale == "ar"
-                          ? item?.title_ar || "Job Type"
-                          : item?.title || "Job Type",
-                      )}
-                      :
-                    </Text>
-                    <Text
-                      as="div"
-                      size="p2"
-                      className="text-[#1C2222] text-ellipsis"
-                    >
-                      {parse(
-                        locale == "ar"
-                          ? item?.description_ar || "-"
-                          : item?.description || "-",
-                      )}
-                    </Text>
+        {data?.jobSpecs?.length > 0 && (
+          <div className="w-full bg-[#fffbf2] p-4 lg:py-4 lg:px-8 xl:py-5 xl:px-6 2xl:py-6 2xl:px-8 3xl:py-7 3xl:px-10 mb-12 lg:mb-18 xl:mb-23 2xl:mb-27 3xl:mb-32">
+            <div className="flex flex-wrap justify-center -m-2 lg:-m-3 xl:-m-2 2xl:-m-2.5 3xl:-m-3 [&>*]:p-2 lg:[&>*]:p-3 xl:[&>*]:p-2 2xl:[&>*]:p-2.5 3xl:[&>*]:p-3">
+              {data.jobSpecs.map((item) => (
+                <div
+                  key={item?.id}
+                  className="w-full 3xs:w-1/2 sm:w-1/3 xl:w-[176px] 2xl:w-[220px] 3xl:w-[280px]"
+                >
+                  <div className="w-full flex flex-wrap items-center ">
+                    <div className="w-[20px] lg:w-[22px] xl:w-[24px] 2xl:w-[26px] 3xl:w-[30px] aspect-square">
+                      <Image
+                        src={item?.iconPath || "/images/career-benefits-1.svg"}
+                        alt={
+                          locale == "ar"
+                            ? item?.title_ar || "Job Type"
+                            : item?.title || "Job Type"
+                        }
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-contain block"
+                      />
+                    </div>
+                    <div className="w-[calc(100%-20px)] lg:w-[calc(100%-22px)] xl:w-[calc(100%-24px)] 2xl:w-[calc(100%-26px)] 3xl:w-[calc(100%-30px)] px-2 lg:px-2.5 xl:px-3 2xl:px-3.5 3xl:px-4">
+                      <Text
+                        as="div"
+                        size="p2"
+                        className="leading-none font-medium text-[#1C2222]"
+                      >
+                        {parse(
+                          locale == "ar"
+                            ? item?.title_ar || "Job Type"
+                            : item?.title || "Job Type",
+                        )}
+                        :
+                      </Text>
+                      <Text
+                        as="div"
+                        size="p2"
+                        className="text-[#1C2222] text-ellipsis"
+                      >
+                        {parse(
+                          locale == "ar"
+                            ? item?.description_ar || "-"
+                            : item?.description || "-",
+                        )}
+                      </Text>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="flex flex-wrap -mx-1 sm:-mx-2 lg:-mx-3 xl:-mx-4 2xl:-mx-8 3xl:-mx-10 [&>*]:p-1 sm:[&>*]:p-2 lg:[&>*]:p-3 xl:[&>*]:p-4 2xl:[&>*]:p-8 3xl:[&>*]:p-10">
           <div className="w-full lg:w-6/12">
