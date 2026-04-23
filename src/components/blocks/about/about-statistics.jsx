@@ -59,10 +59,11 @@ export default function AboutStatistics({ data, locale }) {
                   onMouseLeave={() => setActiveIndex(null)}
                 >
                   <Image
-                    src={"/images/about-statics-bg.jpg"}
+                    src={data?.statisticsImage?.media_path || "/images/about-statics-bg.jpg"}
                     alt={locale === "ar" ? item?.label_ar : item?.label}
                     width={387}
                     height={755}
+                    unoptimized
                     className={cn(
                       "w-full h-full object-cover transition-transform duration-300 absolute -z-1 inset-0 translate-y-full",
                       index % 2 === 0
@@ -79,7 +80,7 @@ export default function AboutStatistics({ data, locale }) {
                         ? "md:bottom-1 lg:bottom-2 xl:bottom-2.5 2xl:bottom-3 3xl:bottom-3.5"
                         : "md:top-1 lg:top-2 xl:top-2.5 2xl:top-3 3xl:top-3.5",
                       index === 2 &&
-                        "bottom-1 lg:bottom-2 xl:bottom-2.5 2xl:bottom-3 3xl:bottom-3.5",
+                      "bottom-1 lg:bottom-2 xl:bottom-2.5 2xl:bottom-3 3xl:bottom-3.5",
                     )}
                   >
                     <ScrollReveal
