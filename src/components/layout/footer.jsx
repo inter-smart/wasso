@@ -10,6 +10,7 @@ import { useState } from "react";
 import { Heading, Text } from "../utils/typography";
 
 import dynamic from "next/dynamic";
+import { convertRichTextToHtml } from "@/lib/sanitizer";
 
 const MediaQuery = dynamic(() => import("react-responsive"), {
   ssr: false,
@@ -220,11 +221,11 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                       size="h6"
                       className="max-3xs:text-[13px] font-normal text-[#1e1e1e] transition [&>a]:hover:text-[#cda278] mb-2 lg:mb-4 xl:mb-6 "
                     >
-                      {parse(
+                      {parse(convertRichTextToHtml(
                         locale == "ar"
-                          ? footerData?.address_ar || ""
-                          : footerData?.address || "",
-                      )}
+                          ? footerData?.address_ar || []
+                          : footerData?.address || [],
+                      ))}
                     </Heading>
                   </div>
                 )}

@@ -19,9 +19,24 @@ export default function FloatNavigation({ data = [], locale }) {
       return `mailto:${trimmed}`;
     }
 
-    // Phone detection (+ or numbers only)
-    if (/^\+?\d+$/.test(trimmed)) {
+    // Phone detection (Must start with + for tel:)
+    if (trimmed.startsWith("+")) {
       return `tel:${trimmed}`;
+    }
+
+    // WhatsApp detection (If it's just numbers, treat as WhatsApp)
+    if (/^\d+$/.test(trimmed.replace(/\s+/g, ""))) {
+      return `https://wa.me/${trimmed.replace(/\s+/g, "")}`;
+    }
+
+    // Manual WhatsApp detection (prefixed with wa: or contains wa.me)
+    if (trimmed.startsWith("wa:")) {
+      const phone = trimmed.replace("wa:", "").replace(/\s+/g, "");
+      return `https://wa.me/${phone}`;
+    }
+
+    if (trimmed.includes("wa.me") || trimmed.includes("whatsapp.com")) {
+      return trimmed.startsWith("http") ? trimmed : `https://${trimmed}`;
     }
 
     return trimmed;
