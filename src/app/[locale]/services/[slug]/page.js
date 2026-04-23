@@ -55,8 +55,7 @@ export default async function ServiceDetailPage({ params }) {
       "populate[Overview][populate]=*&" +
       "populate[approachSection][populate][approachItem][populate]=*&" +
       "populate[benefitSection][populate]=*&" +
-      "populate[flagshipSection][populate][projects][populate]=*&" +
-      "populate[formSection]=*";
+      "populate[flagshipSection][populate][projects][populate]=*";
 
     const url = `${STRAPI_URL}/api/services?filters[slug][$eq]=${slug}&locale=${locale}&${populateQuery}`;
 
@@ -72,7 +71,11 @@ export default async function ServiceDetailPage({ params }) {
 
     if (!rawData) notFound();
 
-    /* ---------- Mapping ---------- */
+    const ourServiceRes = await fetch(
+      `${STRAPI_URL}/api/our-service?locale=${locale}&populate[formSection]=*`,
+      { cache: "no-store" }
+    );
+    const ourServiceData = (await ourServiceRes.json())?.data;
 
     serviceData = {
       heroInfo_data: {
@@ -171,10 +174,10 @@ export default async function ServiceDetailPage({ params }) {
       },
 
       form_data: {
-        title_lit: rawData.formSection?.title,
-        title_lit_ar: rawData.formSection?.title,
-        title: rawData.formSection?.titleContinuation,
-        title_ar: rawData.formSection?.titleContinuation,
+        title_lit: ourServiceData?.formSection?.title,
+        title_lit_ar: ourServiceData?.formSection?.title,
+        title: ourServiceData?.formSection?.titleContinuation,
+        title_ar: ourServiceData?.formSection?.titleContinuation,
       },
     };
   } catch (error) {
