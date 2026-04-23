@@ -140,6 +140,7 @@ export default async function ServiceDetailPage({ params }) {
         title: rawData.benefitSection?.title || "",
         title_ar: rawData.benefitSection?.title || "",
         description: rawData.benefitSection?.description || "",
+        description_ar: rawData.benefitSection?.description || "",
         media: {
           desktop_path: rawData.benefitSection?.image?.url
             ? `${STRAPI_URL}${rawData.benefitSection.image.url}`

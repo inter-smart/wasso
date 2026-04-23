@@ -3,6 +3,7 @@ import parse from "html-react-parser";
 import { Heading, Text } from "@/components/utils/typography";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { convertRichTextToHtml } from "@/lib/sanitizer";
 
 export default function ServiceBenefits({ data, locale = "en" }) {
   return (
@@ -32,9 +33,11 @@ export default function ServiceBenefits({ data, locale = "en" }) {
               dir={locale === "ar" ? "rtl" : "ltr"}
               className={cn("typography", "[--text-color:#282828]")}
             >
-              {typeof data?.description === "string"
-                ? parse(data.description)
-                : "-"}
+              {typeof (locale === "ar" ? data?.description_ar : data?.description) === "string"
+                ? parse(locale === "ar" ? data?.description_ar : data?.description)
+                : Array.isArray(locale === "ar" ? data?.description_ar : data?.description)
+                  ? parse(convertRichTextToHtml(locale === "ar" ? data?.description_ar : data?.description))
+                  : "-"}
             </div>
           </div>
         </div>
