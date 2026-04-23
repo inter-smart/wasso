@@ -45,26 +45,38 @@ export default function CareerOpening({ data, locale }) {
               </div>
               <div className="w-full sm:w-[70%] xl:w-[50%]">
                 <div className="flex flex-wrap justify-between gap-y-6">
-                  {[
-                    ...(item?.opening_specs || []),
-                    ...[
+                  {(() => {
+                    const placeholders = [
                       {
                         id: "p1",
                         title: "Job Type",
                         title_ar: "نوع الوظيفة",
+                        iconPath: "/images/career-benefits-1.svg",
                       },
                       {
                         id: "p2",
                         title: "Requirements",
                         title_ar: "المتطلبات",
+                        iconPath: "/images/career-benefits-2.svg",
                       },
                       {
                         id: "p3",
                         title: "Deadline to Apply",
                         title_ar: "الموعد النهائي للتقديم",
+                        iconPath: "/images/career-benefits-3.svg",
                       },
-                    ].slice(item?.opening_specs?.length || 0),
-                  ].map((spec) => (
+                    ];
+
+                    return placeholders.map((placeholder) => {
+                      const found = item?.opening_specs?.find(
+                        (s) =>
+                          s.title === placeholder.title ||
+                          s.id === placeholder.id ||
+                          s.id === parseInt(placeholder.id.replace("p", ""))
+                      );
+                      return found || placeholder;
+                    });
+                  })().map((spec) => (
                     <div
                       key={spec.id}
                       className="w-full sm:w-1/2 md:w-[33.333%]"
