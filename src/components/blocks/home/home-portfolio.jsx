@@ -81,7 +81,11 @@ export default function HomePortfolio({ data, locale }) {
               className="min-w-[100px] xl:min-w-[105px] 2xl:min-w-[130px] transition-all duration-300 hover:scale-105 hover:shadow-lg"
               asChild
             >
-              <Link href={data?.button?.link}>
+              <Link
+                href={data?.button?.link}
+                target={data?.button?.isExternal ? "_blank" : "_self"}
+                rel={data?.button?.isExternal ? "noopener noreferrer" : ""}
+              >
                 {locale === "ar" ? data?.button?.label_ar : data?.button?.label}
               </Link>
             </Button>
