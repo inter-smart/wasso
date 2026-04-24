@@ -38,7 +38,18 @@ const getFormSchema = (locale) => z.object({
     .string()
     .min(1, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
     .refine((val) => val === "" || val.length >= 8, locale === "ar" ? "رقم الهاتف غير صالح" : "Phone number is too short"),
-  attachment: z.any().optional(),
+  attachment: z
+    .any()
+    .refine(
+      (file) => file && file !== null,
+      locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required",
+    )
+    .refine(
+      (file) => !file || file.size <= 5 * 1024 * 1024,
+      locale === "ar"
+        ? "يجب أن يكون حجم الملف أقل من 5 ميجابايت"
+        : "File size must be less than 5MB",
+    ),
 });
 
 // Styles
@@ -219,7 +230,7 @@ export default function CareerEnquiryForm() {
 
     if (file) {
       setUploadedFile(file);
-      form.setValue("attachment", file);
+      form.setValue("attachment", file, { shouldValidate: true });
     }
   };
 
@@ -288,7 +299,7 @@ export default function CareerEnquiryForm() {
         <FormField
           control={form.control}
           name="attachment"
-          render={() => (
+          render={({ fieldState: { error } }) => (
             <FormItem className="w-full sm:w-[calc(100%-200px)]">
               <FormLabel className={"sr-only"}>Resume/CV</FormLabel>
               <FormControl>
@@ -346,8 +357,12 @@ export default function CareerEnquiryForm() {
                 </div>
               </FormControl>
 
-              <FormMessage className="text-[10px] font-light text-[#939393]">
-                {locale === "ar" ? "PDF أو DOC أو DOCX (بحد أقصى 5 ميجابايت)" : "PDF, DOC, or DOCX (Max 5MB)"}
+              <FormMessage
+                className={cn(!error && "text-[10px] font-light text-[#939393]")}
+              >
+                {locale === "ar"
+                  ? "PDF أو DOC أو DOCX (بحد أقصى 5 ميجابايت)"
+                  : "PDF, DOC, or DOCX (Max 5MB)"}
               </FormMessage>
             </FormItem>
           )}
