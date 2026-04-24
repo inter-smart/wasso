@@ -69,7 +69,7 @@ export default async function CareerPage({ params }) {
       <InnerHero
         locale={locale}
         data={hero}
-        slug={locale === "ar" ? hero?.title_ar : hero?.title}
+        slug={locale === "ar" ? hero?.title_ar || "وظائف" : hero?.title || "Careers"}
       />
 
       <CareerHero locale={locale} data={quote} />

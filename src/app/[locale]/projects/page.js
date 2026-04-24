@@ -56,7 +56,15 @@ export default async function ProjectsPage({ params, searchParams }) {
 
   return (
     <>
-      <InnerHero locale={locale} data={projects_hero} slug={"Our Projects"} />
+      <InnerHero
+        locale={locale}
+        data={projects_hero}
+        slug={
+          locale === "ar"
+            ? projects_hero?.title_ar || "مشاريعنا"
+            : projects_hero?.title || "Our Projects"
+        }
+      />
 
       <ProjectsMonth locale={locale} data={project_month} />
 

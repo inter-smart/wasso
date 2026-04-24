@@ -71,7 +71,14 @@ export default function InnerHero({ slug, data, locale }) {
                 size="h2"
                 className="leading-snug text-white mb-1 [&>span]:text-[128%] [&>span]:font-medium [&>span]:block"
               >
-                {parse((locale == "ar" ? data?.title_ar : data?.title) || "")}
+                {parse(
+                  (locale == "ar" ? data?.title_ar : data?.title) ||
+                    slug
+                      ?.split("-")
+                      ?.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                      ?.join(" ") ||
+                    "",
+                )}
               </Heading>
               <Breadcrumb className="mb-1 lg:mb-1.5 xl:mb-2 2xl:mb-2.5">
                 <BreadcrumbList>
@@ -84,7 +91,8 @@ export default function InnerHero({ slug, data, locale }) {
                   {slug && (
                     <BreadcrumbItem>
                       <BreadcrumbPage className="capitalize">
-                        {locale === "ar" ? data?.title_ar : data?.title}
+                        {(locale === "ar" ? data?.title_ar : data?.title) ||
+                          slug?.replace(/-/g, " ")}
                       </BreadcrumbPage>
                     </BreadcrumbItem>
                   )}

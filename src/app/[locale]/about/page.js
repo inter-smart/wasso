@@ -79,7 +79,9 @@ export default async function AboutPage({ params }) {
   return (
     <>
       {hero && (
-        <InnerHero locale={locale} data={aboutData?.hero} slug={"About Us"} />
+        <InnerHero locale={locale} data={aboutData?.hero} slug={locale === "ar"
+          ? aboutData?.hero?.title_ar || "عن واسو"
+          : aboutData?.hero?.title || "About"} />
       )}
 
       <AboutInfo locale={locale} data={aboutData?.about_info} />

@@ -129,7 +129,15 @@ export default async function ServicesPage({ params }) {
     // =========================
     return (
       <>
-        <InnerHero locale={locale} data={local_data.heroInfo} slug="Services" />
+        <InnerHero
+          locale={locale}
+          data={local_data.heroInfo}
+          slug={
+            locale === "ar"
+              ? local_data.heroInfo?.title_ar || "خدماتنا"
+              : local_data.heroInfo?.title || "Our Services"
+          }
+        />
 
         <ServiceList data={local_data.serviceList} locale={locale} />
       </>

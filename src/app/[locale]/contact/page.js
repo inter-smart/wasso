@@ -57,7 +57,7 @@ export default async function ContactPage({ params }) {
         <InnerHero
           locale={locale}
           data={hero}
-          slug={locale === "ar" ? hero?.title_ar : hero?.title}
+          slug={locale === "ar" ? hero?.title_ar || "اتصل بنا" : hero?.title || "Contact Us"}
         />
       )}
 
