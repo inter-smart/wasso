@@ -25,21 +25,22 @@ import { STRAPI_URL } from "@/lib/constants";
 const getFormSchema = (locale) => z.object({
   fullName: z
     .string()
-    .min(1, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
+    .refine((val) => val.trim().length > 0, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
     .max(50, locale === "ar" ? "لا يمكن أن يتجاوز الاسم الكامل 50 حرفًا" : "Full name cannot exceed 50 characters")
     .refine((val) => val === "" || val.length >= 2, locale === "ar" ? "يجب أن يتكون الاسم الكامل من حرفين على الأقل" : "Full name must be at least 2 characters"),
   email: z
     .string()
-    .min(1, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
+    .refine((val) => val.trim().length > 0, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
     .refine((val) => val === "" || z.string().email().safeParse(val).success, locale === "ar" ? "عنوان بريد إلكتروني غير صالح" : "Invalid email address"),
   phone: z
     .string()
-    .min(1, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
+    .refine((val) => val.trim().length > 0, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
     .max(20, locale === "ar" ? "رقم الهاتف طويل جداً" : "Phone number is too long")
     .refine((val) => val === "" || val.length >= 10, locale === "ar" ? "رقم الهاتف غير صالح" : "Phone number is too short"),
   additionalDetails: z
     .string()
-    .min(1, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
+    .refine((val) => val.trim().length > 0, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
+    .refine((val) => val.replace(/\\t|\\n|\\r/g, "").trim().length > 0, locale === "ar" ? "محتوى غير صالح" : "Invalid content detected")
     .max(4999, locale === "ar" ? "الرسالة طويلة جدا" : "Message is too long")
     .refine((val) => val === "" || val.trim().length >= 2, locale === "ar" ? "الرسالة قصيرة جدا" : "Message is too short")
     .refine(
