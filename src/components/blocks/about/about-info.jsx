@@ -50,17 +50,19 @@ export default function AboutInfo({ data, locale }) {
               <div className="lg:sticky lg:top-20 xl:top-26">
                 <ParallaxBanner className="w-full max-w-[320px] lg:max-w-[320px] xl:max-w-[400px] 2xl:max-w-[520px] 3xl:max-w-[620px] aspect-74/64 mask-[url(/images/icon-brand.svg)] mask-center mask-contain mask-no-repeat max-md:mb-2 mt-4">
                   <ParallaxBannerLayer speed={-5}>
-                    <Image
-                      src={data?.media_path}
-                      alt={
-                        (locale == "ar"
-                          ? data?.media_alt_ar
-                          : data?.media_alt) || "About Image"
-                      }
-                      width={308}
-                      height={517}
-                      className="w-full h-full object-fill select-none"
-                    />
+                    {data?.media_path && (
+                      <Image
+                        src={data?.media_path}
+                        alt={
+                          (locale == "ar"
+                            ? data?.media_alt_ar
+                            : data?.media_alt) || "About Image"
+                        }
+                        width={308}
+                        height={517}
+                        className="w-full h-full object-fill select-none"
+                      />
+                    )}
                   </ParallaxBannerLayer>
                 </ParallaxBanner>
               </div>
@@ -118,13 +120,15 @@ export default function AboutInfo({ data, locale }) {
 function SubItems({ data, locale }) {
   return (
     <div className="w-full">
-      <Image
-        src={data?.icon_path}
-        alt={locale == "ar" ? data?.title_ar : data?.title}
-        width={45}
-        height={45}
-        className="w-[40px] lg:w-[42px] xl:w-[45px] 2xl:w-[52px] 3xl:w-[60px] object-contain block select-none mb-2.5 lg:mb-3.5 xl:mb-5 2xl:mb-6 3xl:mb-7"
-      />
+      {data?.icon_path && (
+        <Image
+          src={data?.icon_path}
+          alt={locale == "ar" ? data?.title_ar : data?.title}
+          width={45}
+          height={45}
+          className="w-[40px] lg:w-[42px] xl:w-[45px] 2xl:w-[52px] 3xl:w-[60px] object-contain block select-none mb-2.5 lg:mb-3.5 xl:mb-5 2xl:mb-6 3xl:mb-7"
+        />
+      )}
       <Heading
         as="h6"
         size="h7"

@@ -70,25 +70,29 @@ export default function AboutConcern({ data, locale }) {
             <div className="w-full lg:w-6/12">
               <ParallaxBanner className="w-full aspect-91/54 relative z-0">
                 <ParallaxBannerLayer speed={-5}>
-                  <Image
-                    src={data?.media?.media_path}
-                    alt={
-                      locale == "ar"
-                        ? data?.media?.media_alt_ar
-                        : data?.media?.media_alt
-                    }
-                    width={913}
-                    height={540}
-                    className="w-full h-full object-cover select-none hover:scale-105 transition-all duration-500"
-                  />
+                  {data?.media?.media_path && (
+                    <Image
+                      src={data?.media?.media_path}
+                      alt={
+                        locale == "ar"
+                          ? data?.media?.media_alt_ar
+                          : data?.media?.media_alt
+                      }
+                      width={913}
+                      height={540}
+                      className="w-full h-full object-cover select-none hover:scale-105 transition-all duration-500"
+                    />
+                  )}
                 </ParallaxBannerLayer>
-                <Image
-                  src={data?.companyLogo}
-                  alt={locale == "ar" ? data?.title_ar : data?.title}
-                  width={228}
-                  height={133}
-                  className="w-[130px] lg:w-[140px] xl:w-[150px] 2xl:w-[180px] 3xl:w-[220px] aspect-230/133 absolute z-0 lg:bottom-2.5 xl:bottom-3 2xl:bottom-4 3xl:bottom-5 left-3 lg:left-3.5 xl:left-4 2xl:left-5"
-                />
+                {data?.companyLogo && (
+                  <Image
+                    src={data?.companyLogo}
+                    alt={locale == "ar" ? data?.title_ar : data?.title}
+                    width={228}
+                    height={133}
+                    className="w-[130px] lg:w-[140px] xl:w-[150px] 2xl:w-[180px] 3xl:w-[220px] aspect-230/133 absolute z-0 lg:bottom-2.5 xl:bottom-3 2xl:bottom-4 3xl:bottom-5 left-3 lg:left-3.5 xl:left-4 2xl:left-5"
+                  />
+                )}
               </ParallaxBanner>
             </div>
           </div>

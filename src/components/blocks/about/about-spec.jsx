@@ -34,17 +34,19 @@ export default function AboutSpec({ data, locale }) {
             <div className="w-full md:w-[47%]">
               <ParallaxBanner className="w-full h-auto aspect-[2/1] md:aspect-[885/1000]">
                 <ParallaxBannerLayer speed={-5}>
-                  <Image
-                    src={data?.media?.media_path}
-                    alt={
-                      locale == "ar"
-                        ? data?.media?.media_alt_ar
-                        : data?.media?.media_alt
-                    }
-                    width={885}
-                    height={1000}
-                    className="w-full h-full object-cover select-none hover:scale-105 transition-all duration-500"
-                  />
+                  {data?.media?.media_path && (
+                    <Image
+                      src={data?.media?.media_path}
+                      alt={
+                        locale == "ar"
+                          ? data?.media?.media_alt_ar
+                          : data?.media?.media_alt
+                      }
+                      width={885}
+                      height={1000}
+                      className="w-full h-full object-cover select-none hover:scale-105 transition-all duration-500"
+                    />
+                  )}
                 </ParallaxBannerLayer>
               </ParallaxBanner>
             </div>
@@ -66,13 +68,15 @@ function SubItems({ data, i, locale }) {
       )}
     >
       <div>
-        <Image
-          src={data?.icon_path}
-          alt={locale == "ar" ? data?.title_ar : data?.title}
-          width={45}
-          height={45}
-          className="w-[40px] lg:w-[42px] xl:w-[45px] 2xl:w-[52px] 3xl:w-[60px] object-contain block select-none mx-auto mb-2.5 lg:mb-3.5 xl:mb-5 2xl:mb-6 3xl:mb-7"
-        />
+        {data?.icon_path && (
+          <Image
+            src={data?.icon_path}
+            alt={locale == "ar" ? data?.title_ar : data?.title}
+            width={45}
+            height={45}
+            className="w-[40px] lg:w-[42px] xl:w-[45px] 2xl:w-[52px] 3xl:w-[60px] object-contain block select-none mx-auto mb-2.5 lg:mb-3.5 xl:mb-5 2xl:mb-6 3xl:mb-7"
+          />
+        )}
         <Heading
           as="h6"
           size="h5"
