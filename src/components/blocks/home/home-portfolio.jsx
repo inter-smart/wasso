@@ -216,14 +216,16 @@ function PortfolioCard({ data, slot, locale, activeIndex, images }) {
                     <Heading size="h4" className="text-white mb-1">
                       {parse(locale === "ar" ? data?.title_ar || "" : data?.title || "")}
                     </Heading>
-                    <Text size="p1" className="text-white">
-                      <span className="font-light">
-                        {locale === "ar" ? "الموقع: " : "Location: "}
-                      </span>
-                      {parse(
-                        locale === "ar" ? data?.location_ar || "" : data?.location || "",
-                      )}
-                    </Text>
+                    {(locale === "ar" ? data?.location_ar : data?.location) && (
+                      <Text size="p1" className="text-white">
+                        <span className="font-light">
+                          {locale === "ar" ? "الموقع: " : "Location: "}
+                        </span>
+                        {parse(
+                          locale === "ar" ? data?.location_ar || "" : data?.location || "",
+                        )}
+                      </Text>
+                    )}
                   </motion.div>
                 </AnimatePresence>
               </div>
