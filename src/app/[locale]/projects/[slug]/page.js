@@ -77,7 +77,15 @@ export default async function ProjectsDetailPage({ params }) {
       <InnerHero
         locale={locale}
         data={projectData?.hero}
-        slug={"Our Projects"}
+        slug={
+          locale === "ar"
+            ? projectData?.title_ar || "مشروع"
+            : projectData?.title || slug?.replace(/-/g, " ")
+        }
+        parent={{
+          label: locale === "ar" ? "المشاريع" : "Project",
+          link: `/${locale}/projects`,
+        }}
       />
 
       <ProjectsInfo locale={locale} data={projectData?.project_info} />

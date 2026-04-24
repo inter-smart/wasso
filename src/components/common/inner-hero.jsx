@@ -17,7 +17,7 @@ import {
   ParallaxBannerLayer,
   ParallaxProvider,
 } from "react-scroll-parallax";
-export default function InnerHero({ slug, data, locale }) {
+export default function InnerHero({ slug, data, locale, parent }) {
   return (
     <ParallaxProvider>
       <ParallaxBanner>
@@ -88,6 +88,21 @@ export default function InnerHero({ slug, data, locale }) {
                     </BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator>/</BreadcrumbSeparator>
+
+                  {parent && (
+                    <>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink
+                          className="hover:text-[#c09c86]"
+                          href={parent.link}
+                        >
+                          {parent.label}
+                        </BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator>/</BreadcrumbSeparator>
+                    </>
+                  )}
+
                   {slug && (
                     <BreadcrumbItem>
                       <BreadcrumbPage className="capitalize">

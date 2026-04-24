@@ -191,7 +191,19 @@ export default async function CareerDetailPage({ params }) {
 
   return (
     <>
-      <InnerHero locale={locale} data={hero} slug={"Career"} />
+      <InnerHero
+        locale={locale}
+        data={hero}
+        slug={
+          locale === "ar"
+            ? career_info?.title_ar || "وظيفة"
+            : career_info?.title || slug?.replace(/-/g, " ")
+        }
+        parent={{
+          label: locale === "ar" ? "وظائف" : "Career",
+          link: `/${locale}/careers`,
+        }}
+      />
       <CareerDetailInfo data={career_info} locale={locale} />
     </>
   );

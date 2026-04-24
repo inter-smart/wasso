@@ -190,7 +190,15 @@ export default async function ServiceDetailPage({ params }) {
       <InnerHero
         locale={locale}
         data={serviceData.heroInfo_data}
-        slug={serviceData.heroInfo_data.title}
+        slug={
+          locale === "ar"
+            ? serviceData.heroInfo_data.title_ar || "خدمة"
+            : serviceData.heroInfo_data.title || slug?.replace(/-/g, " ")
+        }
+        parent={{
+          label: locale === "ar" ? "خدمة" : "Service",
+          link: `/${locale}/services`,
+        }}
       />
 
       <ServiceOverview data={serviceData.overview_data} locale={locale} />
