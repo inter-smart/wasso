@@ -54,7 +54,7 @@ export default function CharacterAnimation({ locale }) {
         <motion.span
           key={"letter-" + index}
           ref={(el) => (refs.current[index] = el)}
-          className="inline-block cursor-default origin-bottom"
+          className="inline-block origin-bottom"
           style={{ scaleY: springs[index] }}
         >
           {letter}

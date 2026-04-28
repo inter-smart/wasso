@@ -32,7 +32,10 @@ export default function HomeAbout({ data, locale }) {
                 <div className="w-full max-w-[268px] bg-gray-200 mx-auto mask-[url(/images/icon-brand.svg)] mask-center mask-contain mask-no-repeat">
                   <Image
                     src={data?.media_path}
-                    alt={(locale == "ar" ? data?.media_alt_ar : data?.media_alt) || "About Section"}
+                    alt={
+                      (locale == "ar" ? data?.media_alt_ar : data?.media_alt) ||
+                      "About Section"
+                    }
                     width={308}
                     height={517}
                     className="w-full h-full object-fill"
@@ -48,7 +51,11 @@ export default function HomeAbout({ data, locale }) {
                   className="tracking-widest font-normal text-[#1e1e1e] flex items-center gap-x-4 mb-1 xl:mb-2.5 2xl:mb-4"
                 >
                   <span className="size-2 rounded-full bg-[#c09c86] inline-block" />
-                  {parse(locale == "ar" ? data?.sub_title_ar || "" : data?.sub_title || "")}
+                  {parse(
+                    locale == "ar"
+                      ? data?.sub_title_ar || ""
+                      : data?.sub_title || "",
+                  )}
                 </Heading>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
@@ -57,7 +64,9 @@ export default function HomeAbout({ data, locale }) {
                   size="h3"
                   className="font-normal text-[#1e1e1e] mb-2 xl:mb-4 2xl:mb-6"
                 >
-                  {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
+                  {parse(
+                    locale == "ar" ? data?.title_ar || "" : data?.title || "",
+                  )}
                 </Heading>
               </ScrollReveal>
               <ScrollReveal delay={0.3}>
@@ -67,7 +76,11 @@ export default function HomeAbout({ data, locale }) {
                   className="line-clamp-10 text-black mb-4 xl:mb-8 2xl:mb-10"
                 >
                   {parse(
-                    convertRichTextToHtml(locale == "ar" ? data?.description_ar || "" : data?.description || "")
+                    convertRichTextToHtml(
+                      locale == "ar"
+                        ? data?.description_ar || ""
+                        : data?.description || "",
+                    ),
                   )}
                 </Text>
               </ScrollReveal>
@@ -139,18 +152,31 @@ export default function HomeAbout({ data, locale }) {
 }
 
 function SubItems({ data, locale }) {
+  const isMissionOrVision =
+    data?.title?.toLowerCase().includes("mission") ||
+    data?.title?.toLowerCase().includes("vision") ||
+    data?.title_ar?.includes("الرؤية") ||
+    data?.title_ar?.includes("المهمة");
+
   return (
     <div className="w-full">
       <Heading
         as="h6"
         size="h7"
-        className="font-medium text-[#1e1e1e] flex items-center gap-x-4 mb-3 sm:mb-1 xl:mb-2"
+        className={cn(
+          "font-medium text-[#1e1e1e] flex items-center gap-x-4 mb-3 sm:mb-1 xl:mb-2",
+          isMissionOrVision &&
+            "font-medium text-[15px] xl:text-[19px] 2xl:text-[20px] 3xl:text-[22px]",
+        )}
       >
         {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
         {data?.logo_path && (
           <Image
             src={data?.logo_path}
-            alt={(locale == "ar" ? data?.logo_alt_ar : data?.logo_alt) || "About Logo"}
+            alt={
+              (locale == "ar" ? data?.logo_alt_ar : data?.logo_alt) ||
+              "About Logo"
+            }
             width={52}
             height={27}
             className="w-[40px] xl:w-[50px] 2xl:w-[60px]"
@@ -158,7 +184,9 @@ function SubItems({ data, locale }) {
         )}
       </Heading>
       <Text as="div" size="p1" className="line-clamp-3 text-black">
-        {parse(locale == "ar" ? data?.description_ar || "" : data?.description || "")}
+        {parse(
+          locale == "ar" ? data?.description_ar || "" : data?.description || "",
+        )}
       </Text>
     </div>
   );

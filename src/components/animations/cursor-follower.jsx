@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "react-responsive";
+import Image from "next/image";
 
 export default function CursorFollower() {
   const [isHovering, setIsHovering] = useState(false);
@@ -21,7 +22,7 @@ export default function CursorFollower() {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 700, mass: 0.5 };
+  const springConfig = { damping: 2, stiffness: 3000, mass: 0.02 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
   useEffect(() => {
@@ -106,7 +107,7 @@ export default function CursorFollower() {
     <>
       <motion.div
         ref={cursorRef}
-        className="fixed pointer-events-none z-[9999] mix-blend-difference flex items-center justify-center text-black rounded-full overflow-hidden opacity-80 transition-all duration-50"
+        className="fixed pointer-events-none z-[9999] flex items-center justify-center overflow-hidden"
         style={{
           left: cursorXSpring,
           top: cursorYSpring,
@@ -114,50 +115,45 @@ export default function CursorFollower() {
           y: "-50%",
         }}
         animate={{
-          backdropFilter: isHovering || isCarousel ? "blur(1px)" : "blur(0)",
+          scale: isHovering || isCarousel ? 1.3 : 1,
         }}
         transition={{
-          duration: 0.2,
+          duration: 0.1,
           ease: "easeOut",
         }}
       >
-        <motion.div
-          className="rounded-full border-1 border-white backdrop-blur-sm flex items-center justify-center relative overflow-hidden transition-all duration-50"
-          animate={{
-            width: isCarousel ? 60 : isHovering ? 50 : 20,
-            height: isCarousel ? 60 : isHovering ? 50 : 20,
-            backgroundColor:
-              isHovering || isCarousel
-                ? "rgba(255, 255, 255, 0.1)"
-                : "rgba(255, 255, 255, 0.05)",
-          }}
-          transition={{
-            duration: 0.1,
-            ease: "easeOut",
-          }}
-        >
-          {isCarousel && (
-            <motion.div
-              className="flex items-center gap-3 text-white"
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-            >
-              <ChevronLeft
-                className={cn(
-                  "size-4 transition-opacity duration-100",
-                  direction === "left" ? "opacity-100" : "opacity-30",
-                )}
-              />
-              <ChevronRight
-                className={cn(
-                  "size-4 transition-opacity duration-100",
-                  direction === "right" ? "opacity-100" : "opacity-30",
-                )}
-              />
-            </motion.div>
+        <Image
+          src="/images/icon-cursor-brand.svg"
+          alt="Cursor"
+          width={40}
+          height={35}
+          className={cn(
+            "w-10 h-8 object-contain transition-all duration-100",
+            isHovering || isCarousel ? "opacity-100" : "opacity-80"
           )}
-        </motion.div>
+          priority
+        />
+        {isCarousel && (
+          <motion.div
+            className="absolute flex items-center gap-3 text-white"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+          >
+            <ChevronLeft
+              className={cn(
+                "size-4 transition-opacity duration-100",
+                direction === "left" ? "opacity-100" : "opacity-30",
+              )}
+            />
+            <ChevronRight
+              className={cn(
+                "size-4 transition-opacity duration-100",
+                direction === "right" ? "opacity-100" : "opacity-30",
+              )}
+            />
+          </motion.div>
+        )}
       </motion.div>
 
       {!isCarousel && (

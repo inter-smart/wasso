@@ -3,6 +3,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html {
+  cursor: none;
+}
+
+a, button, [role="button"], input, textarea, select, [contenteditable="true"] {
+  cursor: pointer;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

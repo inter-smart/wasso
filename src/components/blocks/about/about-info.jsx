@@ -132,7 +132,10 @@ function SubItems({ data, locale }) {
       <Heading
         as="h6"
         size="h7"
-        className="font-medium text-[#1e1e1e] mb-2 lg:mb-2 xl:mb-3 2xl:mb-4 3xl:mb-5"
+        className={cn(
+          "text-[#1e1e1e] mb-2 lg:mb-2 xl:mb-3 2xl:mb-4 3xl:mb-5",
+          "font-medium text-2xl lg:text-[22px] xl:text-[24px] 2xl:text-[26px] 3xl:text-[28px]",
+        )}
       >
         {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
       </Heading>
