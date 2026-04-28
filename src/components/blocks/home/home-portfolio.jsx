@@ -18,6 +18,7 @@ import { CarouselScene } from "@/components/animations/WebglDisplacementCarousel
 export default function HomePortfolio({ data, locale }) {
   const items = data?.items || [];
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const images = useMemo(() => {
     return items.map((item) => item.media?.path).filter(Boolean);
@@ -37,9 +38,10 @@ export default function HomePortfolio({ data, locale }) {
   };
 
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(goToNext, 6000);
     return () => clearInterval(timer);
-  }, [items.length]);
+  }, [items.length, isPaused]);
 
   return (
     <section className="w-full py-[40px] sm:py-[40px] xl:py-[70px] 2xl:py-[100px] bg-[#fffbf2] overflow-hidden relative z-0">
@@ -53,7 +55,11 @@ export default function HomePortfolio({ data, locale }) {
                 className="tracking-widest font-normal text-[#1e1e1e] flex items-center gap-x-4 mb-1"
               >
                 <span className="size-2 rounded-full bg-[#c09c86]" />
-                {parse(locale === "ar" ? data?.sub_title_ar || "" : data?.sub_title || "")}
+                {parse(
+                  locale === "ar"
+                    ? data?.sub_title_ar || ""
+                    : data?.sub_title || "",
+                )}
               </Heading>
             </ScrollReveal>
             <Heading
@@ -61,7 +67,9 @@ export default function HomePortfolio({ data, locale }) {
               size="h3"
               className="font-normal text-[#1e1e1e] mb-2"
             >
-              {parse(locale === "ar" ? data?.title_ar || "" : data?.title || "")}
+              {parse(
+                locale === "ar" ? data?.title_ar || "" : data?.title || "",
+              )}
             </Heading>
           </div>
 
@@ -72,7 +80,9 @@ export default function HomePortfolio({ data, locale }) {
               className="line-clamp-2 text-[#1e1e1e] mb-5"
             >
               {parse(
-                locale === "ar" ? data?.description_ar || "" : data?.description || "",
+                locale === "ar"
+                  ? data?.description_ar || ""
+                  : data?.description || "",
               )}
             </Text>
             <Button
@@ -102,7 +112,11 @@ export default function HomePortfolio({ data, locale }) {
         )}
       >
         <div className="relative">
-          <div className="flex items-center -mx-1.5 lg:-mx-[1.5%] [&>div]:px-1.5 lg:[&>div]:px-[1.5%]">
+          <div
+            className="flex items-center -mx-1.5 lg:-mx-[1.5%] [&>div]:px-1.5 lg:[&>div]:px-[1.5%]"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             {visibleItems.map((item, slotIndex) => (
               <div
                 key={`slot-${slotIndex}`}
@@ -214,7 +228,11 @@ function PortfolioCard({ data, slot, locale, activeIndex, images }) {
                     transition={{ duration: 0.5 }}
                   >
                     <Heading size="h4" className="text-white mb-1">
-                      {parse(locale === "ar" ? data?.title_ar || "" : data?.title || "")}
+                      {parse(
+                        locale === "ar"
+                          ? data?.title_ar || ""
+                          : data?.title || "",
+                      )}
                     </Heading>
                     {(locale === "ar" ? data?.location_ar : data?.location) && (
                       <Text size="p1" className="text-white">
@@ -222,7 +240,9 @@ function PortfolioCard({ data, slot, locale, activeIndex, images }) {
                           {locale === "ar" ? "الموقع: " : "Location: "}
                         </span>
                         {parse(
-                          locale === "ar" ? data?.location_ar || "" : data?.location || "",
+                          locale === "ar"
+                            ? data?.location_ar || ""
+                            : data?.location || "",
                         )}
                       </Text>
                     )}
