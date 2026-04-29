@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 export const metadata = {
   title: {
     default: "WASSO Project Management LLC",
-    template: "%s | WASSO",
+    template: "%s",
   },
   description:
     "Leading project management, engineering, and real estate development solutions across the UAE and GCC region.",

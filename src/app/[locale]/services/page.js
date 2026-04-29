@@ -13,15 +13,30 @@ export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
 
-  console.log("STRAPI_URL", STRAPI_URL);
+  try {
+    const res = await fetch(`${STRAPI_URL}/api/our-service?locale=${locale}`, {
+      cache: "no-store",
+    });
 
-  return {
-    title: locale === "ar" ? "الخدمات" : "Services",
-    description:
-      locale === "ar"
-        ? "استعرض خدماتنا في إدارة المشاريع والإشراف الهندسي وإدارة العقود وضمان الجودة"
-        : "Browse our services in project management, engineering supervision, contracts management, and quality assurance",
-  };
+    if (!res.ok) throw new Error("Failed to fetch services metadata");
+
+    const json = await res.json();
+    const data = json?.data;
+
+    return {
+      title: data?.seoTitle || (locale === "ar" ? "الخدمات" : "Services"),
+      description:
+        data?.seoDescription ||
+        (locale === "ar"
+          ? "استعرض خدماتنا في إدارة المشاريع والإشراف الهندسي وإدارة العقود وضمان الجودة"
+          : "Browse our services in project management, engineering supervision, contracts management, and quality assurance"),
+    };
+  } catch (error) {
+    console.error("Services metadata error:", error);
+    return {
+      title: locale === "ar" ? "الخدمات" : "Services",
+    };
+  }
 }
 
 export default async function ServicesPage({ params }) {

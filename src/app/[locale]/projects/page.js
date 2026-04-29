@@ -14,13 +14,29 @@ export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
 
-  return {
-    title: locale === "ar" ? "المشاريع" : "Projects",
-    description:
-      locale === "ar"
-        ? "استعرض مشاريعنا المميزة في إدارة المشاريع والهندسة وتطوير العقارات"
-        : "Browse our featured projects in project management, engineering, and real estate development",
-  };
+  try {
+    const res = await fetch(`${STRAPI_URL}/api/our-project?locale=${locale}`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch projects metadata");
+
+    const data = await res.json();
+
+    return {
+      title: data?.seoTitle || (locale === "ar" ? "المشاريع" : "Projects"),
+      description:
+        data?.seoDescription ||
+        (locale === "ar"
+          ? "استعرض مشاريعنا المميزة في إدارة المشاريع والهندسة وتطوير العقارات"
+          : "Browse our featured projects in project management, engineering, and real estate development"),
+    };
+  } catch (error) {
+    console.error("Projects metadata error:", error);
+    return {
+      title: locale === "ar" ? "المشاريع" : "Projects",
+    };
+  }
 }
 
 export default async function ProjectsPage({ params, searchParams }) {
