@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 export default function AboutConcern({ data, locale }) {
   return (
     <ParallaxProvider>
-      <section className="w-full h-auto block py-[30px] sm:py-[40px] lg:py-[80px] xl:py-[110px] 2xl:py-[120px] 3xl:py-[140px]">
+      <section className="w-full h-auto block py-[30px_15px] sm:py-[40px_15px] lg:py-[80px_15px] xl:py-[110px_15px] 2xl:py-[120px_20px] 3xl:py-[140px_30px]">
         <div className="container">
           <div className="flex flex-wrap sm:items-center -mx-4 lg:-mx-5 xl:-mx-7 2xl:-mx-8 [&>*]:p-4 lg:[&>*]:p-5 xl:[&>*]:p-7 2xl:[&>*]:p-8">
             <div className="w-full lg:w-6/12">
@@ -27,7 +27,9 @@ export default function AboutConcern({ data, locale }) {
                   size="h3"
                   className="font-normal text-[#1e1e1e] mb-2 lg:mb-2.5 xl:mb-3 2xl:mb-6 3xl:mb-8"
                 >
-                  {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
+                  {parse(
+                    locale == "ar" ? data?.title_ar || "" : data?.title || "",
+                  )}
                 </Heading>
               </ScrollReveal>
               <ScrollReveal delay={0.3}>
@@ -36,7 +38,9 @@ export default function AboutConcern({ data, locale }) {
                   className={cn("typography", "[--text-color:#1e1e1e]")}
                 >
                   {parse(
-                    locale == "ar" ? data?.description_ar || "" : data?.description || "",
+                    locale == "ar"
+                      ? data?.description_ar || ""
+                      : data?.description || "",
                   )}
                 </div>
               </ScrollReveal>

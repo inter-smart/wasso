@@ -46,6 +46,10 @@ export default function CursorFollower() {
         if (
           target.tagName === "A" ||
           target.tagName === "BUTTON" ||
+          target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT" ||
+          target.tagName === "LABEL" ||
           target.closest("a") ||
           target.closest("button") ||
           target.classList.contains("cursor-highlight")
@@ -71,6 +75,10 @@ export default function CursorFollower() {
         if (
           target.tagName === "A" ||
           target.tagName === "BUTTON" ||
+          target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT" ||
+          target.tagName === "LABEL" ||
           target.closest("a") ||
           target.closest("button") ||
           target.classList.contains("cursor-highlight")
@@ -128,8 +136,12 @@ export default function CursorFollower() {
           width={40}
           height={35}
           className={cn(
-            "w-10 h-8 object-contain transition-all duration-100",
-            isHovering || isCarousel ? "opacity-100" : "opacity-80"
+            "w-5 h-4.5 object-contain transition-all duration-100",
+            isHovering && !isCarousel
+              ? "opacity-0"
+              : isCarousel
+                ? "opacity-100"
+                : "opacity-80",
           )}
           priority
         />

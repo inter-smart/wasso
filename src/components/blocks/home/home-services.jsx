@@ -19,7 +19,7 @@ import ScrollReveal from "@/components/animations/scroll-reveal";
 import { useMediaQuery } from "react-responsive";
 
 export default function HomeServices({ data, locale }) {
-  const [emblaRef] = useEmblaCarousel(
+  const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: false,
       direction: locale === "ar" ? "rtl" : "ltr",
@@ -27,7 +27,13 @@ export default function HomeServices({ data, locale }) {
       slidesToScroll: 1,
       containScroll: "trimSnaps",
     },
-    [Autoplay({ delay: 5000, stopOnInteraction: true, pauseOnHover: true })],
+    [
+      Autoplay({
+        delay: 5000,
+        stopOnInteraction: true,
+        stopOnMouseEnter: true,
+      }),
+    ],
   );
 
   return (
@@ -42,7 +48,11 @@ export default function HomeServices({ data, locale }) {
                 className="tracking-widest font-normal text-[#1e1e1e] flex items-center gap-x-4 mb-1 xl:mb-1.5 2xl:mb-1.5"
               >
                 <span className="size-2 rounded-full bg-[#c09c86] inline-block" />
-                {parse(locale == "ar" ? data?.sub_title_ar || "" : data?.sub_title || "")}
+                {parse(
+                  locale == "ar"
+                    ? data?.sub_title_ar || ""
+                    : data?.sub_title || "",
+                )}
               </Heading>
             </ScrollReveal>
             <Heading
@@ -60,7 +70,9 @@ export default function HomeServices({ data, locale }) {
               className="line-clamp-2 text-[#4b4b4b] mb-3 xl:mb-5 2xl:mb-6"
             >
               {parse(
-                locale === "ar" ? data?.description_ar || "" : data?.description || "",
+                locale === "ar"
+                  ? data?.description_ar || ""
+                  : data?.description || "",
               )}
             </Text>
             <Button
@@ -92,6 +104,7 @@ export default function HomeServices({ data, locale }) {
           ref={emblaRef}
           className="w-full max-w-full overflow-hidden"
           data-cursor="carousel"
+          onMouseLeave={() => emblaApi?.plugins()?.autoplay?.play()}
         >
           <div className="flex touch-pan-y touch-pinch-zoom -mx-1.5 lg:-mx-0 [&>*]:p-1.5 lg:[&>*]:p-0">
             {data?.items?.map((item, index) => (
@@ -139,7 +152,10 @@ function ServiceCard({ data, index, locale }) {
             />
             <Image
               src={data?.media?.path || "/images/placeholder.webp"}
-              alt={(locale == "ar" ? data?.media?.alt_ar : data?.media?.alt) || "Service Overview"}
+              alt={
+                (locale == "ar" ? data?.media?.alt_ar : data?.media?.alt) ||
+                "Service Overview"
+              }
               width={432}
               height={668}
               className="w-full h-full object-cover"
@@ -157,15 +173,15 @@ function ServiceCard({ data, index, locale }) {
             animate={
               isMobile
                 ? {
-                  rotateY: 0,
-                  opacity: 1,
-                  filter: "blur(0px)",
-                }
+                    rotateY: 0,
+                    opacity: 1,
+                    filter: "blur(0px)",
+                  }
                 : {
-                  rotateY: hovered === index ? 0 : 180,
-                  opacity: hovered === index ? 1 : 0,
-                  filter: hovered === index ? "blur(0px)" : "blur(2px)",
-                }
+                    rotateY: hovered === index ? 0 : 180,
+                    opacity: hovered === index ? 1 : 0,
+                    filter: hovered === index ? "blur(0px)" : "blur(2px)",
+                  }
             }
             transition={{
               duration: 1,
@@ -190,7 +206,9 @@ function ServiceCard({ data, index, locale }) {
                 size="h4"
                 className="font-semibold text-white lg:text-black mb-2 sm:mb-1 xl:mb-2.5 2xl:mb-3"
               >
-                {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
+                {parse(
+                  locale == "ar" ? data?.title_ar || "" : data?.title || "",
+                )}
               </Heading>
               <Text
                 as="div"
@@ -198,7 +216,9 @@ function ServiceCard({ data, index, locale }) {
                 className="line-clamp-2 lg:line-clamp-7 text-white lg:text-black mb-4 xl:mb-8 2xl:mb-11 max-sm:text-[12px]"
               >
                 {parse(
-                  locale === "ar" ? data?.description_ar || "" : data?.description || "",
+                  locale === "ar"
+                    ? data?.description_ar || ""
+                    : data?.description || "",
                 )}
               </Text>
               <Button
