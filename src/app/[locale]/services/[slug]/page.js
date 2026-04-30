@@ -47,169 +47,57 @@ export async function generateMetadata({ params }) {
 export default async function ServiceDetailPage({ params }) {
   const { locale, slug } = await params;
 
-  let serviceData = null;
-
   try {
-    const populateQuery =
-      "populate[bannerSection][populate]=*&" +
-      "populate[Overview][populate]=*&" +
-      "populate[approachSection][populate][approachItem][populate]=*&" +
-      "populate[benefitSection][populate]=*&" +
-      "populate[flagshipSection][populate][projects][populate]=*";
+    // Fetch pre-structured service detail data
+    const res = await fetch(`${STRAPI_URL}/api/services?filters[slug][$eq]=${slug}&locale=${locale}`, {
+      cache: "no-store",
+    });
 
-    const url = `${STRAPI_URL}/api/services?filters[slug][$eq]=${slug}&locale=${locale}&${populateQuery}`;
+    if (!res.ok) notFound();
 
-    const res = await fetch(url, { cache: "no-store" });
+    const { data } = await res.json();
+    const serviceData = data?.[0];
 
-    if (!res.ok) {
-      console.error("Strapi fetch failed:", res.status, res.statusText);
-      notFound();
-    }
+    if (!serviceData) notFound();
 
-    const response = await res.json();
-    const rawData = response.data?.[0];
-
-    if (!rawData) notFound();
-
+    // Fetch form data from our-service single type
     const ourServiceRes = await fetch(
-      `${STRAPI_URL}/api/our-service?locale=${locale}&populate[formSection]=*`,
+      `${STRAPI_URL}/api/our-service?locale=${locale}`,
       { cache: "no-store" }
     );
-    const ourServiceData = (await ourServiceRes.json())?.data;
+    const ourServiceJson = await ourServiceRes.json();
+    const contactData = ourServiceJson?.data?.contactSection;
 
-    serviceData = {
-      heroInfo_data: {
-        media: {
-          media_type: rawData.bannerSection?.enableVideo ? "video" : "image",
+    return (
+      <>
+        <InnerHero
+          locale={locale}
+          data={serviceData.heroInfo_data}
+          slug={
+            locale === "ar"
+              ? serviceData.heroInfo_data.title_ar || "خدمة"
+              : serviceData.heroInfo_data.title || slug?.replace(/-/g, " ")
+          }
+          parent={{
+            label: locale === "ar" ? "خدمة" : "Service",
+            link: `/${locale}/services`,
+          }}
+        />
 
-          mobile_path: rawData.bannerSection?.enableVideo
-            ? rawData.bannerSection?.video?.url
-              ? `${STRAPI_URL}${rawData.bannerSection.video.url}`
-              : "/images/placeholder.webp"
-            : rawData.bannerSection?.mobileImage?.url
-              ? `${STRAPI_URL}${rawData.bannerSection.mobileImage.url}`
-              : rawData.bannerSection?.desktopImage?.url
-                ? `${STRAPI_URL}${rawData.bannerSection.desktopImage.url}`
-                : "/images/placeholder.webp",
+        <ServiceOverview data={serviceData.overview_data} locale={locale} />
 
-          desktop_path: rawData.bannerSection?.enableVideo
-            ? rawData.bannerSection?.video?.url
-              ? `${STRAPI_URL}${rawData.bannerSection.video.url}`
-              : "/images/placeholder.webp"
-            : rawData.bannerSection?.desktopImage?.url
-              ? `${STRAPI_URL}${rawData.bannerSection.desktopImage.url}`
-              : rawData.bannerSection?.mobileImage?.url
-                ? `${STRAPI_URL}${rawData.bannerSection.mobileImage.url}`
-                : "/images/placeholder.webp",
+        <ServiceApproach data={serviceData.approach_data} locale={locale} />
 
-          media_alt:
-            rawData.bannerSection?.mobileImage?.alternativeText ||
-            rawData.bannerSection?.title ||
-            "hero",
-        },
+        <ServiceBenefits data={serviceData.benefit_data} locale={locale} />
 
-        title: rawData.bannerSection?.title,
-        title_ar: rawData.bannerSection?.title,
-      },
+        <ServiceFlagship data={serviceData.flagship_data} locale={locale} />
 
-      overview_data: {
-        title: rawData.Overview?.title || "",
-        title_ar: rawData.Overview?.title || "",
-        description: rawData.Overview?.overviewDesc,
-        description_ar: rawData.Overview?.overviewDesc,
-        media: {
-          desktop_path: rawData.Overview?.image?.url
-            ? `${STRAPI_URL}${rawData.Overview.image.url}`
-            : "/images/placeholder.webp",
-
-          media_alt: rawData.Overview?.image?.alternativeText || "overview",
-        },
-      },
-
-      approach_data: {
-        main_title: rawData.approachSection?.title || "",
-        main_title_ar: rawData.approachSection?.title || "",
-        items:
-          rawData.approachSection?.approachItem?.map((item) => ({
-            id: item.id,
-            title: item.title || "",
-            title_ar: item.title || "",
-            description: item.description,
-            description_ar: item.description,
-          })) || [],
-      },
-
-      benefit_data: {
-        title: rawData.benefitSection?.title || "",
-        title_ar: rawData.benefitSection?.title || "",
-        description: rawData.benefitSection?.description || "",
-        description_ar: rawData.benefitSection?.description || "",
-        media: {
-          desktop_path: rawData.benefitSection?.image?.url
-            ? `${STRAPI_URL}${rawData.benefitSection.image.url}`
-            : "/images/placeholder.webp",
-          media_alt:
-            rawData.benefitSection?.image?.alternativeText || "benefit",
-        },
-      },
-
-      flagship_data: {
-        title: rawData.flagshipSection?.title || "",
-        title_ar: rawData.flagshipSection?.title || "",
-        items:
-          rawData.flagshipSection?.projects?.map((p) => ({
-            id: p.id,
-            title: p.title || "",
-            title_ar: p.title || "",
-            description: p.description,
-            description_ar: p.description,
-            media: {
-              path: p.featured_image?.url
-                ? `${STRAPI_URL}${p.featured_image.url}`
-                : "/images/placeholder.webp",
-              alt: p.featured_image?.alternativeText || p.title || "",
-              alt_ar: p.featured_image?.alternativeText || p.title || "",
-            },
-          })) || [],
-      },
-
-      form_data: {
-        title_lit: ourServiceData?.formSection?.title,
-        title_lit_ar: ourServiceData?.formSection?.title,
-        title: ourServiceData?.formSection?.titleContinuation,
-        title_ar: ourServiceData?.formSection?.titleContinuation,
-      },
-    };
+        <ServiceHearFrom data={contactData} locale={locale} />
+      </>
+    );
   } catch (error) {
     console.error("Error fetching service data:", error);
     notFound();
   }
-
-  return (
-    <>
-      <InnerHero
-        locale={locale}
-        data={serviceData.heroInfo_data}
-        slug={
-          locale === "ar"
-            ? serviceData.heroInfo_data.title_ar || "خدمة"
-            : serviceData.heroInfo_data.title || slug?.replace(/-/g, " ")
-        }
-        parent={{
-          label: locale === "ar" ? "خدمة" : "Service",
-          link: `/${locale}/services`,
-        }}
-      />
-
-      <ServiceOverview data={serviceData.overview_data} locale={locale} />
-
-      <ServiceApproach data={serviceData.approach_data} locale={locale} />
-
-      <ServiceBenefits data={serviceData.benefit_data} locale={locale} />
-
-      <ServiceFlagship data={serviceData.flagship_data} locale={locale} />
-
-      <ServiceHearFrom data={serviceData.form_data} locale={locale} />
-    </>
-  );
 }
+

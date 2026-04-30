@@ -10,8 +10,7 @@ import ServiceList from "@/components/blocks/service/service-list";
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }) {
-  const resolvedParams = await params;
-  const locale = resolvedParams.locale;
+  const { locale } = await params;
 
   try {
     const res = await fetch(`${STRAPI_URL}/api/our-service?locale=${locale}`, {
@@ -20,8 +19,7 @@ export async function generateMetadata({ params }) {
 
     if (!res.ok) throw new Error("Failed to fetch services metadata");
 
-    const json = await res.json();
-    const data = json?.data;
+    const { data } = await res.json();
 
     return {
       title: data?.seoTitle || (locale === "ar" ? "الخدمات" : "Services"),
@@ -40,135 +38,37 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ServicesPage({ params }) {
-  const resolvedParams = await params;
-  // const resolvedSearchParams = await searchParams;
-  const locale = resolvedParams.locale;
+  const { locale } = await params;
 
   try {
-    // =========================
-    // HERO SECTION (Strapi)
-    // =========================
-    const heroRes = await fetch(
-      `${STRAPI_URL}/api/our-service?locale=${locale}&populate[bannerSection][populate]=*`,
-      { cache: "no-store" },
-    );
+    const res = await fetch(`${STRAPI_URL}/api/our-service?locale=${locale}`, {
+      cache: "no-store",
+    });
 
-    if (!heroRes.ok) notFound();
+    if (!res.ok) notFound();
 
-    const heroJson = await heroRes.json();
-    const hero = heroJson?.data;
+    const { data } = await res.json();
 
-    const banner = hero?.bannerSection;
+    if (!data) notFound();
 
-    const heroInfo = {
-      media: {
-        media_type: banner?.enableVideo ? "video" : "image",
-
-        mobile_path: banner?.enableVideo
-          ? banner?.video?.url
-            ? `${STRAPI_URL}${banner.video.url}`
-            : "/images/placeholder.webp"
-          : banner?.mobileImage?.url
-            ? `${STRAPI_URL}${banner.mobileImage.url}`
-            : banner?.desktopImage?.url
-              ? `${STRAPI_URL}${banner.desktopImage.url}`
-              : "/images/placeholder.webp",
-
-        desktop_path: banner?.enableVideo
-          ? banner?.video?.url
-            ? `${STRAPI_URL}${banner.video.url}`
-            : "/images/placeholder.webp"
-          : banner?.desktopImage?.url
-            ? `${STRAPI_URL}${banner.desktopImage.url}`
-            : banner?.mobileImage?.url
-              ? `${STRAPI_URL}${banner.mobileImage.url}`
-              : "/images/placeholder.webp",
-
-        media_alt:
-          banner?.mobileImage?.alternativeText ||
-          banner?.title ||
-          "service-hero",
-      },
-
-      title: banner?.title || "",
-      title_ar: banner?.title || "",
-    };
-
-    // =========================
-    // SERVICES LIST (Strapi)
-    // =========================
-    const servicesRes = await fetch(
-      `${STRAPI_URL}/api/services?locale=${locale}&populate=*`,
-      { cache: "no-store" },
-    );
-
-    if (!servicesRes.ok) notFound();
-
-    const servicesJson = await servicesRes.json();
-
-    const serviceList = {
-      sub_title: hero?.subTitle || "",
-      sub_title_ar: hero?.subTitle || "",
-
-      title: hero?.title || "",
-      title_ar: hero?.title || "",
-
-      description: hero?.description || "",
-      description_ar: hero?.description || "",
-
-      items:
-        servicesJson?.data?.map((item) => ({
-          id: item.id,
-          title: item.title,
-          title_ar: item.title,
-
-          description: item.description,
-          description_ar: item.description,
-
-          slug: `/${locale}/services/${item.slug}`,
-
-          icon: item.icon?.url ? `${STRAPI_URL}${item.icon.url}` : null,
-        })) || [],
-    };
-
-    // =========================
-    // FINAL DATA OBJECT
-    // =========================
-    const local_data = {
-      heroInfo,
-      serviceList,
-    };
-
-    // =========================
-    // RETURN (unchanged layout)
-    // =========================
     return (
       <>
         <InnerHero
           locale={locale}
-          data={local_data.heroInfo}
+          data={data.heroInfo}
           slug={
             locale === "ar"
-              ? local_data.heroInfo?.title_ar || "خدماتنا"
-              : local_data.heroInfo?.title || "Our Services"
+              ? data.heroInfo?.title_ar || "خدماتنا"
+              : data.heroInfo?.title || "Our Services"
           }
         />
 
-        <ServiceList data={local_data.serviceList} locale={locale} />
+        <ServiceList data={data.serviceList} locale={locale} />
       </>
     );
   } catch (error) {
     console.error("Services page error:", error);
     notFound();
   }
-
-  const { heroInfo, serviceList } = servicesData;
-
-  return (
-    <>
-      <InnerHero locale={locale} data={heroInfo} slug={heroInfo.title} />
-
-      <ServiceList data={serviceList} locale={locale} />
-    </>
-  );
 }
+

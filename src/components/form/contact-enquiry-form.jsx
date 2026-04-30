@@ -34,7 +34,6 @@ const getFormSchema = (locale) => z.object({
     .refine((val) => val === "" || z.string().email().safeParse(val).success, locale === "ar" ? "عنوان بريد إلكتروني غير صالح" : "Invalid email address"),
   phone: z
     .string()
-    // .refine((val) => val.trim().length > 0, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
     .max(20, locale === "ar" ? "رقم الهاتف طويل جداً" : "Phone number is too long")
     .refine((val) => val === "" || val.length >= 10, locale === "ar" ? "رقم الهاتف غير صالح" : "Phone number is too short"),
   additionalDetails: z
