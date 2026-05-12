@@ -216,7 +216,7 @@ export default function CareerEnquiryForm() {
 
       form.reset();
       setUploadedFile(null);
-      setSuccess(locale === "ar" ? "تم إرسال الرسالة بنجاح!" : "Message sent successfully!");
+      setSuccess(locale === "ar" ? "تم تقديم الطلب بنجاح!" : "Application submitted successfully!");
     } catch (error) {
       console.error(error);
       setSuccess(locale === "ar" ? "حدث خطأ ما. يرجى المحاولة مرة أخرى." : "Something went wrong. Please try again.");
