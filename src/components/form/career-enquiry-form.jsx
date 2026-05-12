@@ -239,6 +239,36 @@ export default function CareerEnquiryForm() {
     form.setValue("attachment", null);
   };
 
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+
+    const file = e.dataTransfer.files?.[0];
+    if (file && (file.type === "application/pdf" || file.type === "application/msword" || file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+      if (file.size <= 5 * 1024 * 1024) {
+        setUploadedFile(file);
+        form.setValue("attachment", file, { shouldValidate: true });
+      } else {
+        form.setError("attachment", { type: "manual", message: locale === "ar" ? "يجب أن يكون حجم الملف أقل من 5 ميجابايت" : "File size must be less than 5MB" });
+      }
+    }
+  };
+
   return (
     <Form {...form}>
       <form
@@ -303,13 +333,19 @@ export default function CareerEnquiryForm() {
             <FormItem className="w-full sm:w-[calc(100%-200px)]">
               <FormLabel className={"sr-only"}>Resume/CV</FormLabel>
               <FormControl>
-                <div className="max-w-full space-y-2">
+                <div 
+                  className="max-w-full space-y-2"
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
+                >
                   {!uploadedFile ? (
                     <label
                       htmlFor="file-upload"
                       className={cn(
                         inputStyle,
-                        "flex items-center justify-between gap-x-1",
+                        "flex items-center justify-between gap-x-1 transition-colors duration-300",
+                        isDragging && "border-b-[#966900] bg-[#CDA278]/10"
                       )}
                     >
                       <span className={cn(labelStyle, "text-[#1e1e1e] m-0")}>
