@@ -72,7 +72,7 @@ const nextConfig = {
           },
           {
             key: "X-Frame-Options",
-            value: "SAMEORIGIN",
+            value: "ALLOWALL", // Required for Strapi preview
           },
           {
             key: "Referrer-Policy",
