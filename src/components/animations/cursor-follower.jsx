@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { motion, useMotionValue } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "react-responsive";
@@ -22,22 +22,32 @@ export default function CursorFollower() {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 2, stiffness: 3000, mass: 0.02 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
+  const cursorXSpring = cursorX;
+  const cursorYSpring = cursorY;
+
+  useEffect(() => {
+    document.body.style.cursor = isHovering ? "" : "none";
+    return () => { document.body.style.cursor = ""; };
+  }, [isHovering]);
+
   useEffect(() => {
     if (isMobile) return;
 
-    const moveCursor = (e) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
+    let rafId = null;
 
-      // Simple left/right detection based on screen width
-      if (e.clientX < window.innerWidth / 2) {
-        setDirection("left");
-      } else {
-        setDirection("right");
-      }
+    const moveCursor = (e) => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        cursorX.set(e.clientX);
+        cursorY.set(e.clientY);
+
+        if (e.clientX < window.innerWidth / 2) {
+          setDirection("left");
+        } else {
+          setDirection("right");
+        }
+        rafId = null;
+      });
     };
 
     const handleMouseEnter = (e) => {
@@ -57,7 +67,6 @@ export default function CursorFollower() {
           setIsHovering(true);
         }
 
-        // Check for carousel hover - detect embla container or specific data attribute
         if (
           target.closest(".embla__container") ||
           target.closest(".embla__viewport") ||
@@ -102,14 +111,15 @@ export default function CursorFollower() {
     document.addEventListener("mouseout", handleMouseLeave, true);
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener("mousemove", moveCursor);
       document.removeEventListener("mouseover", handleMouseEnter, true);
       document.removeEventListener("mouseout", handleMouseLeave, true);
-      // Removed the checkMobile line that was causing the error
     };
   }, [cursorX, cursorY, isMobile]);
 
   if (isMobile) return null;
+  if (isHovering && !isCarousel) return null;
 
   return (
     <>

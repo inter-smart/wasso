@@ -37,7 +37,7 @@ export default function HomeHero({ data, locale }) {
       duration: 30,
       dragFree: false,
     },
-    [Autoplay({ delay: 6000, stopOnInteraction: false, pauseOnHover: false })],
+    [Autoplay({ delay: 6000, stopOnInteraction: false, pauseOnHover: true })],
   );
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =

@@ -153,7 +153,8 @@ export default function WebglDisplacementCarousel({
       <Canvas
         camera={{ position: [0, 0, 1], fov: 50 }}
         style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        gl={{ preserveDrawingBuffer: true }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: false, stencil: false, depth: false }}
       >
         <React.Suspense fallback={null}>
           <CarouselScene

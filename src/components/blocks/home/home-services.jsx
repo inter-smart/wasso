@@ -31,7 +31,7 @@ export default function HomeServices({ data, locale }) {
       Autoplay({
         delay: 5000,
         stopOnInteraction: true,
-        stopOnMouseEnter: true,
+        pauseOnHover: true,
       }),
     ],
   );
@@ -104,7 +104,7 @@ export default function HomeServices({ data, locale }) {
           ref={emblaRef}
           className="w-full max-w-full overflow-hidden"
           data-cursor="carousel"
-          onMouseLeave={() => emblaApi?.plugins()?.autoplay?.play()}
+
         >
           <div className="flex touch-pan-y touch-pinch-zoom -mx-1.5 lg:-mx-0 [&>*]:p-1.5 lg:[&>*]:p-0">
             {data?.items?.map((item, index) => (

@@ -104,8 +104,8 @@ export default function ProjectsMore({ data, locale }) {
               "w-full h-[calc(100vh-60px)] h-auto flex items-center",
               "sm:max-w-[calc(var(--container-sm)/2+50%)] md:max-w-[calc(var(--container-md)/2+50%)] lg:max-w-[calc(var(--container-lg)/2+50%)] xl:max-w-[calc(var(--container-xl)/2+50%)] 2xl:max-w-[calc(var(--container-2xl)/2+50%)] 3xl:max-w-[calc(var(--container-3xl)/2+50%)]",
               locale === "ar"
-                ? "pr-4 mr-auto [mask-image:linear-gradient(to_left,black_0%,black_99%,transparent_100%)]"
-                : "pl-4 ml-auto [mask-image:linear-gradient(to_right,black_0%,black_99%,transparent_100%)]",
+                ? "pr-4 pl-4 mr-auto [mask-image:linear-gradient(to_left,black_0%,black_99%,transparent_100%)]"
+                : "pl-4 pr-4 ml-auto [mask-image:linear-gradient(to_right,black_0%,black_99%,transparent_100%)]",
             )}
           >
             <motion.div
@@ -113,7 +113,8 @@ export default function ProjectsMore({ data, locale }) {
                 x: locale === "ar" ? useTransform(x, (value) => -value) : x,
               }}
               className={cn(
-                "flex gap-0 -mx-2 lg:-mx-4 2xl:-mx-6",
+                "flex gap-0",
+                "-mx-2 lg:-mx-4 2xl:-mx-6",
                 locale === "ar" ? "pl-4 " : "pr-4 ",
               )}
             >
@@ -121,7 +122,7 @@ export default function ProjectsMore({ data, locale }) {
                 <div
                   key={item.id || i}
                   data-project-item
-                  className="relative h-hull w-[40vw] sm:w-[34vw] lg:w-[30vw] shrink-0 p-2 lg:p-4 2xl:p-6 flex flex-col justify-center"
+                  className="relative h-hull w-[35vw] sm:w-[24vw] lg:w-[24vw] shrink-0 p-2 lg:p-4 2xl:p-6 flex flex-col justify-center"
                 >
                   <ProjectsCard locale={locale} data={item} />
                 </div>

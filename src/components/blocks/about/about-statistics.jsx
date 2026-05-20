@@ -70,7 +70,7 @@ export default function AboutStatistics({ data, locale }) {
                         ? "md:translate-y-full"
                         : "md:-translate-y-full",
                       activeIndex === index && " md:translate-y-0",
-                      index === 2 && "md:translate-y-0",
+                      // index === 2 && "md:translate-y-0",
                     )}
                   />
                   <div
@@ -79,8 +79,8 @@ export default function AboutStatistics({ data, locale }) {
                       index % 2 === 0
                         ? "md:bottom-1 lg:bottom-2 xl:bottom-2.5 2xl:bottom-3 3xl:bottom-3.5"
                         : "md:top-1 lg:top-2 xl:top-2.5 2xl:top-3 3xl:top-3.5",
-                      index === 2 &&
-                      "bottom-1 lg:bottom-2 xl:bottom-2.5 2xl:bottom-3 3xl:bottom-3.5",
+                      // index === 2 &&
+                      // "bottom-1 lg:bottom-2 xl:bottom-2.5 2xl:bottom-3 3xl:bottom-3.5",
                     )}
                   >
                     <ScrollReveal
@@ -88,7 +88,7 @@ export default function AboutStatistics({ data, locale }) {
                       className={cn(
                         "w-full p-4 lg:p-5 xl:p-6 2xl:p-8 3xl:p-10 relative z-0 overflow-hidden transition duration-300",
                         activeIndex === index ? "bg-[#fff]/90" : "bg-none",
-                        index === 2 && "bg-[#fff]/90",
+                        // index === 2 && "bg-[#fff]/90",
                       )}
                     >
                       <Image
@@ -101,7 +101,7 @@ export default function AboutStatistics({ data, locale }) {
                           activeIndex === index
                             ? "md:opacity-100"
                             : "opacity-0",
-                          index === 2 && "md:opacity-100",
+                          // index === 2 && "md:opacity-100",
                         )}
                       />
 

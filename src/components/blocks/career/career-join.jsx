@@ -17,7 +17,7 @@ export default function CareerJoin({ data, locale }) {
       Autoplay({
         delay: 5000,
         stopOnInteraction: true,
-        stopOnMouseEnter: true,
+        pauseOnHover: true,
       }),
     ],
   );

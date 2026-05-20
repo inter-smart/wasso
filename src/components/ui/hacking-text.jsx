@@ -7,7 +7,7 @@ export default function HackingText({
     text,
     className,
     as: Component = "span",
-    speed = 5, // Ultra fast update speed
+    speed = 50,
 }) {
     const [displayText, setDisplayText] = useState(text || "");
     const [isScrambling, setIsScrambling] = useState(false);

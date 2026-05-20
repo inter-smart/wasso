@@ -31,7 +31,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     <Heading
                       as="div"
                       size="h7"
-                      className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
+                      className="font-medium text-[#c09c86] mb-2 xl:mb-3 2xl:mb-4"
                     >
                       {locale === "ar" ? "روابط سريعة" : "QUICK LINKS"}
                     </Heading>
@@ -89,7 +89,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     <Heading
                       as="div"
                       size="h7"
-                      className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
+                      className="font-medium text-[#c09c86] mb-1.5 xl:mb-3 2xl:mb-4"
                     >
                       {locale === "ar" ? "خدمات" : "SERVICES"}
                     </Heading>
@@ -98,7 +98,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         <Heading
                           as="div"
                           size="h6"
-                          className="font-normal text-[#1e1e1e] transition [&>a]:hover:text-[#cda278] mb-1 xl:mb-1.5"
+                          className="leading-tight font-normal text-[#1e1e1e] transition [&>a]:hover:text-[#cda278] mb-1 xl:mb-1.5"
                         >
                           <Link href={`/${locale}${item?.link}`}>
                             {locale == "ar" ? item?.label_ar : item?.label}
@@ -122,7 +122,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         <Heading
                           as="div"
                           size="h6"
-                          className="text-[#1e1e1e] transition [&>a]:hover:text-[#cda278] mb-2"
+                          className="leading-tight text-[#1e1e1e] transition [&>a]:hover:text-[#cda278] mb-2"
                         >
                           <Link href={`/${locale}${item?.link}`}>
                             {locale == "ar" ? item?.label_ar : item?.label}
@@ -155,7 +155,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                               alt={item?.media?.media_alt || "Social Media"}
                               width={12}
                               height={12}
-                              className="w-2.5 xl:w-3 2xl:w-5 aspect-square block hover:scale-110 transition"
+                              className="w-3 xl:w-4 2xl:w-5 aspect-square block hover:scale-110 transition"
                             />
                           </a>
                         </Button>
@@ -212,7 +212,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     <Heading
                       as="div"
                       size="h7"
-                      className="font-medium text-[#c09c86] mb-1 xl:mb-2.5 2xl:mb-4"
+                      className="font-medium text-[#c09c86] mb-2 xl:mb-3 2xl:mb-4"
                     >
                       {locale === "ar" ? "اتصل بنا" : "CONTACT US"}
                     </Heading>
@@ -364,7 +364,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                 alt="footer-author"
                 width={100}
                 height={20}
-                className="w-[70px] sm:w-[50px] xl:w-[70px] 2xl:w-[85px] inline ml-1"
+                className="w-[80px] sm:w-[70px] xl:w-[80px] 2xl:w-[85px] inline ml-1"
               />
             </a>
           </Text>

@@ -103,7 +103,7 @@ export default function HomePartners({ data, locale }) {
 
         return newIndices;
       });
-    }, 3000); // Rotate every 3 seconds
+    }, 6000);
 
     return () => clearInterval(interval);
   }, [allItems.length]);
