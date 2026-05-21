@@ -111,7 +111,7 @@ export default function HomeServices({ data, locale }) {
               <div
                 key={"product" + index}
                 className={cn(
-                  "flex-[0_0_220px] sm:flex-[0_0_33.333%] lg:flex-[0_0_25%] min-w-0 select-none",
+                  "flex-[0_0_220px] sm:flex-[0_0_33.333%] lg:flex-[0_0_33.333%] min-w-0 select-none",
                 )}
               >
                 <ServiceCard data={item} index={index} locale={locale} />
