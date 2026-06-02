@@ -29,7 +29,13 @@ const getFormSchema = (locale) => z.object({
     .string()
     .refine((val) => val.trim().length > 0, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
     .max(50, locale === "ar" ? "لا يمكن أن يتجاوز الاسم الكامل 50 حرفًا" : "Full name cannot exceed 50 characters")
-    .refine((val) => val === "" || val.length >= 2, locale === "ar" ? "يجب أن يتكون الاسم الكامل من حرفين على الأقل" : "Full name must be at least 2 characters"),
+    .refine((val) => val === "" || val.length >= 2, locale === "ar" ? "يجب أن يتكون الاسم الكامل من حرفين على الأقل" : "Full name must be at least 2 characters")
+    .refine((val) => val === "" || !/\d/.test(val), locale === "ar" ? "لا يمكن أن يحتوي الاسم الكامل على أرقام" : "Full name cannot contain numbers")
+    .refine(
+      (val) => val === "" || (!/(<script|<iframe|<img|javascript:)/i.test(val) && !/(DROP\s+TABLE|SELECT\s+.*FROM|INSERT\s+INTO|DELETE\s+FROM)/i.test(val) && !/{{.*}}/.test(val)),
+      locale === "ar" ? "محتوى غير صالح" : "Invalid content detected"
+    )
+    .refine((val) => val === "" || !/[^\p{L}\p{M}\s\d\-']/u.test(val), locale === "ar" ? "لا يمكن أن يحتوي الاسم الكامل على رموز خاصة" : "Full name cannot contain special characters"),
   email: z
     .string()
     .refine((val) => val.trim().length > 0, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
@@ -37,7 +43,7 @@ const getFormSchema = (locale) => z.object({
   phone: z
     .string()
     .refine((val) => val.trim().length > 0, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
-    .refine((val) => val === "" || val.length >= 8, locale === "ar" ? "رقم الهاتف غير صالح" : "Phone number is too short"),
+    .refine((val) => val === "" || val.length >= 5, locale === "ar" ? "رقم الهاتف غير صالح" : "Phone number is too short"),
   attachment: z
     .any()
     .refine(
@@ -333,7 +339,7 @@ export default function CareerEnquiryForm() {
             <FormItem className="w-full sm:w-[calc(100%-200px)]">
               <FormLabel className={"sr-only"}>Resume/CV</FormLabel>
               <FormControl>
-                <div 
+                <div
                   className="max-w-full space-y-2"
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
