@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { z } from "zod";
 import { useParams } from "next/navigation";
 
@@ -88,6 +88,14 @@ export default function ServiceForm() {
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
+
+  // Clear success message after a short delay
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => setSuccess(null), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
 
   const onSubmit = async (values) => {
     setLoading(true);

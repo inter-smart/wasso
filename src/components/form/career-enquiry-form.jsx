@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { z } from "zod";
 
@@ -35,7 +35,7 @@ const getFormSchema = (locale) => z.object({
       (val) => val === "" || (!/(<script|<iframe|<img|javascript:)/i.test(val) && !/(DROP\s+TABLE|SELECT\s+.*FROM|INSERT\s+INTO|DELETE\s+FROM)/i.test(val) && !/{{.*}}/.test(val)),
       locale === "ar" ? "محتوى غير صالح" : "Invalid content detected"
     )
-    .refine((val) => val === "" || !/[^\p{L}\p{M}\s\d\-']/u.test(val), locale === "ar" ? "لا يمكن أن يحتوي الاسم الكامل على رموز خاصة" : "Full name cannot contain special characters"),
+    .refine((val) => val === "" || !/[^\p{L}\p{M}\s\-']/u.test(val), locale === "ar" ? "لا يمكن أن يحتوي الاسم الكامل على رموز خاصة" : "Full name cannot contain special characters"),
   email: z
     .string()
     .refine((val) => val.trim().length > 0, locale === "ar" ? "هذا الحقل مطلوب" : "This Field is required")
@@ -95,6 +95,14 @@ export default function CareerEnquiryForm() {
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
+
+  // Clear success message after a short delay
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => setSuccess(""), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
 
   // File upload
   const [uploadedFile, setUploadedFile] = useState(null);
