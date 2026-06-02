@@ -237,8 +237,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         alt="Telephone"
                         width={20}
                         height={20}
-                        className="w-full h-full block"
-                        style={{ height: "auto" }}
+                        className="w-full h-auto block"
                       />
                     </div>
                     <Heading
@@ -266,8 +265,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         alt="Email"
                         width={20}
                         height={20}
-                        className="w-full h-full block"
-                        style={{ height: "auto" }}
+                        className="w-full h-auto block"
                       />
                     </div>
                     <div className="flex-1">
@@ -302,8 +300,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         alt="Map Locator"
                         width={20}
                         height={20}
-                        className="w-3 xl:w-5 block"
-                        style={{ height: "auto" }}
+                        className="w-3 xl:w-5 h-auto block"
                       />
                       {locale === "ar" ? "تحديد الموقع على الخريطة" : "Locate on Map"}
                     </a>

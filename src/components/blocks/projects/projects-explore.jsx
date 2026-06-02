@@ -34,20 +34,22 @@ export default function ProjectsExplore({ data, locale }) {
           >
             {parse(locale == "ar" ? data?.title_ar || "" : data?.title || "")}
           </Heading>
-          <div className="flex justify-center">
-            <Button
-              size="lg"
-              variant={"outline"}
-              className="text-center min-w-[100px] xl:min-w-[105px] 2xl:min-w-[130px] transition-all duration-300 bg-[#fffbf2] hover:scale-105"
-              asChild
-            >
-              <Link href={data?.slug}>
-                {locale == "ar"
-                  ? "عرض المزيد من المشاريع"
-                  : "View More Projects"}
-              </Link>
-            </Button>
-          </div>
+          {data?.slug && (
+            <div className="flex justify-center">
+              <Button
+                size="lg"
+                variant={"outline"}
+                className="text-center min-w-[100px] xl:min-w-[105px] 2xl:min-w-[130px] transition-all duration-300 bg-[#fffbf2] hover:scale-105"
+                asChild
+              >
+                <Link href={data?.slug}>
+                  {locale == "ar"
+                    ? "عرض المزيد من المشاريع"
+                    : "View More Projects"}
+                </Link>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </section>
