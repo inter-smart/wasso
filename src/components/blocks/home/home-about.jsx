@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import parse from "html-react-parser";
+import RichTextRenderer from "@/components/utils/rich-text-renderer";
 import { Heading, Text } from "@/components/utils/typography";
 
 import {
@@ -75,13 +76,13 @@ export default function HomeAbout({ data, locale }) {
                   size="p1"
                   className="line-clamp-10 text-black mb-4 xl:mb-8 2xl:mb-10"
                 >
-                  {parse(
-                    convertRichTextToHtml(
+                  <RichTextRenderer
+                    html={convertRichTextToHtml(
                       locale == "ar"
                         ? data?.description_ar || ""
                         : data?.description || "",
-                    ),
-                  )}
+                    )}
+                  />
                 </Text>
               </ScrollReveal>
               <ScrollReveal delay={0.4}>

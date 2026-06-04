@@ -59,11 +59,11 @@ export default function AboutStatistics({ data, locale }) {
                   onMouseLeave={() => setActiveIndex(null)}
                 >
                   <Image
-                    src={data?.statisticsImage?.media_path || "/images/about-statics-bg.jpg"}
+                    src={data?.statisticsImage?.media_path || "/images/placeholder.jpg"}
                     alt={locale === "ar" ? item?.label_ar : item?.label}
                     width={387}
                     height={755}
-                    unoptimized
+                    sizes="(max-width: 768px) 50vw, 25vw"
                     className={cn(
                       "w-full h-full object-cover transition-transform duration-300 absolute -z-1 inset-0 translate-y-full",
                       index % 2 === 0

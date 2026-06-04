@@ -98,6 +98,7 @@ function SlideMedia({ item, priority }) {
         src={item?.media_desktop_path}
         alt={item?.media_alt || "Hero Image"}
         fill
+        sizes="100vw"
         className="object-cover"
         priority={priority}
       />

@@ -30,7 +30,7 @@ export default function ServiceApproach({ data, locale }) {
               <div
                 key={item.id}
                 className={
-                  "flex-[0_0_100%] 3xs:flex-[0_0_50%] xs:flex-[0_0_33.333%] lg:flex-[0_0_25%] xl:flex-[0_0_20%] min-w-0 select-none"
+                  "flex-[0_0_80%] 3xs:flex-[0_0_60%] xs:flex-[0_0_33.333%] lg:flex-[0_0_25%] xl:flex-[0_0_20%] min-w-0 select-none"
                 }
               >
                 <ServiceApproachCard

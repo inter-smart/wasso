@@ -338,6 +338,7 @@ export default function CareerEnquiryForm() {
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                   onDrop={handleDrop}
+                  data-cursor="default"
                 >
                   {!uploadedFile ? (
                     <label

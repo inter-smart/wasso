@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import parse from "html-react-parser";
+import RichTextRenderer from "@/components/utils/rich-text-renderer";
 import { Heading, Text } from "@/components/utils/typography";
 
 import {
@@ -88,13 +89,13 @@ export default function AboutInfo({ data, locale }) {
                     "typography [&_h3]:font-medium [--text-color:#1e1e1e] [&_li]:font-normal [&_li]:my-2 lg:[&_li]:my-2.5 xl:[&_li]:my-3 2xl:[&_li]:my-3.5 3xl:[&_li]:my-4 marker:text-[#EFD8AF]",
                   )}
                 >
-                  {parse(
-                    convertRichTextToHtml(
+                  <RichTextRenderer
+                    html={convertRichTextToHtml(
                       locale == "ar"
                         ? data?.description_ar || ""
                         : data?.description || "",
-                    ),
-                  )}
+                    )}
+                  />
                 </div>
                 {/* </Text> */}
               </ScrollReveal>

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import parse from "html-react-parser";
+import RichTextRenderer from "@/components/utils/rich-text-renderer";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
@@ -221,11 +222,11 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                       size="h6"
                       className="max-3xs:text-[13px] font-normal text-[#1e1e1e] transition [&>a]:hover:text-[#cda278] mb-2 lg:mb-4 xl:mb-6 "
                     >
-                      {parse(convertRichTextToHtml(
+                      <RichTextRenderer html={convertRichTextToHtml(
                         locale == "ar"
                           ? footerData?.address_ar || []
                           : footerData?.address || [],
-                      ))}
+                      )} />
                     </Heading>
                   </div>
                 )}

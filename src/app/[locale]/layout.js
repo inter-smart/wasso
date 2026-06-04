@@ -126,8 +126,9 @@ export default async function RootLayout({ children, params }) {
       suppressHydrationWarning
     >
       <head>
-        {/* DNS prefetch for external resources */}
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        {/* Preconnect to image origins */}
+        <link rel="preconnect" href={STRAPI_URL ? new URL(STRAPI_URL).origin : undefined} />
+        <link rel="preconnect" href="https://images.unsplash.com" />
       </head>
       <body className={cn("antialiased", fontClassName, fontVariable)}>
         <SmoothScrolling>

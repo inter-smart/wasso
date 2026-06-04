@@ -41,7 +41,7 @@ export default function ProjectsExplore({ data, locale }) {
               className="text-center min-w-[100px] xl:min-w-[105px] 2xl:min-w-[130px] transition-all duration-300 bg-[#fffbf2] hover:scale-105"
               asChild
             >
-              <Link href={data?.slug}>
+              <Link href={data?.slug || "#"}>
                 {locale == "ar"
                   ? "عرض المزيد من المشاريع"
                   : "View More Projects"}

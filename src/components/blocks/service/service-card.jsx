@@ -18,6 +18,7 @@ export default function ServiceCard({ data, index, locale }) {
           src="/images/service-card-bg.png"
           alt={data?.title}
           fill
+          sizes="(max-width: 640px) 100vw, 50vw"
           className="object-cover pointer-events-none"
         />
       </div>

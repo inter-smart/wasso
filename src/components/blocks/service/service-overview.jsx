@@ -3,6 +3,7 @@ import parse from "html-react-parser";
 import { Heading, Text } from "@/components/utils/typography";
 import Image from "next/image";
 import { convertRichTextToHtml } from "@/lib/sanitizer";
+import RichTextRenderer from "@/components/utils/rich-text-renderer";
 
 export default function ServiceOverview({
   data = {},
@@ -55,7 +56,7 @@ export default function ServiceOverview({
               className="font-light text-black :max-w-[100%] 3xl:max-w-[80%]"
             >
               {description &&
-                parse(convertRichTextToHtml(isArabic ? data?.description_ar || "" : data?.description || ""))}
+                <RichTextRenderer html={convertRichTextToHtml(isArabic ? data?.description_ar || "" : data?.description || "")} />}
             </Text>
           </div>
         </div>

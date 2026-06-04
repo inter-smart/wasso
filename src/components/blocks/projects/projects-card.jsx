@@ -29,7 +29,7 @@ export default function ProjectsCard({ locale, data }) {
           className="min-w-[100px] xl:min-w-[105px] 2xl:min-w-[130px] transition-all duration-300 bg-[#fffbf2] hover:scale-105 hover:shadow-lg"
           asChild
         >
-          <Link href={data?.slug}>
+          <Link href={data?.slug} data-cursor="default">
             {locale == "ar" ? "عرض المشروع" : "View Project"}
           </Link>
         </Button>

@@ -4,6 +4,7 @@ import { Heading, Text } from "@/components/utils/typography";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { convertRichTextToHtml } from "@/lib/sanitizer";
+import RichTextRenderer from "@/components/utils/rich-text-renderer";
 
 export default function ServiceBenefits({ data, locale = "en" }) {
   return (
@@ -36,7 +37,7 @@ export default function ServiceBenefits({ data, locale = "en" }) {
               {typeof (locale === "ar" ? data?.description_ar : data?.description) === "string"
                 ? parse(locale === "ar" ? data?.description_ar : data?.description)
                 : Array.isArray(locale === "ar" ? data?.description_ar : data?.description)
-                  ? parse(convertRichTextToHtml(locale === "ar" ? data?.description_ar : data?.description))
+                  ? <RichTextRenderer html={convertRichTextToHtml(locale === "ar" ? data?.description_ar : data?.description)} />
                   : "-"}
             </div>
           </div>

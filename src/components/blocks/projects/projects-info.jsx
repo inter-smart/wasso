@@ -2,6 +2,7 @@
 
 import { Heading, Text } from "@/components/utils/typography";
 import parse from "html-react-parser";
+import RichTextRenderer from "@/components/utils/rich-text-renderer";
 
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
@@ -138,7 +139,7 @@ export default function ProjectsInfo({ data, locale }) {
                     {typeof (locale === "ar" ? currentSlide?.description_ar : currentSlide?.description) === "string"
                       ? parse((locale === "ar" ? currentSlide?.description_ar : currentSlide?.description) || "")
                       : Array.isArray(locale === "ar" ? currentSlide?.description_ar : currentSlide?.description)
-                        ? parse(convertRichTextToHtml(locale === "ar" ? currentSlide?.description_ar : currentSlide?.description))
+                        ? <RichTextRenderer html={convertRichTextToHtml(locale === "ar" ? currentSlide?.description_ar : currentSlide?.description)} />
                         : ""}
                   </Text>
                 </div>
