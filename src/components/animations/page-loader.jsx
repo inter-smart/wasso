@@ -63,7 +63,6 @@ export default function PageLoader() {
               muted
               playsInline
               preload="auto"
-              fetchPriority="high"
               onPlaying={() => setIsVideoReady(true)}
               className="max-w-[320px] object-contain"
             ></video>

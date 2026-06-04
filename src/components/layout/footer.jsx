@@ -172,7 +172,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
               <Link
                 href={`/${locale}/${footerData?.slug}`}
                 aria-label={locale === "ar" ? footerData?.name_ar : footerData?.name || "Logo"}
-                className="w-[120px] xl:w-[160px] 2xl:w-[200px] block"
+                className="w-[120px] xl:w-[160px] 2xl:w-[200px] block m-auto xl:m-0"
               >
                 <Image
                   src={footerData?.logoUrl || "/images/placeholder.webp"}
@@ -206,7 +206,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                   </Link>
                 </div>
               </MediaQuery>
-              <div className="w-full sm:w-8/12 lg:w-full">
+              <div className="w-full sm:w-8/12 lg:w-full flex flex-wrap justify-between gap-5 flex-col 3xs:flex-row lg:flex-col">
                 {footerData?.address && (
                   <div>
                     <Heading
@@ -229,117 +229,120 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     </Heading>
                   </div>
                 )}
-                {footerData?.phone && (
-                  <div className="flex items-center gap-3 mb-1.5 xl:mb-2.5">
-                    <div className="w-3 xl:w-5">
-                      <Image
-                        src={"/images/footer-telephone.svg"}
-                        alt="Telephone"
-                        width={20}
-                        height={20}
-                        className="w-full h-full block"
-                        style={{ height: "auto" }}
-                      />
-                    </div>
-                    <Heading
-                      as="div"
-                      size="h6"
-                      className="font-normal text-[#1e1e1e] flex-1 transition [&>a]:hover:text-[#cda278]"
-                    >
-                      {footerData?.phone.map((phone, index) => (
-                        <a
-                          key={"phone" + index}
-                          href={`tel:${phone}`}
-                          dir="ltr"
-                        >
-                          {phone}{" "}
-                        </a>
-                      ))}
-                    </Heading>
-                  </div>
-                )}
-                {footerData?.email && (
-                  <div className="flex flex-wrap items-center gap-3 mb-2.5 xl:mb-3.5">
-                    <div className="w-3 xl:w-5">
-                      <Image
-                        src={"/images/footer-mail.svg"}
-                        alt="Email"
-                        width={20}
-                        height={20}
-                        className="w-full h-full block"
-                        style={{ height: "auto" }}
-                      />
-                    </div>
-                    <div className="flex-1">
+
+                <div>
+                  {footerData?.phone && (
+                    <div className="flex items-center gap-3 mb-1.5 xl:mb-2.5">
+                      <div className="w-3 xl:w-5">
+                        <Image
+                          src={"/images/footer-telephone.svg"}
+                          alt="Telephone"
+                          width={20}
+                          height={20}
+                          className="w-full h-full block"
+                          style={{ height: "auto" }}
+                        />
+                      </div>
                       <Heading
                         as="div"
                         size="h6"
-                        className="font-normal text-[#1e1e1e] transition [&>a]:hover:text-[#cda278]"
+                        className="font-normal text-[#1e1e1e] flex-1 transition [&>a]:hover:text-[#cda278]"
                       >
-                        {footerData?.email.map((email, index) => (
+                        {footerData?.phone.map((phone, index) => (
                           <a
-                            key={"email" + index}
-                            href={`mailto:${email}`}
+                            key={"phone" + index}
+                            href={`tel:${phone.replace(/\s/g, '')}`}
                             dir="ltr"
                           >
-                            {email}{" "}
+                            {phone}{" "}
                           </a>
                         ))}
                       </Heading>
                     </div>
-                  </div>
-                )}
-                {footerData?.location_map_link && (
-                  <Button
-                    size="lg"
-                    variant={"outline"}
-                    className="text-[#cda278] min-w-[100px] xl:min-w-[100px] 2xl:min-w-[130px]"
-                    asChild
-                  >
-                    <a href={footerData?.location_map_link} target="_blank">
-                      <Image
-                        src={"/images/footer-map.svg"}
-                        alt="Map Locator"
-                        width={20}
-                        height={20}
-                        className="w-3 xl:w-5 block"
-                        style={{ height: "auto" }}
-                      />
-                      {locale === "ar" ? "تحديد الموقع على الخريطة" : "Locate on Map"}
-                    </a>
-                  </Button>
-                )}
-
-                <MediaQuery maxWidth={1023}>
-                  {socialLinkData && (
-                    <div className="mt-3">
-                      <Heading
-                        as="div"
-                        size="h7"
-                        className="font-medium text-[#c09c86] mb-1"
-                      >
-                        {locale === "ar" ? "تابعنا" : "FOLLOW US"}
-                      </Heading>
-                      <div className="flex flex-wrap items-center gap-x-4">
-                        {socialLinkData?.map((item, index) => (
-                          <div key={"social_link" + index}>
-                            <Button variant="link" size="none" asChild>
-                              <a href={item?.link} target="_blank" aria-label={item?.media?.media_alt || "Social Media Link"}>
-                                <Image
-                                  src={item?.media?.media_path || "/images/placeholder.webp"}
-                                  alt={item?.media?.media_alt || "Social Media"}
-                                  width={12}
-                                  height={12}
-                                  className="w-4 aspect-square block hover:scale-110 transition"
-                                />
-                              </a>
-                            </Button>
-                          </div>
-                        ))}
+                  )}
+                  {footerData?.email && (
+                    <div className="flex flex-wrap items-center gap-3 mb-2.5 xl:mb-3.5">
+                      <div className="w-3 xl:w-5">
+                        <Image
+                          src={"/images/footer-mail.svg"}
+                          alt="Email"
+                          width={20}
+                          height={20}
+                          className="w-full h-full block"
+                          style={{ height: "auto" }}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <Heading
+                          as="div"
+                          size="h6"
+                          className="font-normal text-[#1e1e1e] transition [&>a]:hover:text-[#cda278]"
+                        >
+                          {footerData?.email.map((email, index) => (
+                            <a
+                              key={"email" + index}
+                              href={`mailto:${email}`}
+                              dir="ltr"
+                            >
+                              {email}{" "}
+                            </a>
+                          ))}
+                        </Heading>
                       </div>
                     </div>
                   )}
-                </MediaQuery>
+                  {footerData?.location_map_link && (
+                    <Button
+                      size="lg"
+                      variant={"outline"}
+                      className="text-[#cda278] min-w-[100px] xl:min-w-[100px] 2xl:min-w-[130px]"
+                      asChild
+                    >
+                      <a href={footerData?.location_map_link} target="_blank">
+                        <Image
+                          src={"/images/footer-map.svg"}
+                          alt="Map Locator"
+                          width={20}
+                          height={20}
+                          className="w-3 xl:w-5 block"
+                          style={{ height: "auto" }}
+                        />
+                        {locale === "ar" ? "تحديد الموقع على الخريطة" : "Locate on Map"}
+                      </a>
+                    </Button>
+                  )}
+
+                  <MediaQuery maxWidth={1023}>
+                    {socialLinkData && (
+                      <div className="mt-3">
+                        <Heading
+                          as="div"
+                          size="h7"
+                          className="font-medium text-[#c09c86] mb-1"
+                        >
+                          {locale === "ar" ? "تابعنا" : "FOLLOW US"}
+                        </Heading>
+                        <div className="flex flex-wrap items-center gap-x-4">
+                          {socialLinkData?.map((item, index) => (
+                            <div key={"social_link" + index}>
+                              <Button variant="link" size="none" asChild>
+                                <a href={item?.link} target="_blank" aria-label={item?.media?.media_alt || "Social Media Link"}>
+                                  <Image
+                                    src={item?.media?.media_path || "/images/placeholder.webp"}
+                                    alt={item?.media?.media_alt || "Social Media"}
+                                    width={12}
+                                    height={12}
+                                    className="w-4 aspect-square block hover:scale-110 transition"
+                                  />
+                                </a>
+                              </Button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </MediaQuery>
+                </div>
               </div>
             </div>
           </div>

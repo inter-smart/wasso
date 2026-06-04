@@ -9,8 +9,8 @@ export default function ServiceBenefits({ data, locale = "en" }) {
   return (
     <section className="w-full h-auto block pt-[30px] sm:pt-[40px] xl:pt-[90px] 2xl:pt-[100px] 3xl:pt-[120px] pb-[20px] sm:pb-[20px] xl:pb-[35px] 2xl:pb-[40px] bg-white relative z-0">
       <div className="container">
-        <div className="lg:gap-10 bg-[#FFFBF2] flex flex-col-reverse md:flex-row  sm:items-center relative">
-          <div className="w-[100%] lg:w-[50%] bg-[url('/images/benefit-bg.png')] bg-no-repeat bg-cover absolute inset-0 lg:left-auto z-0"></div>
+        <div className="lg:gap-10 bg-[#FFFBF2] flex flex-col-reverse md:flex-row sm:items-center relative">
+          <div className="w-[100%] lg:w-6/12 2xl:w-[43%] bg-[url('/images/benefit-bg.png')] bg-no-repeat bg-cover pointer-events-none opacity-10 absolute inset-0 ltr:lg:left-auto rtl:lg:right-auto z-0" />
 
           <div className="w-full lg:w-6/12 2xl:w-[57%] overflow-hidden">
             <Image
@@ -21,7 +21,7 @@ export default function ServiceBenefits({ data, locale = "en" }) {
               className="h-full w-full object-fill hover:scale-105 transition-all duration-300 ease-in-out"
             />
           </div>
-          <div className="w-full lg:w-6/12 2xl:w-[43%] pt-[20px] lg:pt-0 pb-2 pl-[20px] md:pl-[30px] xl:pl-[50px] 2xl:pl-[60px] 3xl:pl-[80px] flex flex-wrap items-center relative">
+          <div className="w-full lg:w-6/12 2xl:w-[43%] pt-[20px] lg:pt-0 pb-2 px-5 ltr:pl-[20px] ltr:md:pl-[30px] ltr:xl:pl-[50px] ltr:2xl:pl-[60px] ltr:3xl:pl-[80px] rtl:pr-[20px] rtl:md:pr-[30px] rtl:xl:pr-[50px] rtl:2xl:pr-[60px] rtl:3xl:pr-[80px] flex flex-wrap items-center relative">
             <Heading
               as="h3"
               size="h3"
@@ -31,7 +31,7 @@ export default function ServiceBenefits({ data, locale = "en" }) {
             </Heading>
             <div
               dir={locale === "ar" ? "rtl" : "ltr"}
-              className={cn("typography", "[--text-color:#282828]")}
+              className={cn("typography", "[--text-color:#282828] -mt-[15px]")}
             >
               {typeof (locale === "ar" ? data?.description_ar : data?.description) === "string"
                 ? parse(locale === "ar" ? data?.description_ar : data?.description)

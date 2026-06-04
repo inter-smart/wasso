@@ -62,6 +62,8 @@ export default function FloatNavigation({ data = [], locale }) {
             rel="noopener noreferrer"
             className={cn(
               "w-1/3 sm:w-8 xl:w-9 2xl:w-11 3xl:w-11.5 max-sm:h-11 sm:aspect-square bg-[#1e1e1e] flex items-center justify-center transition-all duration-300 ease-in-out hover:bg-[#c09c86] translate-y-0 hover:translate-y-[1px] shadow-lg shadow-black/20",
+              data.length === 1 && "w-full",
+              data.length === 2 && "w-1/2",
             )}
           >
             {item.icon?.media_path && (

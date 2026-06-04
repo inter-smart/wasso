@@ -21,7 +21,7 @@ export default function InnerHero({ slug, data, locale, parent }) {
   return (
     <ParallaxProvider>
       <ParallaxBanner>
-        <section className="w-full aspect-6/4 sm:aspect-1920/770 overflow-hidden bg-black flex items-end relative z-0">
+        <section className="w-full aspect-6/4 md:aspect-1920/770 overflow-hidden bg-black flex items-end relative z-0">
           <div className="w-full h-full bg-gradient-to-b from-black/50 via-black/0 to-black/50 absolute -z-1 inset-0" />
           <ParallaxBannerLayer speed={5} className="absolute -z-2 inset-0">
             {data?.media?.media_type === "video" ? (
@@ -65,11 +65,11 @@ export default function InnerHero({ slug, data, locale, parent }) {
             )}
           </ParallaxBannerLayer>
           <div className="container">
-            <div className="w-full sm:max-w-1/2 py-[20px] sm:py-[40px] lg:py-[50px] xl:py-[60px] 2xl:py-[80px] 3xl:py-[100px]">
+            <div className="w-full sm:max-w-[70%] xl:max-w-1/2 py-[15px] sm:py-[25px] lg:py-[30px] xl:py-[60px] 2xl:py-[80px] 3xl:py-[100px]">
               <Heading
                 as="h2"
                 size="h2"
-                className="leading-snug text-white mb-1 [&>span]:text-[128%] [&>span]:font-medium [&>span]:block"
+                className="leading-snug text-white line-clamp-3 mb-1 [&>span]:text-[128%] [&>span]:font-medium [&>span]:block"
               >
                 {parse(
                   (locale == "ar" ? data?.title_ar : data?.title) ||

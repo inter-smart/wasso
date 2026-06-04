@@ -46,7 +46,7 @@ export default function ServiceFlagship({ data, locale }) {
               {data?.items?.map((item, index) => (
                 <div
                   key={"product" + index}
-                  className="flex-[0_0_100%] 3xs:flex-[0_0_50%] sm:flex-[0_0_33.33%] md:flex-[0_0_25%] min-w-0 select-none"
+                  className="flex-[0_0_100%] 3xs:flex-[0_0_60%] md:flex-[0_0_40%] xl:flex-[0_0_25%] min-w-0 select-none"
                 >
                   <FlagshipCard data={item} index={index} locale={locale} />
                 </div>

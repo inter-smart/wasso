@@ -52,7 +52,7 @@ export default function ContactInfo({ data, locale }) {
                   <SubItems
                     data={data?.phone}
                     info={
-                      <a href={`tel:${data?.phone?.details}`} target="_blank">
+                      <a href={`tel:${data?.phone?.details?.replace(/\s/g, '')}`} target="_blank">
                         {data?.phone?.details}
                       </a>
                     }

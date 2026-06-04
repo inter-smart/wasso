@@ -53,6 +53,12 @@ export default function CursorFollower() {
     const handleMouseEnter = (e) => {
       const target = e.target;
       if (target instanceof Element) {
+        if (target.closest('[data-cursor="default"]')) {
+          setIsHovering(true);
+          setIsCarousel(false);
+          return;
+        }
+
         if (
           target.tagName === "A" ||
           target.tagName === "BUTTON" ||
@@ -81,6 +87,10 @@ export default function CursorFollower() {
     const handleMouseLeave = (e) => {
       const target = e.target;
       if (target instanceof Element) {
+        if (target.closest('[data-cursor="default"]')) {
+          return;
+        }
+
         if (
           target.tagName === "A" ||
           target.tagName === "BUTTON" ||

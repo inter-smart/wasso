@@ -62,7 +62,7 @@ function BreadcrumbPage({
       role="link"
       aria-disabled="true"
       aria-current="page"
-      className={cn("text-[#fff] font-light text-[12px] sm:text-[12px] lg:text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[18px]", className)}
+      className={cn("text-[12px] xl:text-[10px] 2xl:text-[12px] 3xl:text-[16px] leading-normal font-light text-white max-w-[400px] truncate", className)}
       {...props} />
   );
 }

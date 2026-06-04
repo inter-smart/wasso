@@ -67,7 +67,7 @@ export default function ProjectsSuccessStories({ data, locale }) {
                         className="w-full h-full object-cover hover:scale-105 transition-all duration-300"
                       />
                     </div>
-                    <div className="inset-x-0 bottom-0 pt-4 xl:pt-6 2xl:pt-10 flex items-center justify-between">
+                    <div className="inset-x-0 bottom-0 pt-4 xl:pt-6 2xl:pt-10 flex gap-2 xl:gap-3 items-center justify-between">
                       <Heading
                         as="div"
                         size="h4"
@@ -81,7 +81,7 @@ export default function ProjectsSuccessStories({ data, locale }) {
                         className="min-w-[100px] xl:min-w-[105px] 2xl:min-w-[130px] transition-all duration-300 hover:scale-105 hover:shadow-lg"
                         asChild
                       >
-                        <Link href={item?.slug}>
+                        <Link href={item?.slug} data-cursor="default">
                           {locale == "ar" ? "عرض المشروع" : "View Project"}
                         </Link>
                       </Button>

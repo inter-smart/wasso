@@ -28,13 +28,9 @@ export default function CareerOpening({ data, locale }) {
           >
             <div className="flex flex-wrap items-center justify-between gap-y-2">
               <div className="w-full xl:w-[36%] px-2">
-                <Text
-                  as="div"
-                  size="p2"
-                  className="xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] leading-none font-medium text-[#1e1e1e] mb-1"
-                >
+                <div className="text-[14px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] leading-none font-medium text-[#1e1e1e] mb-1">
                   {locale === "ar" ? item.jobTitle_ar : item.jobTitle}
-                </Text>
+                </div>
                 <Text
                   as="div"
                   size="p2"
@@ -72,7 +68,7 @@ export default function CareerOpening({ data, locale }) {
                         (s) =>
                           s.title === placeholder.title ||
                           s.id === placeholder.id ||
-                          s.id === parseInt(placeholder.id.replace("p", ""))
+                          s.id === parseInt(placeholder.id.replace("p", "")),
                       );
                       return found || placeholder;
                     });
@@ -81,7 +77,7 @@ export default function CareerOpening({ data, locale }) {
                       key={spec.id}
                       className="w-full sm:w-1/2 md:w-[33.333%]"
                     >
-                      <div className="w-full flex flex-wrap items-center px-2 gap-1 lg:gap-2 xl:gap-2.5 2xl:gap-3 3xl:gap-4">
+                      <div className="w-full flex flex-wrap items-center px-2 gap-2.5 lg:gap-2 xl:gap-2.5 2xl:gap-3 3xl:gap-4">
                         <div className="w-[18px] lg:w-[20px] xl:w-[22px] 2xl:w-[24px] 3xl:w-[28px] aspect-square">
                           {spec?.iconPath ? (
                             <Image

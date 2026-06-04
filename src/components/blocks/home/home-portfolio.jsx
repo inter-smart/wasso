@@ -141,11 +141,11 @@ export default function HomePortfolio({ data, locale }) {
           <button
             onClick={goToNext}
             className={cn(
-              "w-[60px] sm:w-[100px] xl:w-[130px] 2xl:w-[160px] absolute z-0 bottom-0 cursor-pointer",
-              locale === "ar" ? "left-2 sm:left-4" : "right-2 sm:right-4",
+              "w-[50px] sm:w-[60px] md:w-[80px] lg:w-[100px] xl:w-[130px] 2xl:w-[160px] absolute z-0 bottom-0 cursor-pointer",
+              locale === "ar" ? "left-2 md:left-4" : "right-2 md:right-4",
             )}
           >
-            <div className="w-full h-full bg-[url('/images/home-portfolio-button-1.svg')] bg-center bg-no-repeat bg-size-[30px] sm:bg-size-[40px] xl:bg-size-[45px] 2xl:bg-size-[50px] relative hover:bg-size-[100px] transition-all duration-300">
+            <span className="w-full h-full bg-[url('/images/home-portfolio-button-1.svg')] bg-center bg-no-repeat bg-size-[20px] sm:bg-size-[25px] md:bg-size-[30px] lg:bg-size-[40px] xl:bg-size-[45px] 2xl:bg-size-[50px] relative hover:bg-size-[100px] transition-all duration-300">
               <Image
                 src="/images/home-portfolio-button.svg"
                 alt="Next"
@@ -153,7 +153,7 @@ export default function HomePortfolio({ data, locale }) {
                 height={194}
                 className="w-full h-full animate-[spin_5s_ease-in-out_infinite] relative -z-1"
               />
-            </div>
+            </span>
           </button>
         </div>
       </div>

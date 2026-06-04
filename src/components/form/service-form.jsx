@@ -116,7 +116,7 @@ export default function ServiceForm() {
           control={form.control}
           name="fullName"
           render={({ field }) => (
-            <FormItem className="w-full sm:w-4/12">
+            <FormItem className="w-full sm:w-1/2 lg:w-4/12">
               <FormLabel className={labelStyle}>
                 <span className={errorStyle}></span>
               </FormLabel>
@@ -133,7 +133,7 @@ export default function ServiceForm() {
           control={form.control}
           name="phone"
           render={({ field }) => (
-            <FormItem className="w-full sm:w-4/12">
+            <FormItem className="w-full sm:w-1/2 lg:w-4/12">
               <FormLabel className={labelStyle}>
                 <span className={errorStyle}></span>
               </FormLabel>
@@ -155,7 +155,7 @@ export default function ServiceForm() {
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem className="w-full sm:w-4/12">
+            <FormItem className="w-full lg:w-4/12">
               <FormLabel className={labelStyle}>
                 <span className={errorStyle}></span>
               </FormLabel>
@@ -177,7 +177,7 @@ export default function ServiceForm() {
           control={form.control}
           name="additionalDetails"
           render={({ field }) => (
-            <FormItem className="w-full sm:w-9/12 2xl:w-10/12">
+            <FormItem className="w-full lg:w-9/12 3xl:w-9/12">
               <FormLabel className={labelStyle}> </FormLabel>
               <FormControl>
                 <Textarea
@@ -192,7 +192,7 @@ export default function ServiceForm() {
         />
 
         {/* Submit */}
-        <div className="w-full sm:w-3/12 2xl:w-2/12 mt-auto flex flex-end">
+        <div className="w-full lg:w-3/12 3xl:w-3/12 mt-auto flex flex-end">
 
 
           <Button

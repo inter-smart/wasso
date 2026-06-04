@@ -222,7 +222,7 @@ export default function HomeHero({ data, locale }) {
 
               <div className="w-full sm:w-1/2">
                 <Heading
-                  as="h6"
+                  as="h3"
                   size="h6"
                   className="max-sm:text-[12px] text-end tracking-widest font-normal text-white/50 mb-1 xl:mb-2"
                 >

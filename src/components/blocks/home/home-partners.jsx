@@ -133,7 +133,11 @@ export default function HomePartners({ data, locale }) {
                 className="tracking-widest font-normal text-[#1e1e1e] flex items-center gap-x-4 mb-1 xl:mb-1.5 2xl:mb-1.5"
               >
                 <span className="size-2 rounded-full bg-[#c09c86] inline-block" />
-                {parse(locale == "ar" ? data?.sub_title_ar || "" : data?.sub_title || "")}
+                {parse(
+                  locale == "ar"
+                    ? data?.sub_title_ar || ""
+                    : data?.sub_title || "",
+                )}
               </Heading>
             </ScrollReveal>
             <Heading as="h2" size="h3" className="font-normal text-[#1e1e1e]">
@@ -149,7 +153,12 @@ export default function HomePartners({ data, locale }) {
               exit="exit"
               className="grid grid-cols-4 sm:grid-cols-5 grid-rows-2 gap-[1px] relative overflow-hidden"
             >
-              <div className="w-full sm:w-8/10 h-full sm:h-8/10 bg-black opacity-[0%] sm:opacity-10 m-auto blur-md absolute -z-1 inset-0" />
+              <div
+                className={cn(
+                  "w-full sm:w-8/10 h-full sm:h-8/10 bg-black  m-auto blur-md absolute -z-1 inset-0",
+                  currentItems.length < 10 ? "opacity-0" : "opacity-[0%] sm:opacity-10",
+                )}
+              />
               {currentItems.map((item, index) => (
                 <div
                   key={`slot-${index}`}
@@ -169,7 +178,7 @@ export default function HomePartners({ data, locale }) {
                       }}
                       className="absolute inset-0 p-2 sm:p-3 xl:p-5 2xl:p-8 overflow-hidden"
                     >
-                      <div variants={itemVariants} className="w-full h-full">
+                      <motion.div variants={itemVariants} className="w-full h-full">
                         <motion.div
                           initial="initial"
                           whileHover="hover"
@@ -189,7 +198,9 @@ export default function HomePartners({ data, locale }) {
                             className="w-full h-full"
                           >
                             <Image
-                              src={item?.media?.path || "/images/placeholder.webp"}
+                              src={
+                                item?.media?.path || "/images/placeholder.webp"
+                              }
                               alt={
                                 locale == "ar"
                                   ? item?.media?.alt_ar
@@ -213,7 +224,9 @@ export default function HomePartners({ data, locale }) {
                             className="absolute inset-0 block"
                           >
                             <Image
-                              src={item?.media?.path || "/images/placeholder.webp"}
+                              src={
+                                item?.media?.path || "/images/placeholder.webp"
+                              }
                               alt={
                                 locale == "ar"
                                   ? item?.media?.alt_ar
@@ -226,7 +239,7 @@ export default function HomePartners({ data, locale }) {
                             />
                           </motion.span>
                         </motion.div>
-                      </div>
+                      </motion.div>
                     </motion.div>
                   )}
                 </div>

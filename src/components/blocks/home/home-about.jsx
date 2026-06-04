@@ -161,7 +161,7 @@ function SubItems({ data, locale }) {
   return (
     <div className="w-full">
       <Heading
-        as="h6"
+        as="h4"
         size="h7"
         className={cn(
           "font-medium text-[#1e1e1e] flex items-center gap-x-4 mb-3 sm:mb-1 xl:mb-2",
