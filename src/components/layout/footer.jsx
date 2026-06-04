@@ -150,9 +150,18 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     {socialLinkData?.map((item, index) => (
                       <div key={"social_link" + index}>
                         <Button variant="link" size="none" asChild>
-                          <a href={item?.link || "#"} target="_blank" aria-label={item?.media?.media_alt || "Social Media Link"}>
+                          <a
+                            href={item?.link || "#"}
+                            target="_blank"
+                            aria-label={
+                              item?.media?.media_alt || "Social Media Link"
+                            }
+                          >
                             <Image
-                              src={item?.media?.media_path || "/images/placeholder.webp"}
+                              src={
+                                item?.media?.media_path ||
+                                "/images/placeholder.webp"
+                              }
                               alt={item?.media?.media_alt || "Social Media"}
                               width={12}
                               height={12}
@@ -172,12 +181,20 @@ export default function Footer({ footerData, socialLinkData, locale }) {
             <div className="w-full sm:w-3/12 lg:w-[24%] 2xl:w-[23%]">
               <Link
                 href={`/${locale}/${footerData?.slug}`}
-                aria-label={locale === "ar" ? footerData?.name_ar : footerData?.name || "Logo"}
+                aria-label={
+                  locale === "ar"
+                    ? footerData?.name_ar
+                    : footerData?.name || "Logo"
+                }
                 className="w-[120px] xl:w-[160px] 2xl:w-[200px] block m-auto xl:m-0"
               >
                 <Image
                   src={footerData?.logoUrl || "/images/placeholder.webp"}
-                  alt={locale === "ar" ? footerData?.name_ar : footerData?.name || "Logo"}
+                  alt={
+                    locale === "ar"
+                      ? footerData?.name_ar
+                      : footerData?.name || "Logo"
+                  }
                   width={290}
                   height={260}
                   className="w-full h-full block hover:scale-105 transition"
@@ -192,13 +209,19 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                 <div className="w-full 3xs:w-4/12 max-sm:mb-3">
                   <Link
                     href={`/${locale}/${footerData?.slug}`}
-                    aria-label={locale === "ar" ? footerData?.name_ar : footerData?.name || "Logo"}
+                    aria-label={
+                      locale === "ar"
+                        ? footerData?.name_ar
+                        : footerData?.name || "Logo"
+                    }
                     className="w-[80px] sm:w-[120px] block"
                   >
                     <Image
                       src={footerData?.logoUrl || "/images/placeholder.webp"}
                       alt={
-                        locale === "ar" ? footerData?.name_ar : footerData?.name || "Logo"
+                        locale === "ar"
+                          ? footerData?.name_ar
+                          : footerData?.name || "Logo"
                       }
                       width={290}
                       height={260}
@@ -222,11 +245,13 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                       size="h6"
                       className="max-3xs:text-[13px] font-normal text-[#1e1e1e] transition [&>a]:hover:text-[#cda278] mb-2 lg:mb-4 xl:mb-6 "
                     >
-                      <RichTextRenderer html={convertRichTextToHtml(
-                        locale == "ar"
-                          ? footerData?.address_ar || []
-                          : footerData?.address || [],
-                      )} />
+                      <RichTextRenderer
+                        html={convertRichTextToHtml(
+                          locale == "ar"
+                            ? footerData?.address_ar || []
+                            : footerData?.address || [],
+                        )}
+                      />
                     </Heading>
                   </div>
                 )}
@@ -240,8 +265,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                           alt="Telephone"
                           width={20}
                           height={20}
-                          className="w-full h-full block"
-                          style={{ height: "auto" }}
+                          className="w-full h-auto block"
                         />
                       </div>
                       <Heading
@@ -252,7 +276,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                         {footerData?.phone.map((phone, index) => (
                           <a
                             key={"phone" + index}
-                            href={`tel:${phone.replace(/\s/g, '')}`}
+                            href={`tel:${phone.replace(/\s/g, "")}`}
                             dir="ltr"
                           >
                             {phone}{" "}
@@ -269,8 +293,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                           alt="Email"
                           width={20}
                           height={20}
-                          className="w-full h-full block"
-                          style={{ height: "auto" }}
+                          className="w-full h-auto block"
                         />
                       </div>
                       <div className="flex-1">
@@ -305,10 +328,12 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                           alt="Map Locator"
                           width={20}
                           height={20}
-                          className="w-3 xl:w-5 block"
+                          className="w-3 xl:w-5 h-auto block"
                           style={{ height: "auto" }}
                         />
-                        {locale === "ar" ? "تحديد الموقع على الخريطة" : "Locate on Map"}
+                        {locale === "ar"
+                          ? "تحديد الموقع على الخريطة"
+                          : "Locate on Map"}
                       </a>
                     </Button>
                   )}
@@ -327,10 +352,22 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                           {socialLinkData?.map((item, index) => (
                             <div key={"social_link" + index}>
                               <Button variant="link" size="none" asChild>
-                                <a href={item?.link} target="_blank" aria-label={item?.media?.media_alt || "Social Media Link"}>
+                                <a
+                                  href={item?.link}
+                                  target="_blank"
+                                  aria-label={
+                                    item?.media?.media_alt ||
+                                    "Social Media Link"
+                                  }
+                                >
                                   <Image
-                                    src={item?.media?.media_path || "/images/placeholder.webp"}
-                                    alt={item?.media?.media_alt || "Social Media"}
+                                    src={
+                                      item?.media?.media_path ||
+                                      "/images/placeholder.webp"
+                                    }
+                                    alt={
+                                      item?.media?.media_alt || "Social Media"
+                                    }
                                     width={12}
                                     height={12}
                                     className="w-4 aspect-square block hover:scale-110 transition"
@@ -352,7 +389,9 @@ export default function Footer({ footerData, socialLinkData, locale }) {
         <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-x-5 mt-6 xl:mt-8 2xl:mt-10">
           <Text as="div" size="p2" className="tracking-wide text-[#1e1e1e]">
             {parse(
-              locale == "ar" ? footerData?.copyright_ar || "" : footerData?.copyright || "",
+              locale == "ar"
+                ? footerData?.copyright_ar || ""
+                : footerData?.copyright || "",
             )}
           </Text>
           <hr className="border-[#eadcce] flex-1 max-sm:hidden" />
@@ -362,7 +401,11 @@ export default function Footer({ footerData, socialLinkData, locale }) {
             className="whitespace-nowrap text-end tracking-wide text-[#1e1e1e] flex gap-1"
           >
             {locale === "ar" ? "تصميم بواسطة: " : "Designed By: "}
-            <a href="https://www.intersmartsolution.com/" target="_blank" aria-label="Intersmart Web Design">
+            <a
+              href="https://www.intersmartsolution.com/"
+              target="_blank"
+              aria-label="Intersmart Web Design"
+            >
               <Image
                 src="/images/footer-author.svg"
                 alt="footer-author"

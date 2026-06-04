@@ -231,7 +231,7 @@ export default function HeaderNavigation({
                         type="button"
                         className={"text-sm text-white hover:scale-105"}
                       >
-                        Close
+                        {locale === "ar" ? "إغلاق" : "Close"}
                         <X className="size-4" />
                       </Button>
                     </DialogClose>
