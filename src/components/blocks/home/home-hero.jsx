@@ -207,10 +207,11 @@ export default function HomeHero({ data, locale }) {
                 >
                   {scrollSnaps.map((_, index) => (
                     <DotButton
-                      key={index}
+                      key={"scrollSnaps" + index}
                       onClick={() => onDotButtonClick(index)}
+                      aria-label={locale === "ar" ? `الانتقال إلى الشريحة ${index + 1}` : `Go to slide ${index + 1}`}
                       className={cn(
-                        "size-2.5 border rounded-full transition-all ",
+                        "size-2.5 xl:size-3 border rounded-full transition-all ",
                         index === selectedIndex
                           ? "bg-none border-white"
                           : "border-[#d9d9d9] bg-[#d9d9d9] scale-60",
@@ -222,7 +223,7 @@ export default function HomeHero({ data, locale }) {
 
               <div className="w-full sm:w-1/2">
                 <Heading
-                  as="h3"
+                  as="div"
                   size="h6"
                   className="max-sm:text-[12px] text-end tracking-widest font-normal text-white/50 mb-1 xl:mb-2"
                 >
@@ -236,7 +237,7 @@ export default function HomeHero({ data, locale }) {
                   />
                 </Heading>
                 <Heading
-                  as="h5"
+                  as="div"
                   size="h5"
                   className="max-sm:text-[14px] text-end font-medium tracking-widest text-white/50"
                 >

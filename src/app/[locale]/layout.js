@@ -4,11 +4,14 @@ import { locales, localeDirection } from "../../il8n/config";
 import { getFontVariable, getFontClassName } from "@/lib/fonts";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import CursorFollower from "@/components/animations/cursor-follower";
 import PageLoader from "@/components/animations/page-loader";
 import SmoothScrolling from "@/components/utils/smooth-scrolling";
-import FloatNavigation from "@/components/common/float-navigation";
 import { STRAPI_URL } from "@/lib/constants";
+
+import dynamic from "next/dynamic";
+
+const CursorFollower = dynamic(() => import("@/components/animations/cursor-follower"));
+const FloatNavigation = dynamic(() => import("@/components/common/float-navigation"));
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -128,7 +131,6 @@ export default async function RootLayout({ children, params }) {
       <head>
         {/* Preconnect to image origins */}
         <link rel="preconnect" href={STRAPI_URL ? new URL(STRAPI_URL).origin : undefined} />
-        <link rel="preconnect" href="https://images.unsplash.com" />
       </head>
       <body className={cn("antialiased", fontClassName, fontVariable)}>
         <SmoothScrolling>

@@ -114,8 +114,8 @@ export default function HomeAbout({ data, locale }) {
                       alt={
                         locale == "ar" ? data?.media_alt_ar : data?.media_alt
                       }
-                      width={308}
-                      height={517}
+                      width={441}
+                      height={378}
                       className="w-full h-full object-fill"
                     />
                   </ParallaxBannerLayer>

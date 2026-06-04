@@ -15,12 +15,6 @@ const nextConfig = {
       },
 
       {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        pathname: "/**",
-      },
-
-      {
         protocol: "http",
         hostname: "localhost",
         port: "1337",
@@ -33,11 +27,11 @@ const nextConfig = {
       //   pathname: "/uploads/**",
       // },
 
-      {
-        protocol: "https",
-        hostname: "picsum.photos",
-        pathname: "/**",
-      },
+      // {
+      //   protocol: "https",
+      //   hostname: "picsum.photos",
+      //   pathname: "/**",
+      // },
     ],
 
     // dangerouslyAllowLocalIP: true, // 👈 IMPORTANT
