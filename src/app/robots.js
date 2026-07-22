@@ -19,8 +19,10 @@ export default function robots() {
     rules: [
       {
         userAgent: "*",
-        disallow: "/",
+        allow: "/",
+        disallow: "/admin",
       },
     ],
+    sitemap: "https://wasso.com/sitemap.xml",
   };
 }
