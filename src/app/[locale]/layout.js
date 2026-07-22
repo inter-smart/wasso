@@ -17,52 +17,75 @@ export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export const metadata = {
-  title: {
-    default: "WASSO Project Management LLC",
-    template: "%s",
-  },
-  description:
-    "Leading project management, engineering, and real estate development solutions across the UAE and GCC region.",
-  keywords: [
-    "project management",
-    "engineering",
-    "real estate",
-    "UAE",
-    "construction",
-    "workspace solutions",
-  ],
-  authors: [{ name: "WASSO Project Management LLC" }],
-  creator: "WASSO Project Management LLC",
-  publisher: "WASSO Project Management LLC",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL),
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    alternateLocale: "ar_AE",
-    siteName: "WASSO Project Management LLC",
-  },
-  twitter: {
-    card: "summary_large_image",
-    creator: "@wasso",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+export async function generateMetadata() {
+  // Fetch the favicon from the Global single type in Strapi
+  // The global controller already populates header_data.favicon and returns faviconUrl
+  let faviconUrl = null;
+  try {
+    const res = await fetch(`${STRAPI_URL}/api/global`, {
+      next: { revalidate: 3600 },
+    });
+    if (res.ok) {
+      const json = await res.json();
+      // Controller returns faviconUrl as a complete absolute URL string
+      faviconUrl = json?.header_data?.faviconUrl || null;
+    }
+  } catch {
+    // Silently fail — will use the static fallback favicon
+  }
+
+  return {
+    title: {
+      default: "WASSO Project Management LLC",
+      template: "%s",
+    },
+    description:
+      "Leading project management, engineering, and real estate development solutions across the UAE and GCC region.",
+    keywords: [
+      "project management",
+      "engineering",
+      "real estate",
+      "UAE",
+      "construction",
+      "workspace solutions",
+    ],
+    authors: [{ name: "WASSO Project Management LLC" }],
+    creator: "WASSO Project Management LLC",
+    publisher: "WASSO Project Management LLC",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL),
+    // Use the Strapi favicon if available, otherwise fall back to /favicon.png
+    icons: {
+      icon: faviconUrl || "/favicon.png",
+      shortcut: faviconUrl || "/favicon.png",
+    },
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      alternateLocale: "ar_AE",
+      siteName: "WASSO Project Management LLC",
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: "@wasso",
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
-  },
-};
+  };
+}
 
 export default async function RootLayout({ children, params }) {
   const resolvedParams = await params;
