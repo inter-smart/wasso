@@ -2,39 +2,21 @@
 const nextConfig = {
   images: {
     remotePatterns: [
-      // Strapi production images
+      // Strapi uploads (new production)
       {
         protocol: "https",
-        hostname: "strapi.intersmart.in",
-        pathname: "/uploads/**",
-      },
-      {
-        protocol: "https",
-        hostname: "wasso.intersmart.in",
+        hostname: "wasso.com",
         pathname: "/uploads/**",
       },
 
+      // Local development
       {
         protocol: "http",
         hostname: "localhost",
         port: "1337",
         pathname: "/uploads/**",
       },
-      // {
-      //   protocol: "http",
-      //   hostname: "127.0.0.1",
-      //   port: "1337",
-      //   pathname: "/uploads/**",
-      // },
-
-      // {
-      //   protocol: "https",
-      //   hostname: "picsum.photos",
-      //   pathname: "/**",
-      // },
     ],
-
-    // dangerouslyAllowLocalIP: true, // 👈 IMPORTANT
 
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -66,7 +48,7 @@ const nextConfig = {
           },
           {
             key: "X-Frame-Options",
-            value: "ALLOWALL", // Required for Strapi preview
+            value: "ALLOWALL",
           },
           {
             key: "Referrer-Policy",
@@ -77,8 +59,8 @@ const nextConfig = {
             value: "same-origin",
           },
           {
-            key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self' https://strapi.intersmart.in",
+            key: "Content-Security-Policy",
+            value: "frame-ancestors 'self' https://wasso.com",
           },
         ],
       },
@@ -95,7 +77,18 @@ const nextConfig = {
             value: "strapi.intersmart.in",
           },
         ],
-        destination: "https://wasso.intersmart.in/:path*",
+        destination: "https://wasso.com/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "wasso.intersmart.in",
+          },
+        ],
+        destination: "https://wasso.com/:path*",
         permanent: true,
       },
     ];
