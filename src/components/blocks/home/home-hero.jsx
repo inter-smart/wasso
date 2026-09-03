@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useMemo } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 
 import useEmblaCarousel from "embla-carousel-react";
@@ -14,22 +14,13 @@ import parse from "html-react-parser";
 import { cn } from "@/lib/utils";
 import { Heading } from "@/components/utils/typography";
 
-import { Parallax, ParallaxProvider } from "react-scroll-parallax";
-const WebglDisplacementCarousel = dynamic(
-  () => import("@/components/animations/WebglDisplacementCarousel"),
-  { ssr: false }
-);
+import { ParallaxProvider } from "react-scroll-parallax";
 import HackingText from "@/components/ui/hacking-text";
 
 import Image from "next/image";
-import dynamic from "next/dynamic";
-
-const MediaQuery = dynamic(() => import("react-responsive"), {
-  ssr: false,
-});
 
 export default function HomeHero({ data, locale }) {
-  const [isRevealed, setIsRevealed] = useState(false);
+  const [isRevealed] = useState(true);
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: true,
@@ -47,18 +38,7 @@ export default function HomeHero({ data, locale }) {
   const opacity = useTransform(scrollY, [0, 1000], [1, 0]);
   const contentOpacity = useTransform(scrollY, [0, 400], [1, 0]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsRevealed(true);
-    }, 2200);
-    return () => clearTimeout(timer);
-  }, []);
-
   const currentSlide = data?.sliders?.[selectedIndex];
-
-  const images = useMemo(() => {
-    return data?.sliders?.map((slide) => slide.media_desktop_path) || [];
-  }, [data?.sliders]);
 
   return (
     <ParallaxProvider>
@@ -90,51 +70,22 @@ export default function HomeHero({ data, locale }) {
           }}
           className="absolute inset-0 w-full h-full z-0"
         >
-          {/* Priority Static Image for LCP */}
-          {data?.sliders?.[0]?.media_desktop_path && (
+          {currentSlide?.media_desktop_path && (
             <Image
-              src={data.sliders[0].media_desktop_path}
-              alt={data.sliders[0].title || "Hero"}
+              key={currentSlide.media_desktop_path}
+              src={currentSlide.media_desktop_path}
+              alt={currentSlide.media_alt || currentSlide.title || "Hero"}
               fill
               priority
-              quality={90}
+              fetchPriority="high"
+              quality={75}
               sizes="100vw"
               className="object-cover"
-              style={{
-                opacity: isRevealed ? 0 : 1,
-                transition: "opacity 0.5s ease-in-out",
-              }}
+              style={{ transition: "opacity 0.5s ease-in-out" }}
             />
           )}
 
           <div className="absolute inset-0 w-full h-full bg-linear-to-b from-black/70 via-transparent to-black/60 z-10 pointer-events-none" />
-          {/* Single WebGL instance with conditional parallax for desktop */}
-          <div className="w-full h-full">
-            <WebglDisplacementCarousel
-              images={images}
-              activeIndex={selectedIndex}
-            />
-          </div>
-          {/* <MediaQuery minWidth={640}>
-            {images.length > 0 && (
-              <div className="w-full h-full">
-                <WebglDisplacementCarousel
-                  images={images}
-                  activeIndex={selectedIndex}
-                />
-              </div>
-            )}
-          </MediaQuery>
-          <MediaQuery maxWidth={639}>
-            {images.length > 0 && (
-              <div className="w-full h-full">
-                <WebglDisplacementCarousel
-                  images={images}
-                  activeIndex={selectedIndex}
-                />
-              </div>
-            )}
-          </MediaQuery> */}
         </motion.div>
 
         {/* Invisible Embla Layer for Swipe Detection */}
