@@ -56,7 +56,7 @@ export default function Footer({ footerData, socialLinkData, locale }) {
                     <AccordionItem
                       locale={locale}
                       title="Quick links"
-                      title_ar="QUICK LINKS"
+                      title_ar="روابط سريعة"
                       section="quick"
                       openSection={openSection}
                       setOpenSection={setOpenSection}

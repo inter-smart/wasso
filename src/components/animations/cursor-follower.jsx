@@ -50,69 +50,48 @@ export default function CursorFollower() {
       });
     };
 
+    const getCursorRegion = (target) => {
+      if (!(target instanceof Element)) return null;
+
+      if (target.closest('[data-cursor="default"]')) return "default";
+      if (
+        target.closest(".embla__container") ||
+        target.closest(".embla__viewport") ||
+        target.closest('[data-cursor="carousel"]')
+      ) {
+        return "carousel";
+      }
+      if (
+        target.closest("a") ||
+        target.closest("button") ||
+        target.closest("input") ||
+        target.closest("textarea") ||
+        target.closest("select") ||
+        target.closest("label") ||
+        target.classList.contains("cursor-highlight")
+      ) {
+        return "default";
+      }
+      return null;
+    };
+
     const handleMouseEnter = (e) => {
-      const target = e.target;
-      if (target instanceof Element) {
-        if (target.closest('[data-cursor="default"]')) {
-          setIsHovering(true);
-          setIsCarousel(false);
-          return;
-        }
+      const region = getCursorRegion(e.target);
+      const fromRegion = getCursorRegion(e.relatedTarget);
 
-        if (
-          target.tagName === "A" ||
-          target.tagName === "BUTTON" ||
-          target.tagName === "INPUT" ||
-          target.tagName === "TEXTAREA" ||
-          target.tagName === "SELECT" ||
-          target.tagName === "LABEL" ||
-          target.closest("a") ||
-          target.closest("button") ||
-          target.classList.contains("cursor-highlight")
-        ) {
-          setIsHovering(true);
-        }
-
-        if (
-          target.closest(".embla__container") ||
-          target.closest(".embla__viewport") ||
-          target.closest('[data-cursor="carousel"]')
-        ) {
-          setIsCarousel(true);
-          setIsHovering(true);
-        }
+      if (region && region !== fromRegion) {
+        setIsHovering(true);
+        setIsCarousel(region === "carousel");
       }
     };
 
     const handleMouseLeave = (e) => {
-      const target = e.target;
-      if (target instanceof Element) {
-        if (target.closest('[data-cursor="default"]')) {
-          return;
-        }
+      const region = getCursorRegion(e.target);
+      const toRegion = getCursorRegion(e.relatedTarget);
 
-        if (
-          target.tagName === "A" ||
-          target.tagName === "BUTTON" ||
-          target.tagName === "INPUT" ||
-          target.tagName === "TEXTAREA" ||
-          target.tagName === "SELECT" ||
-          target.tagName === "LABEL" ||
-          target.closest("a") ||
-          target.closest("button") ||
-          target.classList.contains("cursor-highlight")
-        ) {
-          setIsHovering(false);
-        }
-
-        if (
-          target.closest(".embla__container") ||
-          target.closest(".embla__viewport") ||
-          target.closest('[data-cursor="carousel"]')
-        ) {
-          setIsCarousel(false);
-          setIsHovering(false);
-        }
+      if (region && region !== toRegion) {
+        setIsCarousel(false);
+        setIsHovering(false);
       }
     };
 
